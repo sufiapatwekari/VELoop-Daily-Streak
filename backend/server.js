@@ -19,7 +19,10 @@ const authMiddleware = require("./middleware/authMiddleware");
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: [
+        "http://localhost:5173",
+        "https://veloop-daily-streak-frontend.onrender.com"
+    ]
 }));
 
 app.use(express.json());
@@ -34,7 +37,7 @@ const streakClaimLimiter = rateLimit({
     }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
