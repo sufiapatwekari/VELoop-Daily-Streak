@@ -1,0 +1,1144 @@
+/* =========================================================
+   VELOOP — REWARD APP EXPERIENCE
+========================================================= */
+
+.page {
+    min-height: 100vh;
+    background: #f5f7fb;
+    color: #182230;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    height: 74px;
+    padding: 0 max(24px, calc((100vw - 1180px) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #e9edf3;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    cursor: pointer;
+}
+
+.logoMark {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #172554;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.logo div {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo strong {
+    color: #111827;
+    font-size: 17px;
+    line-height: 1.1;
+}
+
+.logo small {
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.headerStreak {
+    min-width: 95px;
+    height: 42px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 11px;
+    background: #fff8e7;
+    border: 1px solid #f4dfad;
+}
+
+.headerStreak > span {
+    font-size: 17px;
+}
+
+.headerStreak div {
+    display: flex;
+    flex-direction: column;
+}
+
+.headerStreak strong {
+    color: #8c5400;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.headerStreak small {
+    margin-top: 3px;
+    color: #a06a18;
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.profileButton,
+.logoutButton {
+    height: 42px;
+    border: 1px solid #e1e6ed;
+    background: #ffffff;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.profileButton {
+    width: 42px;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.logoutButton {
+    width: 42px;
+    border-radius: 11px;
+    font-size: 16px;
+}
+
+.profileButton:hover,
+.logoutButton:hover {
+    background: #f1f4f9;
+    border-color: #cdd5e1;
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    width: min(1140px, calc(100% - 36px));
+    margin: auto;
+    padding: 42px 0 75px;
+}
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome {
+    min-height: 170px;
+    padding: 30px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border-radius: 24px;
+    background: #ffffff;
+    border: 1px solid #e4e8ef;
+}
+
+.eyebrow,
+.sectionKicker,
+.cardEyebrow {
+    color: #4f46e5;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.eyebrow {
+    margin: 0 0 9px;
+}
+
+.welcome h1 {
+    max-width: 700px;
+    margin: 0;
+    color: #111827;
+    font-size: clamp(34px, 5vw, 53px);
+    line-height: 1.03;
+    letter-spacing: -2.5px;
+}
+
+.welcome h1 span {
+    display: block;
+    color: #4f46e5;
+}
+
+.welcomeText {
+    max-width: 550px;
+    margin: 14px 0 0;
+    color: #667085;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.welcomeBadge {
+    width: 115px;
+    height: 115px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff8e7;
+    border: 8px solid #fffdf5;
+    box-shadow:
+        0 0 0 1px #f2dfb0,
+        0 15px 35px rgba(245, 158, 11, 0.10);
+}
+
+.welcomeBadge span {
+    font-size: 20px;
+}
+
+.welcomeBadge strong {
+    margin-top: 2px;
+    color: #8c5400;
+    font-size: 27px;
+    line-height: 1;
+}
+
+.welcomeBadge small {
+    margin-top: 4px;
+    color: #a06a18;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+/* =========================================================
+   TOP GRID
+========================================================= */
+
+.topGrid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 18px;
+}
+
+.streakCard,
+.walletCard {
+    min-height: 190px;
+    padding: 27px;
+    border-radius: 19px;
+    border: 1px solid #e3e8ef;
+}
+
+/* streak */
+
+.streakCard {
+    color: #ffffff;
+    background: #172033;
+}
+
+.cardTop {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.streakCard .cardEyebrow {
+    color: #9ba8bd;
+}
+
+.bigNumber {
+    margin-top: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 850;
+    letter-spacing: -2px;
+}
+
+.bigNumber small {
+    color: #9ba8bd;
+    font-size: 11px;
+    letter-spacing: 0;
+}
+
+.fireCircle {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.07);
+    font-size: 25px;
+}
+
+.progressTrack {
+    height: 7px;
+    margin-top: 23px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: inherit;
+    background: #fbbf24;
+    transition: width 0.5s ease;
+}
+
+.progressInfo {
+    margin-top: 9px;
+    display: flex;
+    justify-content: space-between;
+    color: #8996aa;
+    font-size: 8px;
+}
+
+/* wallet */
+
+.walletCard {
+    background: #ffffff;
+}
+
+.walletHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.walletIcon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: #eef2ff;
+    border: 1px solid #dfe4ff;
+    font-size: 20px;
+}
+
+.walletAmount {
+    margin-top: 21px;
+    color: #111827;
+    font-size: 37px;
+    font-weight: 850;
+    letter-spacing: -1.5px;
+}
+
+.walletAmount span {
+    margin-left: 7px;
+    color: #667085;
+    font-size: 12px;
+    letter-spacing: 0;
+}
+
+.walletButton {
+    margin-top: 15px;
+    padding: 0;
+    border: 0;
+    color: #4f46e5;
+    background: transparent;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.todaySection,
+.journeySection,
+.quickSection {
+    margin-top: 55px;
+}
+
+.sectionHeading {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sectionHeading h2 {
+    margin: 5px 0 0;
+    color: #111827;
+    font-size: 25px;
+    font-weight: 850;
+    letter-spacing: -0.8px;
+}
+
+.dayPill,
+.completedText {
+    padding: 7px 11px;
+    border-radius: 8px;
+    color: #4f46e5;
+    background: #eef2ff;
+    border: 1px solid #dfe4ff;
+    font-size: 9px;
+    font-weight: 850;
+}
+
+/* =========================================================
+   TODAY REWARD
+========================================================= */
+
+.todayCard {
+    min-height: 145px;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 85px 1fr 230px;
+    align-items: center;
+    gap: 22px;
+    border-radius: 19px;
+    background: #ffffff;
+    border: 1px solid #e1e6ed;
+    box-shadow: 0 10px 28px rgba(16, 24, 40, 0.045);
+}
+
+.rewardOrb {
+    width: 78px;
+    height: 78px;
+    display: grid;
+    place-items: center;
+    border-radius: 23px;
+    background: #f0f3ff;
+    border: 1px solid #dfe4ff;
+    font-size: 34px;
+}
+
+.todayInfo > span {
+    color: #98a2b3;
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+}
+
+.todayInfo h3 {
+    margin: 5px 0 0;
+    color: #111827;
+    font-size: 21px;
+    font-weight: 850;
+    letter-spacing: -0.5px;
+}
+
+.todayInfo p {
+    max-width: 500px;
+    margin: 5px 0 0;
+    color: #667085;
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+.todayAction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todayAction small {
+    color: #98a2b3;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.todayAction strong {
+    margin-top: 7px;
+    color: #172033;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+}
+
+.claimButton {
+    width: 100%;
+    min-height: 49px;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #4f46e5;
+    font-size: 11px;
+    font-weight: 850;
+    cursor: pointer;
+    box-shadow: 0 9px 20px rgba(79, 70, 229, 0.20);
+    transition: 0.2s ease;
+}
+
+.claimButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #4338ca;
+    box-shadow: 0 13px 25px rgba(79, 70, 229, 0.25);
+}
+
+.claimButton:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.successMessage,
+.warningMessage {
+    margin-top: 12px;
+    padding: 12px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+}
+
+.successMessage {
+    color: #067647;
+    background: #ecfdf3;
+    border: 1px solid #abefc6;
+}
+
+.warningMessage {
+    color: #b54708;
+    background: #fffaeb;
+    border: 1px solid #fedf89;
+}
+
+/* =========================================================
+   REWARD JOURNEY
+========================================================= */
+
+.journey {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.journeyLine {
+    position: absolute;
+    left: 24px;
+    top: 30px;
+    bottom: 30px;
+    width: 2px;
+    background: #e3e7ee;
+}
+
+.rewardItem {
+    position: relative;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.dayCircle {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #98a2b3;
+    background: #ffffff;
+    border: 2px solid #e0e5ec;
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.rewardBox {
+    min-height: 70px;
+    padding: 11px 14px;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 13px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid #e3e7ee;
+    transition: 0.2s ease;
+}
+
+.rewardBox:hover {
+    transform: translateX(4px);
+    border-color: #ccd4df;
+    box-shadow: 0 8px 22px rgba(16, 24, 40, 0.06);
+}
+
+.rewardEmoji {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #f4f6fb;
+    font-size: 20px;
+}
+
+.rewardDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.rewardDetails small {
+    color: #98a2b3;
+    font-size: 7px;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+}
+
+.rewardDetails strong {
+    margin-top: 3px;
+    color: #1d2939;
+    font-size: 12px;
+}
+
+.rewardDetails span {
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 8px;
+}
+
+.rewardArrow {
+    color: #98a2b3;
+    font-size: 17px;
+}
+
+/* claimed */
+
+.itemClaimed .dayCircle {
+    color: #ffffff;
+    background: #12b76a;
+    border-color: #12b76a;
+}
+
+.itemClaimed .rewardBox {
+    background: #fbfffd;
+    border-color: #ccebd8;
+}
+
+.itemClaimed .rewardEmoji {
+    background: #ecfdf3;
+}
+
+/* available */
+
+.itemAvailable .dayCircle {
+    color: #ffffff;
+    background: #f59e0b;
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 5px #fff7e5;
+}
+
+.itemAvailable .rewardBox {
+    background: #fffdf7;
+    border-color: #efcf87;
+}
+
+.itemAvailable .rewardEmoji {
+    background: #fff7e1;
+}
+
+/* locked */
+
+.itemLocked {
+    opacity: 0.52;
+}
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quickGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.quickCard {
+    min-height: 88px;
+    padding: 17px;
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 11px;
+    text-align: left;
+    border: 1px solid #e2e7ee;
+    border-radius: 14px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.quickCard:hover {
+    transform: translateY(-3px);
+    border-color: #ccd4df;
+    box-shadow: 0 12px 25px rgba(16, 24, 40, 0.07);
+}
+
+.quickCard > span {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #f0f3ff;
+    font-size: 18px;
+}
+
+.quickCard div {
+    display: flex;
+    flex-direction: column;
+}
+
+.quickCard strong {
+    color: #344054;
+    font-size: 11px;
+}
+
+.quickCard small {
+    margin-top: 4px;
+    color: #98a2b3;
+    font-size: 8px;
+}
+
+.quickCard b {
+    color: #667085;
+    font-size: 15px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e9ef;
+}
+
+.footerInner {
+    width: min(1140px, calc(100% - 36px));
+    margin: auto;
+    padding: 38px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footerBrand {
+    max-width: 250px;
+}
+
+.footerLogo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footerLogo span {
+    width: 29px;
+    height: 29px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: #ffffff;
+    background: #172554;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.footerLogo strong {
+    color: #111827;
+    font-size: 15px;
+}
+
+.footerBrand p {
+    margin: 10px 0 0;
+    color: #98a2b3;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+.footerLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 17px;
+}
+
+.footerLinks button {
+    border: 0;
+    color: #667085;
+    background: transparent;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.footerLinks button:hover {
+    color: #4f46e5;
+}
+
+.footerBottom {
+    padding: 15px;
+    text-align: center;
+    color: #98a2b3;
+    border-top: 1px solid #edf0f4;
+    font-size: 8px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.rewardOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(6px);
+}
+
+.rewardModal {
+    width: min(420px, 100%);
+    position: relative;
+    padding: 34px;
+    text-align: center;
+    border-radius: 21px;
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    box-shadow: 0 30px 75px rgba(0, 0, 0, 0.22);
+    animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e4e7ec;
+    border-radius: 50%;
+    color: #667085;
+    background: #ffffff;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.modalIcon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 17px;
+    display: grid;
+    place-items: center;
+    border-radius: 21px;
+    background: #f0f3ff;
+    border: 1px solid #dfe4ff;
+    font-size: 34px;
+}
+
+.modalDay {
+    color: #4f46e5;
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: 0.15em;
+}
+
+.rewardModal h2 {
+    margin: 8px 0 0;
+    color: #111827;
+    font-size: 24px;
+    font-weight: 850;
+}
+
+.rewardModal p {
+    margin: 10px 0 0;
+    color: #667085;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.modalButton {
+    width: 100%;
+    height: 46px;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #4f46e5;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loadingPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: #f5f7fb;
+    color: #667085;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e4e7ec;
+    border-top-color: #4f46e5;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingPage p {
+    margin: 0;
+    font-size: 10px;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.errorPage {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: #f5f7fb;
+}
+
+.errorBox {
+    width: min(450px, 100%);
+    padding: 30px;
+    text-align: center;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+}
+
+.errorBox h3 {
+    margin: 0;
+    color: #111827;
+}
+
+.errorBox p {
+    color: #667085;
+    font-size: 11px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .welcomeBadge {
+        width: 95px;
+        height: 95px;
+    }
+
+    .topGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .todayCard {
+        grid-template-columns: 75px 1fr;
+    }
+
+    .todayAction {
+        grid-column: 2;
+        align-items: stretch;
+    }
+
+    .quickGrid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .header {
+        height: auto;
+        min-height: 70px;
+        padding: 10px 14px;
+    }
+
+    .headerRight {
+        gap: 5px;
+    }
+
+    .headerStreak {
+        min-width: auto;
+        flex: 1;
+    }
+
+    .main {
+        width: calc(100% - 22px);
+        padding-top: 18px;
+    }
+
+    .welcome {
+        padding: 25px 20px;
+        align-items: flex-start;
+    }
+
+    .welcomeBadge {
+        width: 75px;
+        height: 75px;
+        border-width: 5px;
+    }
+
+    .welcomeBadge span {
+        font-size: 15px;
+    }
+
+    .welcomeBadge strong {
+        font-size: 20px;
+    }
+
+    .welcome h1 {
+        font-size: 32px;
+        letter-spacing: -1.7px;
+    }
+
+    .welcomeText {
+        font-size: 10px;
+    }
+
+    .streakCard,
+    .walletCard {
+        padding: 21px;
+    }
+
+    .todayCard {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+        padding: 24px 18px;
+    }
+
+    .todayInfo {
+        width: 100%;
+    }
+
+    .todayAction {
+        width: 100%;
+        grid-column: auto;
+    }
+
+    .journeyLine {
+        left: 20px;
+    }
+
+    .rewardItem {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .dayCircle {
+        width: 40px;
+        height: 40px;
+        font-size: 9px;
+    }
+
+    .rewardBox {
+        grid-template-columns: 40px 1fr auto;
+        padding: 10px;
+        gap: 9px;
+    }
+
+    .rewardEmoji {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+
+    .rewardDetails strong {
+        font-size: 10px;
+    }
+
+    .rewardDetails span {
+        font-size: 7px;
+    }
+
+    .footerInner {
+        flex-direction: column;
+        padding: 30px 0;
+    }
+
+    .footerLinks {
+        justify-content: flex-start;
+        gap: 14px;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .headerStreak small {
+        display: none;
+    }
+
+    .welcomeBadge {
+        display: none;
+    }
+
+    .welcome h1 {
+        font-size: 29px;
+    }
+
+    .bigNumber {
+        font-size: 42px;
+    }
+
+    .sectionHeading h2 {
+        font-size: 21px;
+    }
+
+}

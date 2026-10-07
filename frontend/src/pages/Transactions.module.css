@@ -1,0 +1,548 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f6f7f2;
+    color: #172033;
+}
+
+.header {
+    min-height: 72px;
+    padding: 0 clamp(20px, 6vw, 85px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e3e6df;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #172033;
+    cursor: pointer;
+    text-align: left;
+}
+
+.logoIcon {
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #182337;
+    color: #eabf55;
+    font-weight: 900;
+}
+
+.logo strong,
+.logo small {
+    display: block;
+}
+
+.logo strong {
+    font-size: 18px;
+}
+
+.logo small {
+    margin-top: 2px;
+    color: #8b929d;
+    font-size: 9px;
+}
+
+.nav {
+    display: flex;
+    gap: 6px;
+}
+
+.nav button {
+    padding: 9px 13px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: transparent;
+    color: #687180;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.nav button:hover {
+    border-color: #e3e6df;
+    background: #f6f7f2;
+    color: #172033;
+}
+
+.main {
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 55px 0 70px;
+    flex: 1;
+}
+
+.headingRow {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.kicker {
+    color: #ad8730;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.headingRow h1 {
+    margin: 10px 0 7px;
+    font-size: clamp(34px, 5vw, 48px);
+    line-height: 1;
+    letter-spacing: -1.7px;
+}
+
+.headingRow p {
+    margin: 0;
+    color: #7d8692;
+    font-size: 13px;
+}
+
+.countBadge {
+    min-width: 100px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e1e4dc;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.countBadge strong {
+    font-size: 24px;
+}
+
+.countBadge span {
+    margin-top: 2px;
+    color: #8b929d;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.balanceStrip {
+    margin-top: 35px;
+    padding: 23px 25px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 20px;
+    background: #182337;
+    color: #ffffff;
+    box-shadow: 0 16px 35px rgba(24, 35, 55, 0.12);
+}
+
+.balanceIcon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(234, 191, 85, 0.14);
+    font-size: 25px;
+}
+
+.balanceStrip > div:nth-child(2) {
+    flex: 1;
+}
+
+.balanceStrip span {
+    color: #9ca6b7;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.balanceStrip h2 {
+    margin: 5px 0 0;
+    font-size: 25px;
+}
+
+.balanceStrip h2 small {
+    color: #d9b450;
+    font-size: 11px;
+}
+
+.balanceSide {
+    padding-left: 22px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: right;
+}
+
+.balanceSide strong {
+    display: block;
+    margin-top: 4px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.transactionSection {
+    margin-top: 42px;
+}
+
+.sectionHeading span {
+    color: #ad8730;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+
+.sectionHeading h2 {
+    margin: 5px 0 20px;
+    font-size: 22px;
+}
+
+.transactionList {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.transactionCard {
+    padding: 17px 19px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #e1e4dc;
+    border-radius: 16px;
+    background: #ffffff;
+    transition: 0.2s ease;
+}
+
+.transactionCard:hover {
+    transform: translateY(-2px);
+    border-color: #d7c17a;
+    box-shadow: 0 10px 28px rgba(23, 32, 51, 0.06);
+}
+
+.transactionIcon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 13px;
+    background: #f8f1da;
+    font-size: 20px;
+}
+
+.transactionInfo {
+    min-width: 0;
+    flex: 1;
+}
+
+.transactionTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.rewardTag {
+    color: #ad8730;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.transactionTop small {
+    color: #999fa9;
+    font-size: 9px;
+}
+
+.transactionInfo h3 {
+    margin: 6px 0 3px;
+    overflow: hidden;
+    color: #202b3d;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.transactionInfo p {
+    margin: 0;
+    color: #9299a4;
+    font-size: 9px;
+}
+
+.amount {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.amount strong {
+    color: #368454;
+    font-size: 17px;
+}
+
+.amount span {
+    color: #ad8730;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.emptyState {
+    padding: 65px 25px;
+    text-align: center;
+    border: 1px dashed #d8dcd4;
+    border-radius: 20px;
+    background: #ffffff;
+}
+
+.emptyIcon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f8f1da;
+    font-size: 27px;
+}
+
+.emptyState h3 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.emptyState p {
+    max-width: 390px;
+    margin: 8px auto 20px;
+    color: #858d99;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.emptyState button {
+    padding: 10px 17px;
+    border: none;
+    border-radius: 9px;
+    background: #182337;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.footer {
+    padding: 21px max(20px, calc((100% - 1080px) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border-top: 1px solid #e1e4dc;
+    background: #ffffff;
+    color: #8c939e;
+    font-size: 9px;
+}
+
+.footer div {
+    display: flex;
+    gap: 18px;
+}
+
+.footer button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #737b87;
+    font-family: inherit;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.footer button:hover {
+    color: #ad8730;
+}
+
+.loadingPage,
+.errorPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f6f7f2;
+}
+
+.loadingPage {
+    flex-direction: column;
+    gap: 13px;
+}
+
+.loadingPage p {
+    color: #858d99;
+    font-size: 11px;
+}
+
+.loader {
+    width: 38px;
+    height: 38px;
+    border: 3px solid #dfe2da;
+    border-top-color: #d0a83e;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.errorBox {
+    width: min(400px, calc(100% - 35px));
+    padding: 30px;
+    text-align: center;
+    border: 1px solid #e1e4dc;
+    border-radius: 18px;
+    background: #ffffff;
+}
+
+.errorIcon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff0f0;
+    color: #c04d4d;
+    font-weight: 800;
+}
+
+.errorBox h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.errorBox p {
+    margin: 8px 0 18px;
+    color: #858d99;
+    font-size: 11px;
+}
+
+.errorBox button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 9px;
+    background: #182337;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .header {
+        min-height: auto;
+        padding: 13px 16px;
+    }
+
+    .nav {
+        gap: 2px;
+    }
+
+    .nav button {
+        padding: 7px 8px;
+        font-size: 9px;
+    }
+
+    .main {
+        width: calc(100% - 28px);
+        padding: 35px 0 50px;
+    }
+
+    .balanceStrip {
+        align-items: flex-start;
+    }
+
+    .balanceSide {
+        display: none;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo small {
+        display: none;
+    }
+
+    .logo strong {
+        font-size: 16px;
+    }
+
+    .logoIcon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .nav button {
+        font-size: 0;
+    }
+
+    .nav button::first-letter {
+        font-size: 15px;
+    }
+
+    .headingRow {
+        align-items: flex-start;
+    }
+
+    .countBadge {
+        min-width: 65px;
+        padding: 10px;
+    }
+
+    .countBadge strong {
+        font-size: 19px;
+    }
+
+    .transactionCard {
+        padding: 14px;
+    }
+
+    .transactionIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .transactionTop {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .amount {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

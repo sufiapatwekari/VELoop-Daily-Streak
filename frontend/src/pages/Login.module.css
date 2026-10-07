@@ -1,0 +1,492 @@
+.page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background: #f6f7f2;
+    color: #172033;
+    font-family: inherit;
+}
+
+.backgroundShape {
+    position: fixed;
+    width: 520px;
+    height: 520px;
+    right: -180px;
+    top: -180px;
+    border-radius: 50%;
+    background: #e7eee3;
+    pointer-events: none;
+}
+
+.loginLayout {
+    width: min(1050px, 100%);
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: 43% 57%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 1px solid #e2e5dc;
+    border-radius: 30px;
+    background: #ffffff;
+    box-shadow: 0 25px 70px rgba(23, 32, 51, 0.10);
+}
+
+
+/* =========================================
+   LEFT BRAND PANEL
+========================================= */
+
+.brandPanel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 42px;
+    background: #182337;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.brandPanel::after {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: -100px;
+    bottom: -100px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+.brand {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.brandIcon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 13px;
+    background: #eabf55;
+    color: #182337;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.brand strong {
+    display: block;
+    font-size: 19px;
+    letter-spacing: -0.4px;
+}
+
+.brand small {
+    display: block;
+    margin-top: 2px;
+    color: #9da7b9;
+    font-size: 10px;
+}
+
+.brandContent {
+    margin: auto 0;
+    max-width: 370px;
+}
+
+.kicker,
+.formKicker {
+    display: inline-block;
+    color: #d9b450;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.brandContent h1 {
+    margin: 18px 0 16px;
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -1.7px;
+}
+
+.brandContent h1 span {
+    color: #d9b450;
+}
+
+.brandContent p {
+    margin: 0;
+    max-width: 340px;
+    color: #aab2c0;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.rewardPreview {
+    margin-top: 30px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.previewIcon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(234, 191, 85, 0.14);
+    font-size: 20px;
+}
+
+.rewardPreview strong,
+.rewardPreview span {
+    display: block;
+}
+
+.rewardPreview strong {
+    font-size: 12px;
+}
+
+.rewardPreview div span {
+    margin-top: 3px;
+    color: #8f99ab;
+    font-size: 10px;
+}
+
+.previewArrow {
+    margin-left: auto;
+    color: #d9b450;
+    font-size: 20px;
+}
+
+.brandFooter {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #737e91;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   RIGHT FORM PANEL
+========================================= */
+
+.formPanel {
+    padding: 55px 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mobileBrand {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    color: #182337;
+}
+
+.mobileBrand strong {
+    display: block;
+    font-size: 18px;
+}
+
+.mobileBrand small {
+    display: block;
+    margin-top: 2px;
+    color: #89919d;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.formHeader {
+    margin-bottom: 28px;
+}
+
+.formHeader h2 {
+    margin: 8px 0 7px;
+    color: #172033;
+    font-size: 32px;
+    letter-spacing: -1px;
+}
+
+.formHeader p {
+    margin: 0;
+    color: #7b8492;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.messageError {
+    margin-bottom: 18px;
+    padding: 11px 13px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid #f0caca;
+    border-radius: 11px;
+    background: #fff4f4;
+    color: #bd4b4b;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.messageError > span {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #f4dada;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.inputGroup {
+    margin-bottom: 17px;
+}
+
+.inputGroup label {
+    display: block;
+    margin-bottom: 7px;
+    color: #414b5b;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.inputWrap {
+    min-height: 47px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    border: 1px solid #dde1e7;
+    border-radius: 11px;
+    background: #fbfcfd;
+    transition: 0.2s ease;
+}
+
+.inputWrap > span {
+    width: 17px;
+    color: #7f8998;
+    font-size: 12px;
+    text-align: center;
+    opacity: 0.75;
+}
+
+.inputWrap input {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #172033;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.inputWrap input::placeholder {
+    color: #a5acb6;
+}
+
+.inputWrap:focus-within {
+    border-color: #cba94f;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(203, 169, 79, 0.10);
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.loginButton {
+    width: 100%;
+    min-height: 49px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 12px;
+    background: #182337;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.loginButton:hover:not(:disabled) {
+    background: #222f47;
+    transform: translateY(-1px);
+}
+
+.loginButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loginButton > span:last-child {
+    color: #eabf55;
+    font-size: 18px;
+}
+
+.buttonLoader {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+
+/* =========================================
+   REGISTER PROMPT
+========================================= */
+
+.registerPrompt {
+    margin-top: 25px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    border-top: 1px solid #edf0f2;
+    color: #89919d;
+    font-size: 11px;
+}
+
+.registerPrompt button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #182337;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.registerPrompt button:hover {
+    color: #b28c31;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 850px) {
+
+    .page {
+        padding: 18px;
+    }
+
+    .loginLayout {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        min-height: auto;
+    }
+
+    .brandPanel {
+        display: none;
+    }
+
+    .formPanel {
+        padding: 42px 35px;
+    }
+
+    .mobileBrand {
+        display: flex;
+        margin-bottom: 35px;
+    }
+
+    .mobileBrand .brandIcon {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .page {
+        padding: 10px;
+    }
+
+    .loginLayout {
+        min-height: auto;
+        border-radius: 22px;
+    }
+
+    .formPanel {
+        padding: 30px 21px;
+    }
+
+    .formHeader h2 {
+        font-size: 28px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .page {
+        padding: 8px;
+    }
+
+    .formPanel {
+        padding: 28px 18px;
+    }
+
+    .mobileBrand {
+        margin-bottom: 28px;
+    }
+
+    .formHeader h2 {
+        font-size: 26px;
+    }
+}
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
