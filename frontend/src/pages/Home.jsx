@@ -1,15 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
+import vesCoin from "../../assests/VEs_Coin.png";
+import flame from "../../assests/Flame.png";
+import stayActive from "../../assests/Stay_Active.png";
+import biggerStreak from "../../assests/Bigger_Streak.png";
+import day4 from "../../assests/Day-4.png";
+import day5 from "../../assests/Day-5.png";
+import day7 from "../../assests/Day-7.png";
+import exclusiveReward from "../../assests/Exclusive-reward.png";
+import trust from "../../assests/Trust.png";
+import topLeft from "../../assests/Top_Left.png";
+import topRight from "../../assests/Top_right.png";
+
 function Home() {
     const navigate = useNavigate();
 
     return (
         <div className={styles.page}>
 
-            {/* =========================================
+            {/* ================================
                 NAVBAR
-            ========================================= */}
+            ================================= */}
 
             <header className={styles.navbar}>
 
@@ -28,7 +40,6 @@ function Home() {
                     </div>
                 </button>
 
-
                 <nav className={styles.navLinks}>
                     <a href="#how-it-works">
                         How It Works
@@ -42,7 +53,6 @@ function Home() {
                         Why VELoop
                     </a>
                 </nav>
-
 
                 <div className={styles.navActions}>
 
@@ -67,9 +77,9 @@ function Home() {
             </header>
 
 
-            {/* =========================================
+            {/* ================================
                 HERO
-            ========================================= */}
+            ================================= */}
 
             <main>
 
@@ -78,7 +88,11 @@ function Home() {
                     <div className={styles.heroContent}>
 
                         <div className={styles.heroKicker}>
-                            🔥 DAILY STREAK REWARDS
+                            <img
+                                src={flame}
+                                alt=""
+                            />
+                            DAILY STREAK REWARDS
                         </div>
 
                         <h1>
@@ -92,7 +106,6 @@ function Home() {
                             and unlock exciting gift-card rewards as you
                             keep going.
                         </p>
-
 
                         <div className={styles.heroActions}>
 
@@ -115,7 +128,6 @@ function Home() {
 
                         </div>
 
-
                         <div className={styles.heroStats}>
 
                             <div>
@@ -129,7 +141,12 @@ function Home() {
                             </div>
 
                             <div>
-                                <strong>💎</strong>
+                                <strong>
+                                    <img
+                                        src={vesCoin}
+                                        alt=""
+                                    />
+                                </strong>
                                 <span>VES Rewards</span>
                             </div>
 
@@ -144,10 +161,25 @@ function Home() {
 
                         <div className={styles.visualGlow}></div>
 
+                        <img
+                            src={topLeft}
+                            alt=""
+                            className={styles.topLeftReward}
+                        />
+
+                        <img
+                            src={topRight}
+                            alt=""
+                            className={styles.topRightReward}
+                        />
+
                         <div className={styles.rewardOrb}>
 
                             <div className={styles.diamondLarge}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES coins"
+                                />
                             </div>
 
                             <strong>
@@ -161,24 +193,55 @@ function Home() {
                         </div>
 
 
-                        <div className={`${styles.floatingReward} ${styles.rewardOne}`}>
-                            💎
-                            <span>+10 VES</span>
+                        <div
+                            className={`${styles.floatingReward} ${styles.rewardOne}`}
+                        >
+                            <img
+                                src={vesCoin}
+                                alt=""
+                            />
+                            <span>
+                                +10 VES
+                            </span>
                         </div>
 
-                        <div className={`${styles.floatingReward} ${styles.rewardTwo}`}>
-                            🎁
-                            <span>₹1 Gift Card</span>
+
+                        <div
+                            className={`${styles.floatingReward} ${styles.rewardTwo}`}
+                        >
+                            <img
+                                src={day4}
+                                alt=""
+                            />
+                            <span>
+                                ₹1 Gift Card
+                            </span>
                         </div>
 
-                        <div className={`${styles.floatingReward} ${styles.rewardThree}`}>
-                            🪙
-                            <span>VES</span>
+
+                        <div
+                            className={`${styles.floatingReward} ${styles.rewardThree}`}
+                        >
+                            <img
+                                src={biggerStreak}
+                                alt=""
+                            />
+                            <span>
+                                Bigger Streak
+                            </span>
                         </div>
 
-                        <div className={`${styles.floatingReward} ${styles.rewardFour}`}>
-                            🔥
-                            <span>7 Day Streak</span>
+
+                        <div
+                            className={`${styles.floatingReward} ${styles.rewardFour}`}
+                        >
+                            <img
+                                src={flame}
+                                alt=""
+                            />
+                            <span>
+                                7 Day Streak
+                            </span>
                         </div>
 
                     </div>
@@ -186,9 +249,9 @@ function Home() {
                 </section>
 
 
-                {/* =========================================
+                {/* ================================
                     HOW IT WORKS
-                ========================================= */}
+                ================================= */}
 
                 <section
                     id="how-it-works"
@@ -222,7 +285,10 @@ function Home() {
                             </div>
 
                             <div className={styles.stepIcon}>
-                                🔐
+                                <img
+                                    src={trust}
+                                    alt=""
+                                />
                             </div>
 
                             <h3>
@@ -244,7 +310,10 @@ function Home() {
                             </div>
 
                             <div className={styles.stepIcon}>
-                                🔥
+                                <img
+                                    src={stayActive}
+                                    alt=""
+                                />
                             </div>
 
                             <h3>
@@ -266,7 +335,10 @@ function Home() {
                             </div>
 
                             <div className={styles.stepIcon}>
-                                🎁
+                                <img
+                                    src={exclusiveReward}
+                                    alt=""
+                                />
                             </div>
 
                             <h3>
@@ -285,9 +357,9 @@ function Home() {
                 </section>
 
 
-                {/* =========================================
+                {/* ================================
                     REWARD JOURNEY
-                ========================================= */}
+                ================================= */}
 
                 <section
                     id="rewards"
@@ -314,14 +386,20 @@ function Home() {
 
                     <div className={styles.rewardJourney}>
 
-                        <div className={`${styles.rewardCard} ${styles.activeReward}`}>
+                        {/* DAY 01 */}
 
+                        <div
+                            className={`${styles.rewardCard} ${styles.activeReward}`}
+                        >
                             <div className={styles.rewardDay}>
                                 DAY 01
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES reward"
+                                />
                             </div>
 
                             <strong>
@@ -331,12 +409,13 @@ function Home() {
                             <span>
                                 First Claim
                             </span>
-
                         </div>
 
 
                         <div className={styles.journeyLine}></div>
 
+
+                        {/* DAY 02 */}
 
                         <div className={styles.rewardCard}>
 
@@ -345,7 +424,10 @@ function Home() {
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES reward"
+                                />
                             </div>
 
                             <strong>
@@ -362,6 +444,8 @@ function Home() {
                         <div className={styles.journeyLine}></div>
 
 
+                        {/* DAY 03 */}
+
                         <div className={styles.rewardCard}>
 
                             <div className={styles.rewardDay}>
@@ -369,7 +453,10 @@ function Home() {
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES reward"
+                                />
                             </div>
 
                             <strong>
@@ -386,6 +473,8 @@ function Home() {
                         <div className={styles.journeyLine}></div>
 
 
+                        {/* DAY 04 */}
+
                         <div className={styles.rewardCard}>
 
                             <div className={styles.rewardDay}>
@@ -393,7 +482,10 @@ function Home() {
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                🎁
+                                <img
+                                    src={day4}
+                                    alt="Amazon gift card"
+                                />
                             </div>
 
                             <strong>
@@ -410,6 +502,8 @@ function Home() {
                         <div className={styles.journeyLine}></div>
 
 
+                        {/* DAY 05 */}
+
                         <div className={styles.rewardCard}>
 
                             <div className={styles.rewardDay}>
@@ -417,7 +511,10 @@ function Home() {
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                🎁
+                                <img
+                                    src={day5}
+                                    alt="Amazon gift card"
+                                />
                             </div>
 
                             <strong>
@@ -434,6 +531,8 @@ function Home() {
                         <div className={styles.journeyLine}></div>
 
 
+                        {/* DAY 06 */}
+
                         <div className={styles.rewardCard}>
 
                             <div className={styles.rewardDay}>
@@ -441,7 +540,10 @@ function Home() {
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES reward"
+                                />
                             </div>
 
                             <strong>
@@ -458,14 +560,21 @@ function Home() {
                         <div className={styles.journeyLine}></div>
 
 
-                        <div className={`${styles.rewardCard} ${styles.finalReward}`}>
+                        {/* DAY 07 */}
+
+                        <div
+                            className={`${styles.rewardCard} ${styles.finalReward}`}
+                        >
 
                             <div className={styles.rewardDay}>
                                 DAY 07
                             </div>
 
                             <div className={styles.rewardEmoji}>
-                                🎁
+                                <img
+                                    src={day7}
+                                    alt="Ultimate reward"
+                                />
                             </div>
 
                             <strong>
@@ -483,9 +592,9 @@ function Home() {
                 </section>
 
 
-                {/* =========================================
+                {/* ================================
                     WHY VELOOP
-                ========================================= */}
+                ================================= */}
 
                 <section
                     id="why-veloop"
@@ -510,7 +619,6 @@ function Home() {
                             while your wallet keeps track of your earned VES.
                         </p>
 
-
                         <button
                             type="button"
                             className={styles.primaryCta}
@@ -528,7 +636,10 @@ function Home() {
                         <div className={styles.benefitCard}>
 
                             <div>
-                                🔥
+                                <img
+                                    src={flame}
+                                    alt=""
+                                />
                             </div>
 
                             <section>
@@ -547,7 +658,10 @@ function Home() {
                         <div className={styles.benefitCard}>
 
                             <div>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt=""
+                                />
                             </div>
 
                             <section>
@@ -566,7 +680,10 @@ function Home() {
                         <div className={styles.benefitCard}>
 
                             <div>
-                                🎁
+                                <img
+                                    src={exclusiveReward}
+                                    alt=""
+                                />
                             </div>
 
                             <section>
@@ -585,7 +702,10 @@ function Home() {
                         <div className={styles.benefitCard}>
 
                             <div>
-                                🔒
+                                <img
+                                    src={trust}
+                                    alt=""
+                                />
                             </div>
 
                             <section>
@@ -606,14 +726,17 @@ function Home() {
                 </section>
 
 
-                {/* =========================================
+                {/* ================================
                     FINAL CTA
-                ========================================= */}
+                ================================= */}
 
                 <section className={styles.finalCta}>
 
                     <div className={styles.finalIcon}>
-                        💎
+                        <img
+                            src={vesCoin}
+                            alt=""
+                        />
                     </div>
 
                     <span>
@@ -643,9 +766,9 @@ function Home() {
             </main>
 
 
-            {/* =========================================
+            {/* ================================
                 FOOTER
-            ========================================= */}
+            ================================= */}
 
             <footer className={styles.footer}>
 

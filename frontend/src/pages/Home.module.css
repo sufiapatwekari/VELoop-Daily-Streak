@@ -1,10 +1,11 @@
 .page {
     min-height: 100vh;
-    background: #f6f7f2;
-    color: #172033;
-    font-family: inherit;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(124, 60, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(92, 45, 145, 0.14), transparent 28%),
+        #070914;
+    color: #ffffff;
 }
-
 
 /* =========================================
    NAVBAR
@@ -18,6 +19,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 25px;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.12);
 }
 
 .brand {
@@ -27,27 +29,29 @@
     padding: 0;
     border: none;
     background: transparent;
-    color: #172033;
+    color: #ffffff;
     cursor: pointer;
     text-align: left;
 }
 
 .brandIcon {
-    width: 40px;
-    height: 40px;
+    width: 39px;
+    height: 39px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     border-radius: 12px;
-    background: #eabf55;
-    color: #182337;
+    background: linear-gradient(145deg, #7c3cff, #42138e);
+    color: #ffffff;
     font-size: 18px;
-    font-weight: 900;
+    font-weight: 800;
+    box-shadow: 0 0 25px rgba(124, 60, 255, 0.30);
 }
 
 .brand strong {
     display: block;
+    color: #ffffff;
     font-size: 18px;
     letter-spacing: -0.4px;
 }
@@ -55,7 +59,7 @@
 .brand span {
     display: block;
     margin-top: 2px;
-    color: #89919d;
+    color: #858aa0;
     font-size: 8px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -68,7 +72,7 @@
 }
 
 .navLinks a {
-    color: #6f7888;
+    color: #8c91a6;
     text-decoration: none;
     font-size: 11px;
     font-weight: 600;
@@ -76,7 +80,7 @@
 }
 
 .navLinks a:hover {
-    color: #182337;
+    color: #ffffff;
 }
 
 .navActions {
@@ -98,24 +102,26 @@
 }
 
 .loginButton {
-    border: 1px solid #dce0e5;
-    background: #ffffff;
-    color: #182337;
+    border: 1px solid rgba(139, 92, 246, 0.28);
+    background: rgba(255, 255, 255, 0.04);
+    color: #e8e8f1;
 }
 
 .loginButton:hover {
-    border-color: #c7ccd4;
+    border-color: rgba(139, 92, 246, 0.55);
+    background: rgba(124, 60, 255, 0.08);
     transform: translateY(-1px);
 }
 
 .registerButton {
-    border: 1px solid #182337;
-    background: #182337;
+    border: 1px solid #7c3cff;
+    background: linear-gradient(135deg, #7c3cff, #5b22c5);
     color: #ffffff;
+    box-shadow: 0 8px 25px rgba(124, 60, 255, 0.22);
 }
 
 .registerButton:hover {
-    background: #222f47;
+    background: linear-gradient(135deg, #8b52ff, #672bd2);
     transform: translateY(-1px);
 }
 
@@ -142,31 +148,38 @@
     display: inline-flex;
     align-items: center;
     padding: 7px 11px;
-    border: 1px solid #e4dcc5;
+    border: 1px solid rgba(234, 191, 85, 0.25);
     border-radius: 30px;
-    background: #fffdf7;
-    color: #9b7723;
+    background: rgba(234, 191, 85, 0.07);
+    color: #e6bd57;
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1.4px;
 }
 
+.heroKicker img {
+    width: 18px;
+    height: 18px;
+    margin-right: 7px;
+    object-fit: contain;
+}
+
 .heroContent h1 {
     margin: 22px 0 20px;
-    color: #182337;
+    color: #ffffff;
     font-size: clamp(42px, 5.3vw, 68px);
     line-height: 1.02;
     letter-spacing: -3px;
 }
 
 .heroContent h1 span {
-    color: #a47c1c;
+    color: #a875ff;
 }
 
 .heroContent > p {
     max-width: 520px;
     margin: 0;
-    color: #707989;
+    color: #9297aa;
     font-size: 14px;
     line-height: 1.8;
 }
@@ -187,32 +200,33 @@
     gap: 12px;
     border: none;
     border-radius: 12px;
-    background: #182337;
+    background: linear-gradient(135deg, #7c3cff, #5420b8);
     color: #ffffff;
     font-family: inherit;
     font-size: 11px;
     font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 12px 30px rgba(124, 60, 255, 0.25);
     transition: 0.2s ease;
 }
 
 .primaryCta:hover {
-    background: #222f47;
+    background: linear-gradient(135deg, #8b52ff, #6428d0);
     transform: translateY(-2px);
 }
 
 .primaryCta span {
-    color: #eabf55;
+    color: #f1c95e;
     font-size: 17px;
 }
 
 .secondaryCta {
     min-height: 48px;
     padding: 0 17px;
-    border: 1px solid #dde1e7;
+    border: 1px solid rgba(139, 92, 246, 0.25);
     border-radius: 12px;
-    background: #ffffff;
-    color: #626c7c;
+    background: rgba(255, 255, 255, 0.035);
+    color: #a7aabd;
     font-family: inherit;
     font-size: 10px;
     font-weight: 700;
@@ -221,8 +235,9 @@
 }
 
 .secondaryCta:hover {
-    border-color: #c9ced6;
-    color: #182337;
+    border-color: rgba(139, 92, 246, 0.55);
+    background: rgba(124, 60, 255, 0.08);
+    color: #ffffff;
 }
 
 .heroStats {
@@ -239,12 +254,22 @@
 }
 
 .heroStats strong {
-    color: #182337;
+    display: flex;
+    align-items: center;
+    min-height: 24px;
+    color: #ffffff;
     font-size: 19px;
 }
 
+.heroStats strong img {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+    object-fit: contain;
+}
+
 .heroStats span {
-    color: #929aa5;
+    color: #858aa0;
     font-size: 9px;
 }
 
@@ -266,8 +291,13 @@
     width: 360px;
     height: 360px;
     border-radius: 50%;
-    background: #e7eee3;
-    opacity: 0.8;
+    background: radial-gradient(
+        circle,
+        rgba(124, 60, 255, 0.22),
+        rgba(124, 60, 255, 0.04) 55%,
+        transparent 75%
+    );
+    opacity: 1;
 }
 
 .rewardOrb {
@@ -279,53 +309,104 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #e4dfcf;
+    border: 1px solid rgba(139, 92, 246, 0.25);
     border-radius: 50%;
-    background: #fffdf7;
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(124, 60, 255, 0.16),
+            transparent 60%
+        ),
+        rgba(15, 13, 30, 0.92);
     box-shadow:
-        0 25px 60px rgba(23, 32, 51, 0.10),
-        inset 0 0 0 15px rgba(234, 191, 85, 0.07);
+        0 25px 60px rgba(0, 0, 0, 0.45),
+        0 0 60px rgba(124, 60, 255, 0.13),
+        inset 0 0 0 15px rgba(124, 60, 255, 0.04);
 }
 
 .diamondLarge {
-    font-size: 80px;
-    line-height: 1;
-    filter: drop-shadow(0 12px 12px rgba(23, 32, 51, 0.12));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diamondLarge img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(234, 191, 85, 0.20));
 }
 
 .rewardOrb strong {
     margin-top: 10px;
-    color: #182337;
+    color: #ffffff;
     font-size: 27px;
     letter-spacing: -1px;
 }
 
 .rewardOrb span {
     margin-top: 5px;
-    color: #9b7723;
+    color: #e5bd59;
     font-size: 8px;
     font-weight: 800;
     letter-spacing: 1.5px;
 }
 
+
+/* Decorative asset images */
+
+.topLeftReward,
+.topRightReward {
+    position: absolute;
+    z-index: 1;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.topLeftReward {
+    width: 105px;
+    height: 105px;
+    top: 35px;
+    left: 15px;
+    transform: rotate(-8deg);
+}
+
+.topRightReward {
+    width: 115px;
+    height: 115px;
+    top: 20px;
+    right: 0;
+    transform: rotate(8deg);
+}
+
+
+/* Floating rewards */
+
 .floatingReward {
     position: absolute;
     z-index: 3;
-    min-width: 105px;
+    min-width: 125px;
     padding: 11px 13px;
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid #e1e4df;
+    border: 1px solid rgba(139, 92, 246, 0.22);
     border-radius: 13px;
-    background: #ffffff;
-    box-shadow: 0 15px 35px rgba(23, 32, 51, 0.09);
-    color: #182337;
-    font-size: 17px;
+    background: rgba(17, 15, 33, 0.90);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.30);
+    color: #ffffff;
+    backdrop-filter: blur(14px);
+}
+
+.floatingReward img {
+    width: 31px;
+    height: 31px;
+    flex-shrink: 0;
+    object-fit: contain;
 }
 
 .floatingReward span {
-    color: #707989;
+    color: #b0b3c3;
     font-size: 9px;
     font-weight: 700;
 }
@@ -368,22 +449,22 @@
 
 .sectionHeading > span,
 .sectionKicker {
-    color: #b28c31;
+    color: #a875ff;
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1.8px;
 }
 
 .sectionHeading h2 {
-    margin: 10px 0 10px;
-    color: #182337;
+    margin: 10px 0;
+    color: #ffffff;
     font-size: clamp(27px, 3vw, 38px);
     letter-spacing: -1.3px;
 }
 
 .sectionHeading p {
     margin: 0;
-    color: #7c8491;
+    color: #9297aa;
     font-size: 12px;
     line-height: 1.7;
 }
@@ -402,20 +483,23 @@
 .stepCard {
     position: relative;
     padding: 30px;
-    border: 1px solid #e3e6df;
+    border: 1px solid rgba(139, 92, 246, 0.18);
     border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 0 15px 35px rgba(23, 32, 51, 0.045);
+    background: rgba(17, 15, 33, 0.82);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
     transition: 0.25s ease;
 }
 
 .stepCard:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(23, 32, 51, 0.08);
+    border-color: rgba(139, 92, 246, 0.38);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.30),
+        0 0 30px rgba(124, 60, 255, 0.07);
 }
 
 .stepNumber {
-    color: #c5bca5;
+    color: #777c91;
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -429,19 +513,25 @@
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    background: #f4f1e8;
-    font-size: 25px;
+    background: rgba(124, 60, 255, 0.10);
+    border: 1px solid rgba(124, 60, 255, 0.15);
+}
+
+.stepIcon img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
 }
 
 .stepCard h3 {
     margin: 0 0 9px;
-    color: #182337;
+    color: #ffffff;
     font-size: 15px;
 }
 
 .stepCard p {
     margin: 0;
-    color: #808896;
+    color: #9297aa;
     font-size: 11px;
     line-height: 1.7;
 }
@@ -452,9 +542,19 @@
 ========================================= */
 
 .rewardSection {
+    width: min(1180px, calc(100% - 60px));
+    margin: 90px auto;
     padding: 65px 35px;
+    border: 1px solid rgba(139, 92, 246, 0.18);
     border-radius: 28px;
-    background: #182337;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(124, 60, 255, 0.15),
+            transparent 55%
+        ),
+        rgba(14, 12, 28, 0.92);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
 }
 
 .rewardSection .sectionHeading h2 {
@@ -462,7 +562,7 @@
 }
 
 .rewardSection .sectionHeading p {
-    color: #aab2c0;
+    color: #a3a7b8;
 }
 
 .rewardSection .sectionHeading > span {
@@ -488,18 +588,25 @@
     flex-shrink: 0;
     border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 17px;
-    background: rgba(255, 255, 255, 0.055);
+    background: rgba(255, 255, 255, 0.045);
     text-align: center;
+    transition: 0.2s ease;
+}
+
+.rewardCard:hover {
+    transform: translateY(-3px);
+    border-color: rgba(139, 92, 246, 0.35);
 }
 
 .activeReward {
     border-color: rgba(234, 191, 85, 0.55);
-    background: rgba(234, 191, 85, 0.09);
+    background: rgba(234, 191, 85, 0.08);
 }
 
 .finalReward {
     border-color: rgba(234, 191, 85, 0.75);
     background: rgba(234, 191, 85, 0.12);
+    box-shadow: 0 0 25px rgba(234, 191, 85, 0.07);
 }
 
 .rewardDay {
@@ -510,8 +617,18 @@
 }
 
 .rewardEmoji {
+    width: 58px;
+    height: 58px;
     margin: 12px 0 8px;
-    font-size: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rewardEmoji img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
 }
 
 .rewardCard strong {
@@ -549,20 +666,20 @@
 
 .whyContent h2 {
     margin: 12px 0 17px;
-    color: #182337;
+    color: #ffffff;
     font-size: clamp(30px, 3.5vw, 45px);
     line-height: 1.08;
     letter-spacing: -1.7px;
 }
 
 .whyContent h2 span {
-    color: #a47c1c;
+    color: #a875ff;
 }
 
 .whyContent p {
     max-width: 440px;
     margin: 0;
-    color: #7b8492;
+    color: #9297aa;
     font-size: 12px;
     line-height: 1.8;
 }
@@ -583,9 +700,15 @@
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    border: 1px solid #e2e5dc;
+    border: 1px solid rgba(139, 92, 246, 0.18);
     border-radius: 17px;
-    background: #ffffff;
+    background: rgba(17, 15, 33, 0.82);
+    transition: 0.2s ease;
+}
+
+.benefitCard:hover {
+    border-color: rgba(139, 92, 246, 0.35);
+    transform: translateY(-2px);
 }
 
 .benefitCard > div {
@@ -596,8 +719,13 @@
     justify-content: center;
     flex-shrink: 0;
     border-radius: 12px;
-    background: #f5f2e9;
-    font-size: 19px;
+    background: rgba(124, 60, 255, 0.10);
+}
+
+.benefitCard > div img {
+    width: 29px;
+    height: 29px;
+    object-fit: contain;
 }
 
 .benefitCard section {
@@ -606,13 +734,13 @@
 }
 
 .benefitCard strong {
-    color: #182337;
+    color: #ffffff;
     font-size: 11px;
 }
 
 .benefitCard span {
     margin-top: 7px;
-    color: #858d9a;
+    color: #858aa0;
     font-size: 9px;
     line-height: 1.6;
 }
@@ -626,11 +754,17 @@
     width: min(900px, calc(100% - 60px));
     margin: 100px auto;
     padding: 60px 30px;
-    border: 1px solid #dedfd7;
+    border: 1px solid rgba(139, 92, 246, 0.20);
     border-radius: 27px;
-    background: #ffffff;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(124, 60, 255, 0.15),
+            transparent 60%
+        ),
+        rgba(17, 15, 33, 0.90);
     text-align: center;
-    box-shadow: 0 20px 50px rgba(23, 32, 51, 0.06);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.30);
 }
 
 .finalIcon {
@@ -641,8 +775,14 @@
     align-items: center;
     justify-content: center;
     border-radius: 19px;
-    background: #f4f0e4;
-    font-size: 34px;
+    background: rgba(124, 60, 255, 0.10);
+    border: 1px solid rgba(124, 60, 255, 0.15);
+}
+
+.finalIcon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
 }
 
 .finalCta > span {
@@ -654,15 +794,15 @@
 
 .finalCta h2 {
     margin: 10px 0 9px;
-    color: #182337;
+    color: #ffffff;
     font-size: clamp(27px, 3vw, 38px);
     letter-spacing: -1.2px;
 }
 
 .finalCta p {
-    margin: 0 auto;
     max-width: 470px;
-    color: #7d8693;
+    margin: 0 auto;
+    color: #9297aa;
     font-size: 11px;
     line-height: 1.7;
 }
@@ -676,22 +816,23 @@
     gap: 11px;
     border: none;
     border-radius: 12px;
-    background: #182337;
+    background: linear-gradient(135deg, #7c3cff, #5420b8);
     color: #ffffff;
     font-family: inherit;
     font-size: 11px;
     font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 10px 25px rgba(124, 60, 255, 0.20);
     transition: 0.2s ease;
 }
 
 .finalButton:hover {
-    background: #222f47;
+    background: linear-gradient(135deg, #8b52ff, #6428d0);
     transform: translateY(-2px);
 }
 
 .finalButton span {
-    color: #eabf55;
+    color: #f1c95e;
     font-size: 17px;
 }
 
@@ -706,8 +847,8 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 20px;
-    border-top: 1px solid #e2e5dc;
-    background: #ffffff;
+    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    background: rgba(5, 6, 15, 0.85);
 }
 
 .footerBrand {
@@ -724,14 +865,14 @@
 
 .footerBrand strong {
     display: block;
-    color: #182337;
+    color: #ffffff;
     font-size: 14px;
 }
 
 .footerBrand span {
     display: block;
     margin-top: 2px;
-    color: #9299a5;
+    color: #858aa0;
     font-size: 8px;
 }
 
@@ -745,21 +886,21 @@
     padding: 0;
     border: none;
     background: transparent;
-    color: #7d8592;
+    color: #858aa0;
     font-family: inherit;
     font-size: 9px;
     cursor: pointer;
 }
 
 .footerLinks button:hover {
-    color: #182337;
+    color: #ffffff;
 }
 
 .footerBottom {
     grid-column: 1 / -1;
     padding-top: 18px;
-    border-top: 1px solid #edf0ec;
-    color: #a0a6af;
+    border-top: 1px solid rgba(139, 92, 246, 0.10);
+    color: #656a7b;
     font-size: 8px;
 }
 
@@ -815,6 +956,7 @@
     }
 
     .rewardSection {
+        width: min(100% - 36px, 760px);
         padding: 50px 25px;
     }
 
@@ -891,13 +1033,19 @@
         min-height: 380px;
     }
 
+    .visualGlow {
+        width: 280px;
+        height: 280px;
+    }
+
     .rewardOrb {
         width: 220px;
         height: 220px;
     }
 
-    .diamondLarge {
-        font-size: 65px;
+    .diamondLarge img {
+        width: 80px;
+        height: 80px;
     }
 
     .rewardOrb strong {
@@ -907,11 +1055,29 @@
     .floatingReward {
         min-width: auto;
         padding: 8px 10px;
-        font-size: 15px;
+    }
+
+    .floatingReward img {
+        width: 24px;
+        height: 24px;
     }
 
     .floatingReward span {
         font-size: 7px;
+    }
+
+    .topLeftReward {
+        width: 70px;
+        height: 70px;
+        top: 30px;
+        left: 0;
+    }
+
+    .topRightReward {
+        width: 75px;
+        height: 75px;
+        top: 25px;
+        right: 0;
     }
 
     .rewardOne {
@@ -963,6 +1129,16 @@
 
     .rewardCard {
         min-width: 112px;
+    }
+
+    .rewardEmoji {
+        width: 50px;
+        height: 50px;
+    }
+
+    .rewardEmoji img {
+        width: 45px;
+        height: 45px;
     }
 
     .whySection {

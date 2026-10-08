@@ -1,9 +1,35 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getStreakStatus, claimStreak } from "../services/streakApi";
+import {
+    ArrowRight,
+    Check,
+    Lock,
+    LogOut,
+    WalletCards,
+    X
+} from "lucide-react";
+
+import {
+    getStreakStatus,
+    claimStreak
+} from "../services/streakApi";
+
 import styles from "./Dashboard.module.css";
 
+import flameImg from "../../assests/Flame.png";
+import coinImg from "../../assests/VEs_Coin.png";
+import heroGiftImg from "../../assests/Top_Left.png";
+import heroCrownImg from "../../assests/Top_right.png";
+import day4Img from "../../assests/Day-4.png";
+import day5Img from "../../assests/Day-5.png";
+import day7Img from "../../assests/Day-7.png";
+import activeImg from "../../assests/Stay_Active.png";
+import biggerStreakImg from "../../assests/Bigger_Streak.png";
+import exclusiveImg from "../../assests/Exclusive-reward.png";
+import trustImg from "../../assests/Trust.png";
+
 function Dashboard() {
+
     const [streak, setStreak] = useState(null);
     const [loading, setLoading] = useState(true);
     const [claiming, setClaiming] = useState(false);
@@ -25,14 +51,19 @@ function Dashboard() {
     const loadStreak = async () => {
         try {
             const data = await getStreakStatus();
+
             setStreak(data);
+            setError("");
+
         } catch (error) {
+
             console.error(error);
 
             setError(
                 error.response?.data?.message ||
                 "Failed to load streak information."
             );
+
         } finally {
             setLoading(false);
         }
@@ -43,7 +74,9 @@ function Dashboard() {
     }, []);
 
     const handleClaim = async () => {
+
         try {
+
             setClaiming(true);
             setError("");
             setClaimMessage("");
@@ -57,18 +90,22 @@ function Dashboard() {
             await loadStreak();
 
         } catch (error) {
+
             console.error(error);
 
             setError(
                 error.response?.data?.message ||
                 "Unable to claim reward."
             );
+
         } finally {
+
             setClaiming(false);
         }
     };
 
     useEffect(() => {
+
         if (!streak?.nextClaimAt) {
             setCountdown("00:00:00");
             return;
@@ -78,11 +115,16 @@ function Dashboard() {
             new Date(streak.nextClaimAt).getTime();
 
         const updateCountdown = () => {
+
             const now = Date.now();
-            const difference = targetTime - now;
+
+            const difference =
+                targetTime - now;
 
             if (difference <= 0) {
+
                 setCountdown("00:00:00");
+
                 return;
             }
 
@@ -93,7 +135,9 @@ function Dashboard() {
                 Math.floor(totalSeconds / 3600);
 
             const minutes =
-                Math.floor((totalSeconds % 3600) / 60);
+                Math.floor(
+                    (totalSeconds % 3600) / 60
+                );
 
             const seconds =
                 totalSeconds % 60;
@@ -116,253 +160,378 @@ function Dashboard() {
         setSelectedReward(reward);
     };
 
+    const getRewardImage = (reward) => {
+
+        if (!reward) {
+            return coinImg;
+        }
+
+        if (reward.rewardType === "GIFT_CARD") {
+
+            if (reward.day === 4) {
+                return day4Img;
+            }
+
+            if (reward.day === 5) {
+                return day5Img;
+            }
+
+            if (reward.day === 7) {
+                return day7Img;
+            }
+
+            return day5Img;
+        }
+
+        return coinImg;
+    };
+
+    const getDayStatusClass = (status) => {
+
+        if (status === "CLAIMED") {
+            return styles.claimed;
+        }
+
+        if (status === "AVAILABLE") {
+            return styles.available;
+        }
+
+        return styles.locked;
+    };
+
     if (loading) {
+
         return (
             <div className={styles.loadingPage}>
-                <div className={styles.loader}></div>
-                <p>Loading VELoop...</p>
+
+                <div className={styles.loadingLogo}>
+                    <img
+                        src={flameImg}
+                        alt="VELoop"
+                    />
+                </div>
+
+                <div className={styles.loadingSpinner}></div>
+
+                <p>
+                    Loading your daily rewards...
+                </p>
+
             </div>
         );
     }
 
     if (error && !streak) {
+
         return (
             <div className={styles.errorPage}>
+
                 <div className={styles.errorBox}>
-                    <h3>Something went wrong</h3>
-                    <p>{error}</p>
+
+                    <div className={styles.errorIcon}>
+                        !
+                    </div>
+
+                    <h2>
+                        Something went wrong
+                    </h2>
+
+                    <p>
+                        {error}
+                    </p>
+
+                    <button
+                        type="button"
+                        onClick={loadStreak}
+                    >
+                        Try Again
+                    </button>
+
                 </div>
+
             </div>
         );
     }
 
+    const progress =
+        streak?.totalRewards
+            ? Math.min(
+                (streak.currentDay /
+                    streak.totalRewards) * 100,
+                100
+            )
+            : 0;
+
     return (
+
         <div className={styles.page}>
 
-            {/* ================= HEADER ================= */}
+            {/* =====================================
+                HEADER
+            ====================================== */}
 
             <header className={styles.header}>
 
-                <div
-                    className={styles.logo}
-                    onClick={() => navigate("/dashboard")}
-                >
-                    <span className={styles.logoMark}>
-                        V
-                    </span>
+                <div className={styles.headerInner}>
 
-                    <div>
-                        <strong>VELoop</strong>
-                        <small>Daily Rewards</small>
-                    </div>
-                </div>
+                    <div
+                        className={styles.brand}
+                        onClick={() => navigate("/dashboard")}
+                    >
 
-                <div className={styles.headerRight}>
-
-                    <div className={styles.headerStreak}>
-                        <span>🔥</span>
+                        <div className={styles.brandMark}>
+                            V
+                        </div>
 
                         <div>
                             <strong>
-                                {streak.currentStreak}
+                                VELoop
                             </strong>
+
+                            <span>
+                                Daily Streak
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div className={styles.headerRight}>
+
+                        <div className={styles.streakBadge}>
+
+                            <img
+                                src={flameImg}
+                                alt=""
+                            />
+
+                            <span>
+                                {streak.currentStreak}
+                            </span>
 
                             <small>
                                 day streak
                             </small>
+
                         </div>
+
+                        <button
+                            type="button"
+                            className={styles.balanceButton}
+                            onClick={() => navigate("/wallet")}
+                        >
+
+                            <img
+                                src={coinImg}
+                                alt=""
+                            />
+
+                            <span>
+                                {streak.vesBalance}
+                            </span>
+
+                            <small>
+                                VES
+                            </small>
+
+                        </button>
+
+                        <button
+                            type="button"
+                            className={styles.logoutButton}
+                            onClick={handleLogout}
+                            aria-label="Logout"
+                        >
+                            <LogOut size={17} />
+                        </button>
+
                     </div>
-
-                    <button
-                        type="button"
-                        className={styles.profileButton}
-                        onClick={() => navigate("/wallet")}
-                        title="My Wallet"
-                    >
-                        👤
-                    </button>
-
-                    <button
-                        type="button"
-                        className={styles.logoutButton}
-                        onClick={handleLogout}
-                        title="Logout"
-                    >
-                        🚪
-                    </button>
 
                 </div>
 
             </header>
 
 
-            {/* ================= MAIN ================= */}
+            {/* =====================================
+                MAIN
+            ====================================== */}
 
             <main className={styles.main}>
 
-                {/* ================= WELCOME ================= */}
+                {/* =================================
+                    HERO
+                ================================== */}
 
-                <section className={styles.welcome}>
+                <section className={styles.hero}>
 
-                    <div>
+                    <div className={styles.heroContent}>
 
-                        <p className={styles.eyebrow}>
-                            YOUR DAILY REWARD
-                        </p>
+                        <span className={styles.heroKicker}>
+                            DAILY CHECK-IN
+                        </span>
 
                         <h1>
-                            Keep showing up.
-                            <span>Keep earning.</span>
+                            Check-in daily.
+                            <span>
+                                Unlock bigger rewards.
+                            </span>
                         </h1>
 
-                        <p className={styles.welcomeText}>
-                            Complete your daily check-in and
-                            unlock the next reward in your journey.
+                        <p>
+                            Maintain your streak and unlock
+                            increasingly valuable rewards every day.
                         </p>
 
-                    </div>
-
-                    <div className={styles.welcomeBadge}>
-                        <span>🔥</span>
-                        <strong>
-                            {streak.currentStreak}
-                        </strong>
-                        <small>
-                            DAYS
-                        </small>
-                    </div>
-
-                </section>
-
-
-                {/* ================= TOP CARDS ================= */}
-
-                <section className={styles.topGrid}>
-
-                    {/* STREAK CARD */}
-
-                    <div className={styles.streakCard}>
-
-                        <div className={styles.cardTop}>
+                        <div className={styles.heroStats}>
 
                             <div>
-
-                                <span className={styles.cardEyebrow}>
-                                    CURRENT STREAK
-                                </span>
-
-                                <div className={styles.bigNumber}>
+                                <strong>
                                     {streak.currentStreak}
-                                    <small>days</small>
-                                </div>
+                                </strong>
 
+                                <span>
+                                    Current Streak
+                                </span>
                             </div>
 
-                            <div className={styles.fireCircle}>
-                                🔥
+                            <div>
+                                <strong>
+                                    {streak.checkedIn}
+                                </strong>
+
+                                <span>
+                                    Days Completed
+                                </span>
                             </div>
 
-                        </div>
+                            <div>
+                                <strong>
+                                    {streak.totalRewards}
+                                </strong>
 
-                        <div className={styles.progressTrack}>
+                                <span>
+                                    Reward Days
+                                </span>
+                            </div>
 
-                            <div
-                                className={styles.progressFill}
-                                style={{
-                                    width: `${Math.min(
-                                        (streak.currentDay /
-                                            streak.totalRewards) * 100,
-                                        100
-                                    )}%`
-                                }}
-                            ></div>
-
-                        </div>
-
-                        <div className={styles.progressInfo}>
-                            <span>
-                                Day {streak.currentDay}
-                            </span>
-
-                            <span>
-                                {streak.totalRewards} day journey
-                            </span>
                         </div>
 
                     </div>
 
+                    <div className={styles.heroVisual}>
 
-                    {/* WALLET CARD */}
+                        <div className={styles.heroGlow}></div>
 
-                    <div className={styles.walletCard}>
+                        <img
+                            src={heroGiftImg}
+                            alt="VELoop rewards"
+                            className={styles.heroGift}
+                        />
 
-                        <div className={styles.walletHeader}>
-
-                            <span className={styles.cardEyebrow}>
-                                VES WALLET
-                            </span>
-
-                            <span className={styles.walletIcon}>
-                                💎
-                            </span>
-
-                        </div>
-
-                        <div className={styles.walletAmount}>
-                            {streak.vesBalance}
-                            <span>VES</span>
-                        </div>
-
-                        <button
-                            type="button"
-                            className={styles.walletButton}
-                            onClick={() => navigate("/wallet")}
-                        >
-                            View Wallet →
-                        </button>
+                        <img
+                            src={heroCrownImg}
+                            alt="Ultimate reward"
+                            className={styles.heroCrown}
+                        />
 
                     </div>
 
                 </section>
 
 
-                {/* ================= TODAY REWARD ================= */}
+                {/* =================================
+                    PROGRESS
+                ================================== */}
 
-                <section className={styles.todaySection}>
+                <section className={styles.progressCard}>
 
-                    <div className={styles.sectionHeading}>
+                    <div className={styles.progressHeader}>
 
                         <div>
 
-                            <span className={styles.sectionKicker}>
-                                TODAY
+                            <span>
+                                YOUR STREAK
+                            </span>
+
+                            <h2>
+                                {streak.currentStreak} Day Streak
+                            </h2>
+
+                        </div>
+
+                        <div className={styles.progressDay}>
+                            Day {streak.currentDay}
+                            <small>
+                                / {streak.totalRewards}
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <div className={styles.progressTrack}>
+
+                        <div
+                            className={styles.progressFill}
+                            style={{
+                                width: `${progress}%`
+                            }}
+                        />
+
+                    </div>
+
+                    <div className={styles.progressBottom}>
+
+                        <span>
+                            Keep checking in every day
+                        </span>
+
+                        <strong>
+                            {Math.round(progress)}%
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                {/* =================================
+                    TODAY
+                ================================== */}
+
+                <section className={styles.todaySection}>
+
+                    <div className={styles.sectionTitle}>
+
+                        <div>
+                            <span>
+                                TODAY'S REWARD
                             </span>
 
                             <h2>
                                 Your reward is waiting
                             </h2>
-
                         </div>
 
-                        <span className={styles.dayPill}>
-                            DAY {streak.currentDay + 1}
-                        </span>
+                        <div className={styles.dayTag}>
+                            Day {streak.nextRewardDay}
+                        </div>
 
                     </div>
 
 
                     <div className={styles.todayCard}>
 
-                        <div className={styles.rewardOrb}>
+                        <div className={styles.todayArtwork}>
 
-                            {streak.nextReward?.rewardType ===
-                            "GIFT_CARD"
-                                ? "🎁"
-                                : "💎"}
+                            <img
+                                src={getRewardImage(
+                                    streak.nextReward
+                                )}
+                                alt=""
+                            />
 
                         </div>
 
-                        <div className={styles.todayInfo}>
+                        <div className={styles.todayDetails}>
 
                             <span>
                                 NEXT REWARD
@@ -386,26 +555,40 @@ function Dashboard() {
                         <div className={styles.todayAction}>
 
                             {streak.todayClaimed ? (
-                                <>
-                                    <small>
+
+                                <div className={styles.countdownBox}>
+
+                                    <span>
                                         NEXT CLAIM IN
-                                    </small>
+                                    </span>
 
                                     <strong>
                                         {countdown}
                                     </strong>
-                                </>
+
+                                </div>
+
                             ) : (
+
                                 <button
                                     type="button"
                                     className={styles.claimButton}
                                     onClick={handleClaim}
                                     disabled={claiming}
                                 >
-                                    {claiming
-                                        ? "Claiming..."
-                                        : "🎁 Claim Reward"}
+
+                                    <span>
+                                        {claiming
+                                            ? "Claiming..."
+                                            : "Claim Reward"}
+                                    </span>
+
+                                    {!claiming && (
+                                        <ArrowRight size={17} />
+                                    )}
+
                                 </button>
+
                             )}
 
                         </div>
@@ -415,31 +598,49 @@ function Dashboard() {
                 </section>
 
 
-                {/* ================= MESSAGES ================= */}
+                {/* =================================
+                    MESSAGES
+                ================================== */}
 
                 {claimMessage && (
+
                     <div className={styles.successMessage}>
-                        ✓ {claimMessage}
+
+                        <Check size={17} />
+
+                        <span>
+                            {claimMessage}
+                        </span>
+
                     </div>
                 )}
 
                 {error && (
+
                     <div className={styles.warningMessage}>
-                        ⚠ {error}
+
+                        <span>!</span>
+
+                        <p>
+                            {error}
+                        </p>
+
                     </div>
                 )}
 
 
-                {/* ================= JOURNEY ================= */}
+                {/* =================================
+                    7 DAY REWARD GRID
+                ================================== */}
 
-                <section className={styles.journeySection}>
+                <section className={styles.rewardsSection}>
 
-                    <div className={styles.sectionHeading}>
+                    <div className={styles.sectionTitle}>
 
                         <div>
 
-                            <span className={styles.sectionKicker}>
-                                YOUR PROGRESS
+                            <span>
+                                STREAK CALENDAR
                             </span>
 
                             <h2>
@@ -448,81 +649,78 @@ function Dashboard() {
 
                         </div>
 
-                        <span className={styles.completedText}>
+                        <div className={styles.completedBadge}>
                             {streak.checkedIn} / {streak.totalRewards}
-                        </span>
+                        </div>
 
                     </div>
 
 
-                    <div className={styles.journey}>
-
-                        <div className={styles.journeyLine}></div>
+                    <div className={styles.rewardGrid}>
 
                         {streak.rewards.map((reward) => (
 
-                            <div
+                            <button
                                 key={reward.day}
-                                className={`${styles.rewardItem} ${
-                                    reward.status === "CLAIMED"
-                                        ? styles.itemClaimed
-                                        : reward.status === "AVAILABLE"
-                                        ? styles.itemAvailable
-                                        : styles.itemLocked
-                                }`}
+                                type="button"
+                                className={`${styles.rewardCard} ${getDayStatusClass(
+                                    reward.status
+                                )}`}
                                 onClick={() =>
                                     handleRewardClick(reward)
                                 }
                             >
 
-                                <div className={styles.dayCircle}>
+                                <div className={styles.rewardTop}>
 
+                                    <span>
+                                        Day {reward.day}
+                                    </span>
+
+                                    {reward.status === "CLAIMED" && (
+                                        <Check size={14} />
+                                    )}
+
+                                    {reward.status === "LOCKED" && (
+                                        <Lock size={13} />
+                                    )}
+
+                                </div>
+
+
+                                <div className={styles.rewardImage}>
+
+                                    <img
+                                        src={getRewardImage(reward)}
+                                        alt=""
+                                    />
+
+                                </div>
+
+
+                                <strong>
+                                    {reward.title}
+                                </strong>
+
+                                <small>
                                     {reward.status === "CLAIMED"
-                                        ? "✓"
-                                        : reward.day}
+                                        ? "Claimed"
+                                        : reward.status === "AVAILABLE"
+                                        ? "Available today"
+                                        : "Locked"}
+                                </small>
 
-                                </div>
 
-                                <div className={styles.rewardBox}>
+                                {reward.status === "AVAILABLE" && (
 
-                                    <div className={styles.rewardEmoji}>
+                                    <span className={styles.claimNow}>
+                                        Claim now
+                                        <ArrowRight size={13} />
+                                    </span>
 
-                                        {reward.rewardType ===
-                                        "GIFT_CARD"
-                                            ? "🎁"
-                                            : "💎"}
+                                )}
 
-                                    </div>
-
-                                    <div className={styles.rewardDetails}>
-
-                                        <small>
-                                            DAY {reward.day}
-                                        </small>
-
-                                        <strong>
-                                            {reward.title}
-                                        </strong>
-
-                                        <span>
-                                            {reward.status ===
-                                            "CLAIMED"
-                                                ? "Reward collected"
-                                                : reward.status ===
-                                                  "AVAILABLE"
-                                                ? "Ready to claim"
-                                                : "Complete previous day"}
-                                        </span>
-
-                                    </div>
-
-                                    <div className={styles.rewardArrow}>
-                                        →
-                                    </div>
-
-                                </div>
-
-                            </div>
+                            </button>
 
                         ))}
 
@@ -531,20 +729,22 @@ function Dashboard() {
                 </section>
 
 
-                {/* ================= QUICK ACTIONS ================= */}
+                {/* =================================
+                    BENEFITS
+                ================================== */}
 
-                <section className={styles.quickSection}>
+                <section className={styles.benefitsSection}>
 
-                    <div className={styles.sectionHeading}>
+                    <div className={styles.sectionTitle}>
 
                         <div>
 
-                            <span className={styles.sectionKicker}>
-                                EXPLORE
+                            <span>
+                                WHY MAINTAIN YOUR STREAK?
                             </span>
 
                             <h2>
-                                Your VELoop
+                                Bigger consistency. Bigger rewards.
                             </h2>
 
                         </div>
@@ -552,82 +752,180 @@ function Dashboard() {
                     </div>
 
 
-                    <div className={styles.quickGrid}>
+                    <div className={styles.benefitsGrid}>
 
-                        <button
-                            type="button"
-                            onClick={() => navigate("/wallet")}
-                            className={styles.quickCard}
-                        >
-                            <span>💎</span>
+                        <div className={styles.benefitCard}>
 
-                            <div>
-                                <strong>
-                                    VES Wallet
-                                </strong>
+                            <img
+                                src={activeImg}
+                                alt=""
+                            />
 
-                                <small>
-                                    Check your balance
-                                </small>
-                            </div>
+                            <h3>
+                                Stay Active
+                            </h3>
 
-                            <b>→</b>
-                        </button>
+                            <p>
+                                Keep your daily streak alive
+                                and never miss an eligible reward.
+                            </p>
+
+                        </div>
 
 
-                        <button
-                            type="button"
-                            onClick={() =>
-                                navigate("/transactions")
-                            }
-                            className={styles.quickCard}
-                        >
-                            <span>💳</span>
+                        <div className={styles.benefitCard}>
 
-                            <div>
-                                <strong>
-                                    Transactions
-                                </strong>
+                            <img
+                                src={biggerStreakImg}
+                                alt=""
+                            />
 
-                                <small>
-                                    View reward activity
-                                </small>
-                            </div>
+                            <h3>
+                                Bigger Streak
+                            </h3>
 
-                            <b>→</b>
-                        </button>
+                            <p>
+                                Stay consistent to unlock
+                                higher-value rewards.
+                            </p>
+
+                        </div>
 
 
-                        <button
-                            type="button"
-                            onClick={() =>
-                                navigate("/streak-history")
-                            }
-                            className={styles.quickCard}
-                        >
-                            <span>📈</span>
+                        <div className={styles.benefitCard}>
 
-                            <div>
-                                <strong>
-                                    Streak History
-                                </strong>
+                            <img
+                                src={exclusiveImg}
+                                alt=""
+                            />
 
-                                <small>
-                                    See your journey
-                                </small>
-                            </div>
+                            <h3>
+                                Exclusive Rewards
+                            </h3>
 
-                            <b>→</b>
-                        </button>
+                            <p>
+                                Reach later days to unlock
+                                special reward types.
+                            </p>
+
+                        </div>
+
+
+                        <div className={styles.benefitCard}>
+
+                            <img
+                                src={trustImg}
+                                alt=""
+                            />
+
+                            <h3>
+                                Don't Miss Out
+                            </h3>
+
+                            <p>
+                                Come back every day to protect
+                                your progress.
+                            </p>
+
+                        </div>
 
                     </div>
+
+                </section>
+
+
+                {/* =================================
+                    QUICK NAVIGATION
+                ================================== */}
+
+                <section className={styles.quickSection}>
+
+                    <button
+                        type="button"
+                        onClick={() => navigate("/wallet")}
+                        className={styles.quickCard}
+                    >
+
+                        <img
+                            src={coinImg}
+                            alt=""
+                        />
+
+                        <div>
+                            <strong>
+                                VES Wallet
+                            </strong>
+
+                            <span>
+                                View your reward balance
+                            </span>
+                        </div>
+
+                        <ArrowRight size={17} />
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onClick={() =>
+                            navigate("/transactions")
+                        }
+                        className={styles.quickCard}
+                    >
+
+                        <WalletCards size={25} />
+
+                        <div>
+                            <strong>
+                                Transactions
+                            </strong>
+
+                            <span>
+                                View your reward activity
+                            </span>
+                        </div>
+
+                        <ArrowRight size={17} />
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onClick={() =>
+                            navigate("/streak-history")
+                        }
+                        className={styles.quickCard}
+                    >
+
+                        <img
+                            src={flameImg}
+                            alt=""
+                        />
+
+                        <div>
+                            <strong>
+                                Streak History
+                            </strong>
+
+                            <span>
+                                See your previous streak activity
+                            </span>
+                        </div>
+
+                        <ArrowRight size={17} />
+
+                    </button>
 
                 </section>
 
             </main>
 
 
-            {/* ================= FOOTER ================= */}
+            {/* =====================================
+                FOOTER
+            ====================================== */}
 
             <footer className={styles.footer}>
 
@@ -635,15 +933,21 @@ function Dashboard() {
 
                     <div className={styles.footerBrand}>
 
-                        <div className={styles.footerLogo}>
-                            <span>V</span>
-                            <strong>VELoop</strong>
-                        </div>
+                      <div className={styles.footerLogo}>
+
+                           <div className={styles.footerBrandMark}>
+                                V
+                           </div>
+
+                            <strong>
+                             VELoop Rewards
+                            </strong>
+
+                      </div>
 
                         <p>
-                            Build your streak.
-                            Stay consistent.
-                            Unlock rewards.
+                            Stay active. Build your streak.
+                            Unlock your rewards.
                         </p>
 
                     </div>
@@ -652,9 +956,11 @@ function Dashboard() {
                     <div className={styles.footerLinks}>
 
                         <button
-                            onClick={() => navigate("/wallet")}
+                            onClick={() =>
+                                navigate("/wallet")
+                            }
                         >
-                            💎 Wallet
+                            Wallet
                         </button>
 
                         <button
@@ -662,7 +968,7 @@ function Dashboard() {
                                 navigate("/transactions")
                             }
                         >
-                            💳 Transactions
+                            Transactions
                         </button>
 
                         <button
@@ -670,7 +976,7 @@ function Dashboard() {
                                 navigate("/streak-history")
                             }
                         >
-                            📈 History
+                            Streak History
                         </button>
 
                         <button
@@ -678,7 +984,7 @@ function Dashboard() {
                                 navigate("/privacy-policy")
                             }
                         >
-                            🔐 Privacy
+                            Privacy
                         </button>
 
                         <button
@@ -686,7 +992,7 @@ function Dashboard() {
                                 navigate("/terms")
                             }
                         >
-                            📄 Terms
+                            Terms
                         </button>
 
                     </div>
@@ -694,14 +1000,16 @@ function Dashboard() {
                 </div>
 
                 <div className={styles.footerBottom}>
-                    © {new Date().getFullYear()} VELoop.
+                    © {new Date().getFullYear()} VELoop Rewards.
                     All rights reserved.
                 </div>
 
             </footer>
 
 
-            {/* ================= MODAL ================= */}
+            {/* =====================================
+                REWARD MODAL
+            ====================================== */}
 
             {selectedReward && (
 
@@ -720,50 +1028,54 @@ function Dashboard() {
                     >
 
                         <button
+                            type="button"
                             className={styles.closeButton}
                             onClick={() =>
                                 setSelectedReward(null)
                             }
                         >
-                            ×
+                            <X size={18} />
                         </button>
 
-                        <div className={styles.modalIcon}>
 
-                            {selectedReward.status === "CLAIMED"
-                                ? "✓"
-                                : selectedReward.status ===
-                                  "AVAILABLE"
-                                ? "🎁"
-                                : "🔒"}
+                        <img
+                            className={styles.modalRewardImage}
+                            src={getRewardImage(
+                                selectedReward
+                            )}
+                            alt=""
+                        />
 
-                        </div>
 
                         <span className={styles.modalDay}>
                             DAY {selectedReward.day}
                         </span>
 
+
                         <h2>
-                            {selectedReward.status ===
-                            "CLAIMED"
+
+                            {selectedReward.status === "CLAIMED"
                                 ? "Reward Collected!"
-                                : selectedReward.status ===
-                                  "AVAILABLE"
+                                : selectedReward.status === "AVAILABLE"
                                 ? "Your Reward Awaits!"
                                 : "Not Unlocked Yet"}
+
                         </h2>
 
+
                         <p>
-                            {selectedReward.status ===
-                            "CLAIMED"
+
+                            {selectedReward.status === "CLAIMED"
                                 ? `You already collected ${selectedReward.title}. Keep your streak alive for the next reward!`
-                                : selectedReward.status ===
-                                  "AVAILABLE"
+                                : selectedReward.status === "AVAILABLE"
                                 ? `${selectedReward.title} is ready for you. Claim your daily reward now!`
                                 : `Complete the previous streak days to unlock ${selectedReward.title}.`}
+
                         </p>
 
+
                         <button
+                            type="button"
                             className={styles.modalButton}
                             onClick={() =>
                                 setSelectedReward(null)

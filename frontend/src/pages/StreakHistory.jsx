@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { getStreakHistory } from "../services/streakApi";
 import styles from "./StreakHistory.module.css";
 
+import flame from "../../assests/Flame.png";
+import vesCoin from "../../assests/VEs_Coin.png";
+import trust from "../../assests/Trust.png";
+
 function StreakHistory() {
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -53,6 +57,13 @@ function StreakHistory() {
         return (
             <div className={styles.loadingPage}>
                 <div className={styles.loader}></div>
+
+                <img
+                    src={flame}
+                    alt=""
+                    className={styles.loadingImage}
+                />
+
                 <p>Loading your journey...</p>
             </div>
         );
@@ -63,14 +74,16 @@ function StreakHistory() {
             <div className={styles.errorPage}>
                 <div className={styles.errorBox}>
                     <div className={styles.errorIcon}>!</div>
+
                     <h3>Unable to load history</h3>
+
                     <p>{error}</p>
 
                     <button
                         type="button"
                         onClick={() => navigate("/dashboard")}
                     >
-                        ← Back to Dashboard
+                        Back to Dashboard
                     </button>
                 </div>
             </div>
@@ -80,6 +93,7 @@ function StreakHistory() {
     return (
         <div className={styles.page}>
 
+            {/* NAVBAR */}
             <header className={styles.header}>
 
                 <button
@@ -87,14 +101,15 @@ function StreakHistory() {
                     type="button"
                     onClick={() => navigate("/dashboard")}
                 >
-                    <span className={styles.logoIcon}>V</span>
+                    <span className={styles.logoIcon}>
+                        V
+                    </span>
 
-                    <span>
+                    <span className={styles.logoText}>
                         <strong>VELoop</strong>
                         <small>Daily Rewards</small>
                     </span>
                 </button>
-
 
                 <nav className={styles.nav}>
 
@@ -102,21 +117,21 @@ function StreakHistory() {
                         type="button"
                         onClick={() => navigate("/dashboard")}
                     >
-                        🏠 Dashboard
+                        Dashboard
                     </button>
 
                     <button
                         type="button"
                         onClick={() => navigate("/wallet")}
                     >
-                        💎 Wallet
+                        Wallet
                     </button>
 
                     <button
                         type="button"
                         onClick={() => navigate("/transactions")}
                     >
-                        📋 Transactions
+                        Transactions
                     </button>
 
                 </nav>
@@ -124,13 +139,19 @@ function StreakHistory() {
             </header>
 
 
+            {/* MAIN */}
             <main className={styles.main}>
 
                 <div className={styles.headingRow}>
 
-                    <div>
+                    <div className={styles.headingContent}>
+
                         <span className={styles.kicker}>
-                            🔥 YOUR JOURNEY
+                            <img
+                                src={flame}
+                                alt=""
+                            />
+                            YOUR JOURNEY
                         </span>
 
                         <h1>Streak History</h1>
@@ -138,6 +159,7 @@ function StreakHistory() {
                         <p>
                             Every check-in is a step toward your next reward.
                         </p>
+
                     </div>
 
                     <div className={styles.recordBadge}>
@@ -148,13 +170,18 @@ function StreakHistory() {
                 </div>
 
 
+                {/* OVERVIEW */}
                 <section className={styles.overviewCard}>
 
                     <div className={styles.overviewIcon}>
-                        🔥
+                        <img
+                            src={flame}
+                            alt="Streak"
+                        />
                     </div>
 
                     <div className={styles.overviewText}>
+
                         <span>STREAK ACTIVITY</span>
 
                         <h2>
@@ -168,22 +195,36 @@ function StreakHistory() {
                                 ? "Keep checking in to unlock more rewards."
                                 : "Claim your first daily reward to create your history."}
                         </p>
+
                     </div>
 
-                    <div className={styles.overviewDiamond}>
-                        💎
+                    <div className={styles.overviewReward}>
+                        <img
+                            src={vesCoin}
+                            alt="VES Coins"
+                        />
                     </div>
 
                 </section>
 
 
+                {/* HISTORY */}
                 <section className={styles.historySection}>
 
                     <div className={styles.sectionTitle}>
+
                         <div>
                             <span>ACTIVITY</span>
                             <h2>Reward Journey</h2>
                         </div>
+
+                        <div className={styles.sectionDecoration}>
+                            <img
+                                src={trust}
+                                alt=""
+                            />
+                        </div>
+
                     </div>
 
 
@@ -192,7 +233,10 @@ function StreakHistory() {
                         <div className={styles.emptyState}>
 
                             <div className={styles.emptyCircle}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES Coins"
+                                />
                             </div>
 
                             <h3>No activity yet</h3>
@@ -206,7 +250,8 @@ function StreakHistory() {
                                 type="button"
                                 onClick={() => navigate("/dashboard")}
                             >
-                                Start My Streak →
+                                Start My Streak
+                                <span>→</span>
                             </button>
 
                         </div>
@@ -240,25 +285,38 @@ function StreakHistory() {
                                     >
 
                                         <div className={styles.timelineRail}>
+
                                             <div className={styles.timelineDot}>
                                                 ✓
                                             </div>
 
                                             {index !== history.length - 1 && (
-                                                <div className={styles.timelineLine}></div>
+                                                <div
+                                                    className={
+                                                        styles.timelineLine
+                                                    }
+                                                ></div>
                                             )}
+
                                         </div>
 
 
                                         <div className={styles.historyCard}>
 
                                             <div className={styles.cardIcon}>
-                                                💎
+
+                                                <img
+                                                    src={vesCoin}
+                                                    alt="Reward"
+                                                />
+
                                             </div>
+
 
                                             <div className={styles.cardContent}>
 
                                                 <div className={styles.cardTop}>
+
                                                     <span>
                                                         DAY {day}
                                                     </span>
@@ -270,16 +328,20 @@ function StreakHistory() {
                                                             item.timestamp
                                                         )}
                                                     </small>
+
                                                 </div>
 
-                                                <h3>{description}</h3>
+                                                <h3>
+                                                    {description}
+                                                </h3>
 
                                                 <p>
-                                                    Daily streak activity recorded
-                                                    successfully.
+                                                    Daily streak activity
+                                                    recorded successfully.
                                                 </p>
 
                                             </div>
+
 
                                             <div className={styles.completed}>
                                                 ✓
@@ -300,13 +362,27 @@ function StreakHistory() {
             </main>
 
 
+            {/* FOOTER */}
             <footer className={styles.footer}>
 
-                <span>
-                    © {new Date().getFullYear()} VELoop. All rights reserved.
+                <div className={styles.footerBrand}>
+
+                    <div className={styles.footerBrandMark}>
+                        V
+                    </div>
+
+                    <strong>
+                        VELoop Rewards
+                    </strong>
+
+                </div>
+
+                <span className={styles.copyright}>
+                    © {new Date().getFullYear()} VELoop.
+                    All rights reserved.
                 </span>
 
-                <div>
+                <div className={styles.footerLinks}>
 
                     <button
                         type="button"

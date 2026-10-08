@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 
+import vesCoin from "../../assests/VEs_Coin.png";
+import flame from "../../assests/Flame.png";
+import trust from "../../assests/Trust.png";
+
 function Login() {
     const navigate = useNavigate();
 
@@ -31,7 +35,7 @@ function Login() {
 
         try {
             const response = await axios.post(
-               "https://veloop-daily-streak-1-bwlb.onrender.com/login",
+                "https://veloop-daily-streak-1-bwlb.onrender.com/login",
                 formData
             );
 
@@ -57,41 +61,49 @@ function Login() {
     return (
         <div className={styles.page}>
 
-            <div className={styles.backgroundShape}></div>
+            <div className={styles.glowOne}></div>
+            <div className={styles.glowTwo}></div>
 
             <div className={styles.loginLayout}>
 
-                {/* LEFT BRAND PANEL */}
-
-                <div className={styles.brandPanel}>
+                {/* =========================================
+                    LEFT BRAND PANEL
+                ========================================= */}
+                <section className={styles.brandPanel}>
 
                     <button
                         type="button"
                         className={styles.brand}
                         onClick={() => navigate("/login")}
                     >
-                        <div className={styles.brandIcon}>
+                        <span className={styles.brandIcon}>
                             V
-                        </div>
+                        </span>
 
-                        <div>
+                        <span className={styles.brandText}>
                             <strong>VELoop</strong>
-                            <small>DAILY STREAK</small>
-                        </div>
+                            <small>Daily Rewards</small>
+                        </span>
                     </button>
 
 
                     <div className={styles.brandContent}>
 
-                        <span className={styles.kicker}>
+                        <div className={styles.kicker}>
+                            <img
+                                src={flame}
+                                alt=""
+                            />
                             DAILY REWARDS
-                        </span>
+                        </div>
+
 
                         <h1>
                             Keep your streak.
                             <br />
                             <span>Earn more.</span>
                         </h1>
+
 
                         <p>
                             Sign in to continue your daily journey,
@@ -103,10 +115,13 @@ function Login() {
                         <div className={styles.rewardPreview}>
 
                             <div className={styles.previewIcon}>
-                                💎
+                                <img
+                                    src={vesCoin}
+                                    alt="VES"
+                                />
                             </div>
 
-                            <div>
+                            <div className={styles.previewText}>
                                 <strong>
                                     Your rewards are waiting
                                 </strong>
@@ -122,35 +137,59 @@ function Login() {
 
                         </div>
 
+
+                        <div className={styles.trustRow}>
+
+                            <img
+                                src={trust}
+                                alt=""
+                            />
+
+                            <span>
+                                Secure and simple reward tracking
+                            </span>
+
+                        </div>
+
                     </div>
 
 
                     <div className={styles.brandFooter}>
-                        <span>VELoop Daily Streak</span>
-                        <span>Reward • Repeat • Grow</span>
+
+                        <span>
+                            VELoop Daily Streak
+                        </span>
+
+                        <span>
+                            Reward • Repeat • Grow
+                        </span>
+
                     </div>
 
-                </div>
+                </section>
 
 
-                {/* RIGHT FORM PANEL */}
-
-                <div className={styles.formPanel}>
+                {/* =========================================
+                    RIGHT FORM PANEL
+                ========================================= */}
+                <section className={styles.formPanel}>
 
                     {/* MOBILE BRAND */}
 
-                    <div className={styles.mobileBrand}>
-
-                        <div className={styles.brandIcon}>
+                    <button
+                        type="button"
+                        className={styles.mobileBrand}
+                        onClick={() => navigate("/login")}
+                    >
+                        <span className={styles.brandIcon}>
                             V
-                        </div>
+                        </span>
 
-                        <div>
+                        <span>
                             <strong>VELoop</strong>
-                            <small>DAILY STREAK</small>
-                        </div>
-
-                    </div>
+                            <small>Daily Rewards</small>
+                        </span>
+                    </button>
 
 
                     {/* FORM HEADER */}
@@ -191,17 +230,34 @@ function Login() {
 
                     <form onSubmit={handleSubmit}>
 
+                        {/* EMAIL */}
+
                         <div className={styles.inputGroup}>
 
-                            <label>
+                            <label htmlFor="email">
                                 Email Address
                             </label>
 
                             <div className={styles.inputWrap}>
 
-                                <span>✉</span>
+                                <span className={styles.inputIcon}>
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <rect
+                                            x="3"
+                                            y="5"
+                                            width="18"
+                                            height="14"
+                                            rx="2"
+                                        />
+                                        <path d="m4 7 8 6 8-6" />
+                                    </svg>
+                                </span>
 
                                 <input
+                                    id="email"
                                     type="email"
                                     name="email"
                                     placeholder="Enter your email"
@@ -216,17 +272,36 @@ function Login() {
                         </div>
 
 
+                        {/* PASSWORD */}
+
                         <div className={styles.inputGroup}>
 
-                            <label>
+                            <label htmlFor="password">
                                 Password
                             </label>
 
                             <div className={styles.inputWrap}>
 
-                                <span>●</span>
+                                <span className={styles.inputIcon}>
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <rect
+                                            x="5"
+                                            y="10"
+                                            width="14"
+                                            height="10"
+                                            rx="2"
+                                        />
+                                        <path
+                                            d="M8 10V7a4 4 0 0 1 8 0v3"
+                                        />
+                                    </svg>
+                                </span>
 
                                 <input
+                                    id="password"
                                     type="password"
                                     name="password"
                                     placeholder="Enter your password"
@@ -241,25 +316,34 @@ function Login() {
                         </div>
 
 
+                        {/* LOGIN BUTTON */}
+
                         <button
                             type="submit"
                             className={styles.loginButton}
                             disabled={loading}
                         >
 
-                            <span>
-                                {loading
-                                    ? "Signing in..."
-                                    : "Sign In"
-                                }
-                            </span>
+                            {loading ? (
+                                <>
+                                    <span>
+                                        Signing in...
+                                    </span>
 
-                            {!loading && (
-                                <span>→</span>
-                            )}
+                                    <span
+                                        className={styles.buttonLoader}
+                                    ></span>
+                                </>
+                            ) : (
+                                <>
+                                    <span>
+                                        Sign In
+                                    </span>
 
-                            {loading && (
-                                <span className={styles.buttonLoader}></span>
+                                    <span>
+                                        →
+                                    </span>
+                                </>
                             )}
 
                         </button>
@@ -284,7 +368,7 @@ function Login() {
 
                     </div>
 
-                </div>
+                </section>
 
             </div>
 

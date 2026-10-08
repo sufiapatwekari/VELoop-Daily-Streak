@@ -1,488 +1,1183 @@
 .page {
     min-height: 100vh;
+
     display: flex;
     flex-direction: column;
-    background: #f6f7f2;
-    color: #172033;
+
+    background:
+        radial-gradient(
+            circle at 12% 8%,
+            rgba(124, 60, 255, 0.16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 88% 22%,
+            rgba(92, 45, 145, 0.14),
+            transparent 28%
+        ),
+        #070914;
+
+    color: #ffffff;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 .header {
     min-height: 72px;
-    padding: 0 clamp(20px, 6vw, 85px);
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    background:
+        rgba(7, 9, 20, 0.82);
+
+    backdrop-filter: blur(16px);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 20;
+}
+
+.headerInner {
+    width: min(1080px, calc(100% - 40px));
+
+    min-height: 72px;
+
+    margin: 0 auto;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #e3e6df;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(14px);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+
+    gap: 25px;
 }
 
-.logo {
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
     display: flex;
     align-items: center;
+
     gap: 10px;
+
     padding: 0;
+
     border: none;
     background: transparent;
-    color: #172033;
+
+    color: #ffffff;
+
     cursor: pointer;
+
     text-align: left;
 }
 
-.logoIcon {
+.brandMark {
     width: 39px;
     height: 39px;
+
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 12px;
-    background: #182337;
-    color: #eabf55;
-    font-weight: 900;
-}
 
-.logo strong,
-.logo small {
-    display: block;
-}
+    background:
+        linear-gradient(
+            145deg,
+            #7c3cff,
+            #42138e
+        );
 
-.logo strong {
+    color: #ffffff;
+
     font-size: 18px;
+    font-weight: 800;
+
+    box-shadow:
+        0 0 25px rgba(124, 60, 255, 0.30);
 }
 
-.logo small {
-    margin-top: 2px;
-    color: #8b929d;
+.brandText {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.1;
+}
+
+.brandText strong {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.brandText span {
+    margin-top: 3px;
+
+    color: #777d94;
+
     font-size: 9px;
 }
 
-.nav {
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navLinks {
     display: flex;
+    align-items: center;
+
     gap: 6px;
 }
 
-.nav button {
+.navLinks button {
     padding: 9px 13px;
+
     border: 1px solid transparent;
+
     border-radius: 9px;
+
     background: transparent;
-    color: #687180;
+
+    color: #858aa0;
+
     font-family: inherit;
+
     font-size: 11px;
+    font-weight: 600;
+
     cursor: pointer;
-    transition: 0.2s ease;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.nav button:hover {
-    border-color: #e3e6df;
-    background: #f6f7f2;
-    color: #172033;
+.navLinks button:hover {
+    border-color:
+        rgba(124, 60, 255, 0.28);
+
+    background:
+        rgba(124, 60, 255, 0.09);
+
+    color: #ffffff;
 }
+
+.navLinks .activeLink {
+    border-color:
+        rgba(124, 60, 255, 0.20);
+
+    background:
+        rgba(124, 60, 255, 0.14);
+
+    color: #ffffff;
+}
+
+
+/* =========================
+   MAIN
+========================= */
 
 .main {
-    width: min(960px, calc(100% - 40px));
+    width: min(1080px, calc(100% - 40px));
+
     margin: 0 auto;
-    padding: 55px 0 70px;
+
+    padding: 55px 0 75px;
+
     flex: 1;
 }
 
-.heading {
-    margin-bottom: 32px;
+
+/* =========================
+   HEADING
+========================= */
+
+.pageHeading {
+    margin-bottom: 34px;
 }
 
-.kicker {
-    color: #ad8730;
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    color: #a97aff;
+
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: 1.8px;
+
+    letter-spacing: 1.7px;
+
+    text-transform: uppercase;
 }
 
-.heading h1 {
-    margin: 10px 0 7px;
-    font-size: clamp(34px, 5vw, 48px);
+.pageHeading h1 {
+    margin: 0;
+
+    font-size:
+        clamp(34px, 5vw, 48px);
+
     line-height: 1;
+
+    font-weight: 800;
+
     letter-spacing: -1.7px;
 }
 
-.heading p {
-    margin: 0;
-    color: #7d8692;
+.pageHeading p {
+    margin: 12px 0 0;
+
+    max-width: 600px;
+
+    color: #858ba0;
+
     font-size: 13px;
+
+    line-height: 1.7;
 }
 
-.walletHero {
-    padding: 30px;
-    border-radius: 23px;
-    background: #182337;
-    color: #ffffff;
-    box-shadow: 0 18px 40px rgba(24, 35, 55, 0.14);
+
+/* =========================
+   BALANCE CARD
+========================= */
+
+.balanceCard {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 28px;
+
+    border:
+        1px solid rgba(124, 60, 255, 0.18);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124, 60, 255, 0.14),
+            rgba(33, 22, 56, 0.78)
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.24);
 }
 
-.walletTop {
+.balanceCard::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    right: -100px;
+    top: -120px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(124, 60, 255, 0.25),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+.balanceGlow {
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    right: 80px;
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(124, 60, 255, 0.10);
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+.balanceTop {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    color: #9b9eb2;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.walletIcon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(124, 60, 255, 0.12);
+
+    border:
+        1px solid rgba(124, 60, 255, 0.18);
+
+    color: #b184ff;
+}
+
+.balanceMain {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+
+    gap: 30px;
+
+    margin-top: 22px;
 }
 
-.walletTop > div:first-child > span {
-    color: #a5afbe;
-    font-size: 9px;
+.balanceValue {
+    font-size:
+        clamp(42px, 7vw, 64px);
+
     font-weight: 800;
-    letter-spacing: 1.6px;
-}
 
-.walletTop h2 {
-    margin: 8px 0 0;
-    font-size: clamp(42px, 7vw, 65px);
     line-height: 1;
+
     letter-spacing: -2px;
 }
 
-.walletTop h2 small {
-    margin-left: 10px;
-    color: #d9b450;
-    font-size: 15px;
+.balanceValue span {
+    color: #a97aff;
+
+    font-size: 18px;
+
     letter-spacing: 0;
 }
 
-.diamond {
-    width: 82px;
-    height: 82px;
+.balanceDescription {
+    margin: 14px 0 0;
+
+    color: #85899e;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   VES COIN
+========================= */
+
+.coinDisplay {
+    width: 105px;
+    height: 105px;
+
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(234, 191, 85, 0.18);
-    border-radius: 22px;
-    background: rgba(234, 191, 85, 0.10);
-    font-size: 36px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.07),
+            rgba(255, 255, 255, 0.015)
+        );
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 0 35px rgba(124, 60, 255, 0.10);
 }
 
-.walletBottom {
-    margin-top: 35px;
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid rgba(255, 255, 255, 0.09);
-    color: #7f8a9d;
-    font-size: 9px;
+.coinDisplay img {
+    width: 70px;
+    height: 70px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 15px rgba(255, 190, 80, 0.25)
+        );
 }
 
-.walletStatus {
-    color: #79c591;
-}
 
-.quickGrid {
-    margin-top: 18px;
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.actionsGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 13px;
+
+    margin-top: 20px;
 }
 
-.quickCard {
-    padding: 17px;
+.actionCard {
+    width: 100%;
+
     display: flex;
     align-items: center;
-    gap: 13px;
-    border: 1px solid #e1e4dc;
-    border-radius: 15px;
-    background: #ffffff;
-    color: #172033;
-    font-family: inherit;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 17px;
+
+    background:
+        rgba(18, 20, 37, 0.78);
+
+    color: #ffffff;
+
     text-align: left;
+
     cursor: pointer;
-    transition: 0.2s ease;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
 }
 
-.quickCard:hover {
-    transform: translateY(-2px);
-    border-color: #d8c17b;
-    box-shadow: 0 10px 25px rgba(23, 32, 51, 0.06);
+.actionCard:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(124, 60, 255, 0.30);
+
+    background:
+        rgba(124, 60, 255, 0.08);
 }
 
-.quickIcon {
-    width: 42px;
-    height: 42px;
+.actionIcon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 12px;
-    background: #f8f1da;
-    font-size: 19px;
+
+    background:
+        rgba(124, 60, 255, 0.12);
+
+    color: #ad7cff;
 }
 
-.quickCard div:nth-child(2) {
+.actionContent {
     flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
 }
 
-.quickCard strong,
-.quickCard span {
-    display: block;
-}
-
-.quickCard strong {
+.actionContent strong {
     font-size: 12px;
+    font-weight: 700;
 }
 
-.quickCard span {
-    margin-top: 3px;
-    color: #8b929d;
-    font-size: 9px;
+.actionContent span {
+    color: #777d92;
+
+    font-size: 10px;
 }
 
-.quickCard b {
-    color: #ad8730;
-    font-size: 18px;
+.actionArrow {
+    color: #686e83;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
 }
+
+.actionCard:hover .actionArrow {
+    transform: translateX(3px);
+
+    color: #a97aff;
+}
+
+
+/* =========================
+   INFO SECTION
+========================= */
 
 .infoSection {
-    margin-top: 30px;
+    margin-top: 20px;
+
     padding: 25px;
-    border: 1px solid #e1e4dc;
-    border-radius: 18px;
-    background: #ffffff;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 20px;
+
+    background:
+        rgba(18, 20, 37, 0.72);
 }
 
 .infoHeader {
     display: flex;
     align-items: center;
+
     gap: 13px;
 }
 
 .infoIcon {
     width: 43px;
     height: 43px;
+
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 12px;
-    background: #f8f1da;
-    font-size: 19px;
+
+    background:
+        rgba(124, 60, 255, 0.12);
+
+    border:
+        1px solid rgba(124, 60, 255, 0.16);
+}
+
+.infoIcon img {
+    width: 29px;
+    height: 29px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(255, 190, 80, 0.22)
+        );
 }
 
 .infoHeader span {
-    color: #ad8730;
-    font-size: 8px;
+    display: block;
+
+    color: #a97aff;
+
+    font-size: 9px;
     font-weight: 800;
-    letter-spacing: 1.4px;
+
+    letter-spacing: 1.3px;
 }
 
 .infoHeader h2 {
     margin: 4px 0 0;
-    font-size: 18px;
+
+    color: #ffffff;
+
+    font-size: 16px;
 }
 
 .infoSection > p {
-    max-width: 700px;
-    margin: 18px 0 0 56px;
-    color: #7e8793;
+    margin: 17px 0 0;
+
+    color: #85899e;
+
     font-size: 11px;
-    line-height: 1.8;
+
+    line-height: 1.7;
 }
+
+
+/* =========================
+   STREAK TIP
+========================= */
 
 .tipCard {
-    margin-top: 14px;
-    padding: 17px 20px;
+    margin-top: 15px;
+
     display: flex;
     align-items: center;
-    gap: 13px;
-    border: 1px solid #eadfbf;
-    border-radius: 15px;
-    background: #fffaf0;
-}
 
-.tipCard > span {
-    font-size: 23px;
-}
-
-.tipCard strong {
-    font-size: 11px;
-}
-
-.tipCard p {
-    margin: 4px 0 0;
-    color: #8b8170;
-    font-size: 9px;
-}
-
-.footer {
-    padding: 21px max(20px, calc((100% - 960px) / 2));
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     gap: 15px;
-    border-top: 1px solid #e1e4dc;
-    background: #ffffff;
-    color: #8c939e;
-    font-size: 9px;
+
+    padding: 19px;
+
+    border:
+        1px solid rgba(124, 60, 255, 0.14);
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124, 60, 255, 0.10),
+            rgba(18, 20, 37, 0.75)
+        );
 }
 
-.footer div {
-    display: flex;
-    gap: 18px;
-}
+.tipIcon {
+    width: 44px;
+    height: 44px;
 
-.footer button {
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: #737b87;
-    font-family: inherit;
-    font-size: 9px;
-    cursor: pointer;
-}
+    flex-shrink: 0;
 
-.footer button:hover {
-    color: #ad8730;
-}
-
-.loadingPage,
-.errorPage {
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f6f7f2;
+
+    border-radius: 13px;
+
+    background:
+        rgba(124, 60, 255, 0.12);
+
+    border:
+        1px solid rgba(124, 60, 255, 0.18);
 }
 
+.tipIcon img {
+    width: 29px;
+    height: 29px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 9px rgba(255, 170, 70, 0.25)
+        );
+}
+
+.tipCard strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 12px;
+}
+
+.tipCard p {
+    margin: 5px 0 0;
+
+    color: #777d92;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    padding: 21px 0;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.07);
+
+    background:
+        rgba(7, 9, 20, 0.88);
+}
+
+.footerInner {
+    width: min(1080px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.footerLogo {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.footerBrandMark {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #7c3cff,
+            #42138e
+        );
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    box-shadow:
+        0 0 25px rgba(124, 60, 255, 0.30);
+}
+
+.footerLogo strong {
+    font-size: 11px;
+}
+
+.footerLinks {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.footerLinks button {
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #747b8e;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.footerLinks button:hover {
+    color: #a97aff;
+}
+
+.copyright {
+    width: min(1080px, calc(100% - 40px));
+
+    margin: 13px auto 0;
+
+    color: #60677b;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
 .loadingPage {
+    min-height: 100vh;
+
+    display: flex;
     flex-direction: column;
-    gap: 13px;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(124, 60, 255, 0.13),
+            transparent 35%
+        ),
+        #070914;
+
+    color: #ffffff;
+}
+
+.loadingImage {
+    width: 34px;
+    height: 34px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 12px rgba(255, 170, 70, 0.28)
+        );
 }
 
 .loadingPage p {
-    color: #858d99;
+    margin: 0;
+
+    color: #858ca0;
+
     font-size: 11px;
 }
 
 .loader {
     width: 38px;
     height: 38px;
-    border: 3px solid #dfe2da;
-    border-top-color: #d0a83e;
+
+    border:
+        3px solid rgba(255, 255, 255, 0.08);
+
+    border-top-color: #8b55ff;
+
     border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+
+    animation:
+        spin 0.8s linear infinite;
 }
 
-.errorBox {
-    width: min(400px, calc(100% - 35px));
-    padding: 30px;
-    text-align: center;
-    border: 1px solid #e1e4dc;
-    border-radius: 18px;
-    background: #ffffff;
-}
 
-.errorIcon {
-    width: 38px;
-    height: 38px;
-    margin: 0 auto 12px;
+/* =========================
+   ERROR
+========================= */
+
+.errorPage {
+    min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(124, 60, 255, 0.12),
+            transparent 35%
+        ),
+        #070914;
+
+    color: #ffffff;
+}
+
+.errorBox {
+    width: min(400px, 100%);
+
+    padding: 30px;
+
+    text-align: center;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 20px;
+
+    background:
+        rgba(18, 20, 37, 0.90);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.30);
+}
+
+.errorIcon {
+    width: 42px;
+    height: 42px;
+
+    margin: 0 auto 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 50%;
-    background: #fff0f0;
-    color: #c04d4d;
+
+    background:
+        rgba(220, 75, 75, 0.12);
+
+    border:
+        1px solid rgba(220, 75, 75, 0.22);
+
+    color: #ff7777;
+
+    font-size: 17px;
     font-weight: 800;
 }
 
 .errorBox h3 {
     margin: 0;
+
+    color: #ffffff;
+
     font-size: 18px;
 }
 
 .errorBox p {
     margin: 8px 0 18px;
-    color: #858d99;
+
+    color: #858ca0;
+
     font-size: 11px;
+
+    line-height: 1.6;
 }
 
 .errorBox button {
-    padding: 10px 15px;
+    padding: 10px 16px;
+
     border: none;
+
     border-radius: 9px;
-    background: #182337;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3cff,
+            #5721b5
+        );
+
     color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
     cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-@media (max-width: 700px) {
-    .header {
+.errorBox button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(124, 60, 255, 0.25);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .headerInner {
         min-height: auto;
-        padding: 13px 16px;
+
+        padding: 13px 0;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
     }
 
-    .nav {
-        gap: 2px;
+    .brand {
+        justify-content: center;
     }
 
-    .nav button {
-        padding: 7px 8px;
-        font-size: 9px;
+    .navLinks {
+        width: 100%;
+
+        justify-content: center;
+
+        overflow-x: auto;
+
+        padding-bottom: 2px;
+    }
+
+    .navLinks button {
+        flex-shrink: 0;
+
+        padding: 8px 10px;
+
+        font-size: 10px;
     }
 
     .main {
-        width: calc(100% - 28px);
-        padding: 35px 0 50px;
+        padding-top: 40px;
     }
 
-    .quickGrid {
+    .actionsGrid {
         grid-template-columns: 1fr;
     }
 
-    .infoSection > p {
-        margin-left: 0;
-    }
-
-    .footer {
+    .footerInner {
         flex-direction: column;
-        align-items: flex-start;
+
+        align-items: center;
+
+        text-align: center;
     }
 }
 
+
+@media (max-width: 600px) {
+
+    .headerInner,
+    .main,
+    .footerInner,
+    .copyright {
+        width: calc(100% - 28px);
+    }
+
+    .pageHeading h1 {
+        font-size: 34px;
+    }
+
+    .balanceCard {
+        padding: 22px 19px;
+
+        border-radius: 19px;
+    }
+
+    .balanceMain {
+        align-items: flex-start;
+    }
+
+    .balanceValue {
+        font-size: 44px;
+    }
+
+    .coinDisplay {
+        width: 75px;
+        height: 75px;
+    }
+
+    .coinDisplay img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .actionCard {
+        padding: 16px;
+    }
+
+    .infoSection {
+        padding: 21px;
+    }
+}
+
+
 @media (max-width: 480px) {
-    .logo small {
+
+    .brandText span {
         display: none;
     }
 
-    .logo strong {
+    .brandText strong {
         font-size: 16px;
     }
 
-    .logoIcon {
-        width: 34px;
-        height: 34px;
+    .brandMark {
+        width: 36px;
+        height: 36px;
     }
 
-    .nav button {
-        font-size: 0;
+    .navLinks {
+        justify-content: flex-start;
     }
 
-    .nav button::first-letter {
-        font-size: 15px;
+    .navLinks button {
+        font-size: 9px;
+        padding: 7px 9px;
     }
 
-    .walletHero {
-        padding: 22px;
+    .main {
+        width: calc(100% - 24px);
+
+        padding-top: 32px;
     }
 
-    .diamond {
-        width: 62px;
-        height: 62px;
-        font-size: 27px;
+    .pageHeading {
+        margin-bottom: 25px;
     }
 
-    .walletTop h2 {
-        font-size: 43px;
+    .pageHeading h1 {
+        font-size: 31px;
     }
 
-    .walletBottom {
-        margin-top: 25px;
+    .pageHeading p {
+        font-size: 11px;
+    }
+
+    .balanceMain {
+        display: block;
+    }
+
+    .balanceValue {
+        margin-top: 20px;
+
+        font-size: 42px;
+    }
+
+    .coinDisplay {
+        display: none;
+    }
+
+    .balanceDescription {
+        font-size: 10px;
+    }
+
+    .tipCard {
+        align-items: flex-start;
+
+        padding: 16px;
+    }
+
+    .footer {
+        padding: 18px 0;
+    }
+
+    .footerInner,
+    .copyright {
+        width: calc(100% - 24px);
     }
 }
+
 
 @keyframes spin {
     to {

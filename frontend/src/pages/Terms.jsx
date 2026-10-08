@@ -8,61 +8,74 @@ function Terms() {
         <div className={styles.page}>
 
             {/* HEADER */}
-
             <header className={styles.header}>
-
-                <div
-                    className={styles.logo}
-                    onClick={() => navigate("/dashboard")}
-                >
-                    <span className={styles.logoIcon}>V</span>
-                    <span>VELoop</span>
-                </div>
-
-                <div className={styles.headerActions}>
+                <div className={styles.headerInner}>
 
                     <button
                         type="button"
+                        className={styles.brand}
                         onClick={() => navigate("/dashboard")}
                     >
-                        Dashboard
+                        <div className={styles.brandMark}>V</div>
+
+                        <div className={styles.brandText}>
+                            <strong>VELoop</strong>
+                            <span>Daily Streak</span>
+                        </div>
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/wallet")}
-                    >
-                        Wallet
-                    </button>
+                    <nav className={styles.navLinks}>
+                        <button
+                            type="button"
+                            onClick={() => navigate("/dashboard")}
+                        >
+                            Dashboard
+                        </button>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/transactions")}
-                    >
-                        Transactions
-                    </button>
+                        <button
+                            type="button"
+                            onClick={() => navigate("/wallet")}
+                        >
+                            Wallet
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/transactions")}
+                        >
+                            Transactions
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/streak-history")}
+                        >
+                            Streak History
+                        </button>
+                    </nav>
 
                 </div>
-
             </header>
 
 
             {/* MAIN CONTENT */}
-
             <main className={styles.main}>
 
-                <div className={styles.heading}>
-
-                    <p>LEGAL</p>
+                <section className={styles.pageHeading}>
+                    <span className={styles.eyebrow}>LEGAL</span>
 
                     <h1>Terms &amp; Conditions</h1>
 
-                </div>
+                    <p>
+                        Please review the rules and conditions for using
+                        the VELoop Daily Streak application.
+                    </p>
+                </section>
 
 
-                <div className={styles.content}>
+                <section className={styles.content}>
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>1. Introduction</h2>
 
@@ -80,7 +93,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>2. Account Registration</h2>
 
@@ -98,7 +111,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>3. Daily Streak</h2>
 
@@ -117,7 +130,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>4. Reward Claims</h2>
 
@@ -136,7 +149,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>5. Reward and Wallet Records</h2>
 
@@ -154,7 +167,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>6. Streak Reset and Missed Claims</h2>
 
@@ -172,7 +185,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>7. Prohibited Activities</h2>
 
@@ -182,7 +195,6 @@ function Terms() {
                         </p>
 
                         <ul>
-
                             <li>
                                 Attempting to claim the same reward multiple
                                 times outside the permitted system flow
@@ -202,13 +214,12 @@ function Terms() {
                                 Using automated or malicious methods to
                                 interfere with the application
                             </li>
-
                         </ul>
 
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>8. Account Suspension</h2>
 
@@ -221,7 +232,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>9. Application Availability</h2>
 
@@ -235,7 +246,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>10. Changes to These Terms</h2>
 
@@ -252,7 +263,7 @@ function Terms() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>11. Contact</h2>
 
@@ -265,47 +276,47 @@ function Terms() {
 
                     </section>
 
-                </div>
-
-
-                {/* BACK BUTTON */}
-
-                <button
-                    type="button"
-                    className={styles.backButton}
-                    onClick={() => navigate("/dashboard")}
-                >
-                    ← Back to Dashboard
-                </button>
+                </section>
 
             </main>
 
 
             {/* FOOTER */}
-
             <footer className={styles.footer}>
 
-                <span>
-                    © {new Date().getFullYear()} VELoop. All rights reserved.
-                </span>
+                <div className={styles.footerInner}>
 
-                <div className={styles.footerLinks}>
+                    <div className={styles.footerLogo}>
+                        <div className={styles.footerBrandMark}>V</div>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/privacy-policy")}
-                    >
-                        Privacy Policy
-                    </button>
+                        <strong>VELoop Rewards</strong>
+                    </div>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/terms")}
-                    >
-                        Terms &amp; Conditions
-                    </button>
+                    <div className={styles.footerLinks}>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/privacy-policy")}
+                        >
+                            Privacy Policy
+                        </button>
+
+                        <button
+                            type="button"
+                            className={styles.activeFooterLink}
+                            onClick={() => navigate("/terms")}
+                        >
+                            Terms
+                        </button>
+
+                    </div>
 
                 </div>
+
+                <p className={styles.copyright}>
+                    © {new Date().getFullYear()} VELoop Rewards.
+                    All rights reserved.
+                </p>
 
             </footer>
 

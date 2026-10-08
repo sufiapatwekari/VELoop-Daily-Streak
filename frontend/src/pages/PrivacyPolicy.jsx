@@ -1,84 +1,95 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./PrivacyPolicy.module.css";
 
-
 function PrivacyPolicy() {
-
     const navigate = useNavigate();
 
-
     return (
-
         <div className={styles.page}>
 
-            {/* HEADER */}
+            {/* ================= NAVBAR ================= */}
 
             <header className={styles.header}>
-
-                <div
-                    className={styles.logo}
-                    onClick={() => navigate("/dashboard")}
-                >
-
-                    <span className={styles.logoIcon}>
-                        V
-                    </span>
-
-                    <span>
-                        VELoop
-                    </span>
-
-                </div>
-
-
-                <div className={styles.headerActions}>
+                <div className={styles.headerInner}>
 
                     <button
                         type="button"
+                        className={styles.brand}
                         onClick={() => navigate("/dashboard")}
                     >
-                        Dashboard
+                        <div className={styles.brandMark}>
+                            V
+                        </div>
+
+                        <div className={styles.brandText}>
+                            <strong>VELoop</strong>
+                            <span>Daily Streak</span>
+                        </div>
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/wallet")}
-                    >
-                        Wallet
-                    </button>
+                    <nav className={styles.navLinks}>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/transactions")}
-                    >
-                        Transactions
-                    </button>
+                        <button
+                            type="button"
+                            onClick={() => navigate("/dashboard")}
+                        >
+                            Dashboard
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/wallet")}
+                        >
+                            Wallet
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/transactions")}
+                        >
+                            Transactions
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/streak-history")}
+                        >
+                            Streak History
+                        </button>
+
+                    </nav>
 
                 </div>
-
             </header>
 
 
-            {/* MAIN */}
+            {/* ================= MAIN ================= */}
 
             <main className={styles.main}>
 
-                <div className={styles.heading}>
+                <section className={styles.pageHeading}>
 
-                    <p>
+                    <span className={styles.eyebrow}>
                         LEGAL
-                    </p>
+                    </span>
 
                     <h1>
                         Privacy Policy
                     </h1>
-                    
-                </div>
+
+                    <p>
+                        Learn how VELoop handles account, streak,
+                        reward, wallet, and application information.
+                    </p>
+
+                </section>
 
 
-                <div className={styles.content}>
+                {/* ================= CONTENT ================= */}
 
-                    <section>
+                <section className={styles.content}>
+
+                    <section className={styles.contentSection}>
 
                         <h2>
                             1. Introduction
@@ -99,7 +110,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             2. Information We Collect
@@ -113,33 +124,21 @@ function PrivacyPolicy() {
                         </p>
 
                         <ul>
+                            <li>Name</li>
 
-                            <li>
-                                Name
-                            </li>
+                            <li>Email address</li>
 
-                            <li>
-                                Email address
-                            </li>
+                            <li>Account authentication information</li>
 
-                            <li>
-                                Account authentication information
-                            </li>
+                            <li>Streak and reward activity</li>
 
-                            <li>
-                                Streak and reward activity
-                            </li>
-
-                            <li>
-                                Wallet and transaction records
-                            </li>
-
+                            <li>Wallet and transaction records</li>
                         </ul>
 
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             3. How We Use Information
@@ -150,7 +149,6 @@ function PrivacyPolicy() {
                         </p>
 
                         <ul>
-
                             <li>
                                 Create and manage user accounts
                             </li>
@@ -174,13 +172,12 @@ function PrivacyPolicy() {
                             <li>
                                 Improve application functionality
                             </li>
-
                         </ul>
 
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             4. Account Security
@@ -201,7 +198,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             5. Wallet and Transaction Information
@@ -217,7 +214,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             6. Data Sharing
@@ -233,7 +230,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             7. Data Retention
@@ -249,7 +246,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             8. Cookies and Local Storage
@@ -264,7 +261,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             9. Changes to This Policy
@@ -280,7 +277,7 @@ function PrivacyPolicy() {
                     </section>
 
 
-                    <section>
+                    <section className={styles.contentSection}>
 
                         <h2>
                             10. Contact
@@ -294,54 +291,61 @@ function PrivacyPolicy() {
 
                     </section>
 
-
-                </div>
-
-
-                <button
-                    type="button"
-                    className={styles.backButton}
-                    onClick={() => navigate("/dashboard")}
-                >
-                    ← Back to Dashboard
-                </button>
+                </section>
 
             </main>
 
 
-            {/* FOOTER */}
+            {/* ================= FOOTER ================= */}
 
             <footer className={styles.footer}>
 
-                <span>
-                    © {new Date().getFullYear()} VELoop. All rights reserved.
-                </span>
+                <div className={styles.footerInner}>
 
-                <div className={styles.footerLinks}>
+                    <div className={styles.footerLogo}>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/privacy-policy")}
-                    >
-                        Privacy Policy
-                    </button>
+                        <div className={styles.footerBrandMark}>
+                            V
+                        </div>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/terms")}
-                    >
-                        Terms &amp; Conditions
-                    </button>
+                        <strong>
+                            VELoop Rewards
+                        </strong>
+
+                    </div>
+
+
+                    <div className={styles.footerLinks}>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/privacy-policy")}
+                            className={styles.activeFooterLink}
+                        >
+                            Privacy Policy
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/terms")}
+                        >
+                            Terms
+                        </button>
+
+                    </div>
 
                 </div>
+
+
+                <p className={styles.copyright}>
+                    © {new Date().getFullYear()} VELoop Rewards.
+                    All rights reserved.
+                </p>
 
             </footer>
 
         </div>
-
     );
-
 }
-
 
 export default PrivacyPolicy;
