@@ -770,7 +770,7 @@ function Home() {
                 FOOTER
             ================================= */}
 
-            <footer className={styles.footer}>
+          {/*  <footer className={styles.footer}>
 
                 <div className={styles.footerBrand}>
 
@@ -823,7 +823,7 @@ function Home() {
                     © 2026 VELoop. Daily streak rewards.
                 </div>
 
-            </footer>
+            </footer>*/}
 
         </div>
     );

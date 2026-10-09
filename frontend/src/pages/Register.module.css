@@ -978,3 +978,618 @@
         min-height: 45px;
     }
 }
+
+
+/* =========================================
+   VELOOP REGISTER — GLASSMORPHISM UI
+   Append at the END of Register.module.css
+========================================= */
+
+.page,
+.page * {
+    box-sizing: border-box;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 32px 24px;
+    background:
+        radial-gradient(
+            circle at 12% 12%,
+            rgba(124, 60, 255, 0.20),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(232, 183, 75, 0.07),
+            transparent 30%
+        ),
+        #080914;
+}
+
+/* Background glow */
+.glowOne {
+    width: 420px;
+    height: 420px;
+    background: rgba(124, 60, 255, 0.13);
+    filter: blur(45px);
+}
+
+.glowTwo {
+    width: 380px;
+    height: 380px;
+    background: rgba(92, 54, 170, 0.12);
+    filter: blur(40px);
+}
+
+/* Main card: keep existing two-column layout */
+.registerLayout {
+    width: min(1080px, 100%);
+    min-height: 650px;
+    grid-template-columns: 44% 56%;
+    border: 1px solid rgba(177, 143, 255, 0.24);
+    border-radius: 26px;
+    background: rgba(17, 16, 34, 0.84);
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.40),
+        0 0 45px rgba(124, 60, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Left brand panel */
+.brandPanel {
+    padding: 40px;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(124, 60, 255, 0.20),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(25, 21, 48, 0.97),
+            rgba(11, 11, 25, 0.97)
+        );
+    border-right: 1px solid rgba(177, 143, 255, 0.16);
+}
+
+/* Brand */
+.brand {
+    gap: 12px;
+}
+
+.brandIcon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #9b70ff, #632be0);
+    font-size: 21px;
+    box-shadow: 0 7px 24px rgba(124, 60, 255, 0.30);
+}
+
+.brandText strong {
+    font-size: 19px;
+}
+
+.brandText small {
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* Brand introduction */
+.kicker {
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+}
+
+.kicker img {
+    width: 20px;
+    height: 20px;
+}
+
+.brandContent h1 {
+    margin: 22px 0 18px;
+    font-size: clamp(34px, 3.2vw, 45px);
+    line-height: 1.13;
+    letter-spacing: -1.6px;
+}
+
+.brandContent h1 span {
+    color: #b18aff;
+}
+
+.brandContent > p {
+    max-width: 350px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #b4b5c8;
+}
+
+/* Reward preview glass card */
+.rewardPreview {
+    margin-top: 28px;
+    padding: 16px;
+    gap: 13px;
+    border: 1px solid rgba(177, 143, 255, 0.23);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.rewardPreview:hover {
+    border-color: rgba(177, 143, 255, 0.43);
+    background: rgba(124, 60, 255, 0.09);
+}
+
+.previewIcon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(177, 143, 255, 0.16);
+    background: rgba(124, 60, 255, 0.12);
+}
+
+.previewIcon img {
+    width: 33px;
+    height: 33px;
+}
+
+.previewText {
+    gap: 4px;
+}
+
+.rewardPreview strong {
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.rewardPreview .previewText span {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #a6a7bb;
+}
+
+.previewArrow {
+    font-size: 22px;
+    color: #e9c56f;
+}
+
+/* Trust and brand footer */
+.trustRow {
+    margin-top: 20px;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #a9aabd;
+}
+
+.trustRow img {
+    width: 22px;
+    height: 22px;
+}
+
+.brandFooter {
+    flex-wrap: wrap;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #9292a9;
+}
+
+/* Right form panel */
+.formPanel {
+    padding: 42px 48px;
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(124, 60, 255, 0.10),
+            transparent 42%
+        ),
+        rgba(15, 14, 30, 0.48);
+}
+
+/* Mobile brand */
+.mobileBrand {
+    gap: 12px;
+}
+
+.mobileBrand strong {
+    font-size: 19px;
+}
+
+.mobileBrand small {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+}
+
+/* Form heading */
+.formHeader {
+    margin-bottom: 25px;
+}
+
+.formKicker {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+}
+
+.formHeader h2 {
+    margin: 10px 0 9px;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.formHeader p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #adaec2;
+}
+
+/* Error and success messages */
+.messageError,
+.messageSuccess {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    gap: 11px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.messageError {
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    background: rgba(239, 68, 68, 0.08);
+    color: #ffaaaa;
+}
+
+.messageSuccess {
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    background: rgba(74, 222, 128, 0.08);
+    color: #8de9ab;
+}
+
+.messageError > span,
+.messageSuccess > span {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.messageError > span {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+.messageSuccess > span {
+    background: rgba(74, 222, 128, 0.14);
+}
+
+/* Password fields: side by side on desktop */
+.inputRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 13px;
+}
+
+.inputGroup {
+    min-width: 0;
+    margin-bottom: 18px;
+}
+
+.inputGroup label {
+    margin-bottom: 8px;
+    color: #e0deeb;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Glass input fields */
+.inputWrap {
+    min-height: 49px;
+    gap: 10px;
+    padding: 0 12px;
+    border: 1px solid rgba(177, 143, 255, 0.23);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.045);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.inputWrap:hover {
+    border-color: rgba(177, 143, 255, 0.42);
+}
+
+.inputWrap:focus-within {
+    border-color: #9d75ff;
+    background: rgba(124, 60, 255, 0.075);
+    box-shadow: 0 0 0 3px rgba(124, 60, 255, 0.12);
+}
+
+.inputIcon {
+    width: 19px;
+    height: 19px;
+    color: #a99acb;
+}
+
+.inputIcon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.inputWrap input {
+    width: 100%;
+    min-width: 0;
+    padding: 11px 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.inputWrap input::placeholder {
+    color: #89899f;
+    opacity: 1;
+}
+
+/* Create Account button */
+.registerButton {
+    width: 100%;
+    min-height: 51px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 13px;
+    background: linear-gradient(135deg, #8955f5, #642ed0);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(124, 60, 255, 0.24);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.registerButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, #9a6aff, #7540e4);
+    transform: translateY(-1px);
+    box-shadow: 0 13px 30px rgba(124, 60, 255, 0.30);
+}
+
+.registerButton:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.registerButton > span:last-child {
+    color: #f1d17d;
+    font-size: 20px;
+}
+
+/* Loading spinner */
+.buttonLoader {
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.28);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+/* Existing login link */
+.loginPrompt {
+    margin-top: 22px;
+    padding-top: 19px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-top: 1px solid rgba(139, 92, 246, 0.16);
+    color: #a5a5ba;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.loginPrompt button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #b69aff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.loginPrompt button:hover {
+    color: #d0bdff;
+    text-decoration: underline;
+}
+
+/* Keyboard accessibility */
+.brand:focus-visible,
+.mobileBrand:focus-visible,
+.registerButton:focus-visible,
+.loginPrompt button:focus-visible {
+    outline: 2px solid #c2a8ff;
+    outline-offset: 4px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+@media (max-width: 900px) {
+    .page {
+        padding: 22px;
+    }
+
+    .registerLayout {
+        width: min(600px, 100%);
+        min-height: auto;
+        grid-template-columns: 1fr;
+        border-radius: 24px;
+    }
+
+    .brandPanel {
+        display: none;
+    }
+
+    .formPanel {
+        padding: 42px;
+    }
+
+    .mobileBrand {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        font-family: inherit;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .mobileBrand .brandIcon {
+        width: 41px;
+        height: 41px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 560px) {
+    .page {
+        padding: 13px;
+        align-items: center;
+    }
+
+    .registerLayout {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .formPanel {
+        padding: 29px 21px;
+    }
+
+    .mobileBrand {
+        margin-bottom: 27px;
+    }
+
+    .formHeader {
+        margin-bottom: 22px;
+    }
+
+    .formHeader h2 {
+        font-size: 29px;
+    }
+
+    .formHeader p {
+        font-size: 13px;
+    }
+
+    /* Stack password fields to avoid cramped inputs */
+    .inputRow {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .inputGroup {
+        margin-bottom: 16px;
+    }
+
+    .inputGroup label {
+        font-size: 13px;
+    }
+
+    .inputWrap {
+        min-height: 49px;
+    }
+
+    .inputWrap input {
+        font-size: 13px;
+    }
+
+    .registerButton {
+        min-height: 49px;
+        font-size: 14px;
+    }
+
+    .loginPrompt {
+        margin-top: 21px;
+        padding-top: 18px;
+        font-size: 12px;
+    }
+
+    .loginPrompt button {
+        font-size: 12px;
+    }
+}
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+@media (max-width: 380px) {
+    .page {
+        padding: 9px;
+    }
+
+    .formPanel {
+        padding: 25px 16px;
+    }
+
+    .formHeader h2 {
+        font-size: 27px;
+    }
+
+    .formHeader p {
+        font-size: 12px;
+    }
+
+    .inputWrap {
+        gap: 8px;
+        padding: 0 10px;
+    }
+
+    .inputWrap input {
+        font-size: 12px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .registerButton,
+    .rewardPreview,
+    .inputWrap {
+        transition: none;
+    }
+
+    .buttonLoader {
+        animation-duration: 1.5s;
+    }
+}
+

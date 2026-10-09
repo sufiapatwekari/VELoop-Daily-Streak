@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getStreakHistory } from "../services/streakApi";
@@ -18,10 +19,9 @@ function StreakHistory() {
             try {
                 const data = await getStreakHistory();
 
-                const historyData =
-                    Array.isArray(data)
-                        ? data
-                        : data.history || data.data || [];
+                const historyData = Array.isArray(data)
+                    ? data
+                    : data.history || data.data || [];
 
                 setHistory(historyData);
             } catch (error) {
@@ -40,9 +40,7 @@ function StreakHistory() {
     }, []);
 
     const formatDate = (date) => {
-        if (!date) {
-            return "N/A";
-        }
+        if (!date) return "N/A";
 
         return new Date(date).toLocaleString("en-IN", {
             day: "2-digit",
@@ -56,15 +54,12 @@ function StreakHistory() {
     if (loading) {
         return (
             <div className={styles.loadingPage}>
-                <div className={styles.loader}></div>
-
-                <img
-                    src={flame}
-                    alt=""
-                    className={styles.loadingImage}
-                />
-
-                <p>Loading your journey...</p>
+                <div className={styles.loadingCard}>
+                    <div className={styles.loader}></div>
+                    <img src={flame} alt="" className={styles.loadingImage} />
+                    <h2>Loading your journey</h2>
+                    <p>Getting your latest streak activity...</p>
+                </div>
             </div>
         );
     }
@@ -74,11 +69,8 @@ function StreakHistory() {
             <div className={styles.errorPage}>
                 <div className={styles.errorBox}>
                     <div className={styles.errorIcon}>!</div>
-
                     <h3>Unable to load history</h3>
-
                     <p>{error}</p>
-
                     <button
                         type="button"
                         onClick={() => navigate("/dashboard")}
@@ -92,27 +84,45 @@ function StreakHistory() {
 
     return (
         <div className={styles.page}>
+            <main className={styles.panel}>
+                {/* PAGE HEADER */}
+                <header className={styles.header}>
+                    <div className={styles.headerTitle}>
+                        <div className={styles.headerIcon}>
+                            <img src={flame} alt="" />
+                        </div>
 
-            {/* NAVBAR */}
-            <header className={styles.header}>
+                        <div>
+                            <h1>Streak History</h1>
+                            <p>Your daily check-ins and reward journey</p>
+                        </div>
+                    </div>
 
-                <button
-                    className={styles.logo}
-                    type="button"
-                    onClick={() => navigate("/dashboard")}
-                >
-                    <span className={styles.logoIcon}>
-                        V
-                    </span>
+                    <div className={styles.headerActions}>
+                        <button
+                            type="button"
+                            className={styles.headerButton}
+                            onClick={() => window.location.reload()}
+                            aria-label="Refresh streak history"
+                            title="Refresh"
+                        >
+                            ↻
+                        </button>
 
-                    <span className={styles.logoText}>
-                        <strong>VELoop</strong>
-                        <small>Daily Rewards</small>
-                    </span>
-                </button>
+                        <button
+                            type="button"
+                            className={styles.headerButton}
+                            onClick={() => navigate("/dashboard")}
+                            aria-label="Close streak history"
+                            title="Back to dashboard"
+                        >
+                            ×
+                        </button>
+                    </div>
+                </header>
 
+                {/* NAVIGATION */}
                 <nav className={styles.nav}>
-
                     <button
                         type="button"
                         onClick={() => navigate("/dashboard")}
@@ -134,276 +144,219 @@ function StreakHistory() {
                         Transactions
                     </button>
 
+                    <button
+                        type="button"
+                        className={styles.activeNav}
+                    >
+                        Streak History
+                    </button>
                 </nav>
 
-            </header>
-
-
-            {/* MAIN */}
-            <main className={styles.main}>
-
-                <div className={styles.headingRow}>
-
-                    <div className={styles.headingContent}>
-
-                        <span className={styles.kicker}>
-                            <img
-                                src={flame}
-                                alt=""
-                            />
-                            YOUR JOURNEY
-                        </span>
-
-                        <h1>Streak History</h1>
-
-                        <p>
-                            Every check-in is a step toward your next reward.
-                        </p>
-
-                    </div>
-
-                    <div className={styles.recordBadge}>
-                        <strong>{history.length}</strong>
-                        <span>Records</span>
-                    </div>
-
-                </div>
-
-
-                {/* OVERVIEW */}
-                <section className={styles.overviewCard}>
-
-                    <div className={styles.overviewIcon}>
-                        <img
-                            src={flame}
-                            alt="Streak"
-                        />
-                    </div>
-
-                    <div className={styles.overviewText}>
-
-                        <span>STREAK ACTIVITY</span>
-
-                        <h2>
-                            {history.length > 0
-                                ? "Your journey is underway"
-                                : "Your journey starts here"}
-                        </h2>
-
-                        <p>
-                            {history.length > 0
-                                ? "Keep checking in to unlock more rewards."
-                                : "Claim your first daily reward to create your history."}
-                        </p>
-
-                    </div>
-
-                    <div className={styles.overviewReward}>
-                        <img
-                            src={vesCoin}
-                            alt="VES Coins"
-                        />
-                    </div>
-
-                </section>
-
-
-                {/* HISTORY */}
-                <section className={styles.historySection}>
-
-                    <div className={styles.sectionTitle}>
-
+                {/* MAIN CONTENT */}
+                <div className={styles.main}>
+                    <section className={styles.headingRow}>
                         <div>
-                            <span>ACTIVITY</span>
-                            <h2>Reward Journey</h2>
-                        </div>
+                            <span className={styles.eyebrow}>
+                                <img src={flame} alt="" />
+                                YOUR DAILY JOURNEY
+                            </span>
 
-                        <div className={styles.sectionDecoration}>
-                            <img
-                                src={trust}
-                                alt=""
-                            />
-                        </div>
-
-                    </div>
-
-
-                    {history.length === 0 ? (
-
-                        <div className={styles.emptyState}>
-
-                            <div className={styles.emptyCircle}>
-                                <img
-                                    src={vesCoin}
-                                    alt="VES Coins"
-                                />
-                            </div>
-
-                            <h3>No activity yet</h3>
+                            <h2>Every day counts.</h2>
 
                             <p>
-                                Your daily reward claims will appear here
-                                as you build your VELoop streak.
+                                Track your check-ins and keep building
+                                your VELoop streak.
+                            </p>
+                        </div>
+
+                        <div className={styles.recordBadge}>
+                            <strong>{history.length}</strong>
+                            <span>
+                                {history.length === 1 ? "Record" : "Records"}
+                            </span>
+                        </div>
+                    </section>
+
+                    {/* OVERVIEW */}
+                    <section className={styles.overviewGrid}>
+                        <div className={styles.overviewCard}>
+                            <div className={styles.overviewTop}>
+                                <div className={styles.overviewIcon}>
+                                    <img src={flame} alt="Streak" />
+                                </div>
+
+                                <span className={styles.purpleTag}>
+                                    STREAK ACTIVITY
+                                </span>
+                            </div>
+
+                            <div className={styles.overviewLabel}>
+                                YOUR JOURNEY
+                            </div>
+
+                            <h3>
+                                {history.length > 0
+                                    ? "Your journey is underway"
+                                    : "Your journey starts here"}
+                            </h3>
+
+                            <p>
+                                {history.length > 0
+                                    ? "Keep checking in to continue your reward journey."
+                                    : "Claim your first daily reward to create your history."}
                             </p>
 
-                            <button
-                                type="button"
-                                onClick={() => navigate("/dashboard")}
-                            >
-                                Start My Streak
-                                <span>→</span>
-                            </button>
-
+                            <div className={styles.cardDecoration}>
+                                <img src={flame} alt="" />
+                            </div>
                         </div>
 
-                    ) : (
+                        <div className={styles.overviewCard}>
+                            <div className={styles.overviewTop}>
+                                <div className={styles.coinIcon}>
+                                    <img src={vesCoin} alt="VES coins" />
+                                </div>
 
-                        <div className={styles.timeline}>
+                                <span className={styles.greenTag}>
+                                    VERIFIED ACTIVITY
+                                </span>
+                            </div>
 
-                            {history.map((item, index) => {
+                            <div className={styles.overviewLabel}>
+                                HISTORY RECORDS
+                            </div>
 
-                                const day =
-                                    item.day ||
-                                    item.currentDay ||
-                                    item.rewardDay ||
-                                    "-";
+                            <h3>{history.length} activity records</h3>
 
-                                const description =
-                                    item.description ||
-                                    item.event ||
-                                    item.action ||
-                                    "Streak Activity";
+                            <p>
+                                Your recorded streak events are collected
+                                here for easy reference.
+                            </p>
 
-                                return (
-                                    <div
-                                        className={styles.timelineItem}
-                                        key={
-                                            item._id ||
-                                            item.id ||
-                                            index
-                                        }
-                                    >
+                            <div className={styles.cardDecoration}>
+                                <img src={trust} alt="" />
+                            </div>
+                        </div>
+                    </section>
 
-                                        <div className={styles.timelineRail}>
+                    {/* HISTORY LIST */}
+                    <section className={styles.historySection}>
+                        <div className={styles.sectionHeading}>
+                            <div>
+                                <span className={styles.sectionEyebrow}>
+                                    ACTIVITY LOG
+                                </span>
+                                <h2>Reward Journey</h2>
+                            </div>
 
-                                            <div className={styles.timelineDot}>
-                                                ✓
-                                            </div>
+                            <span className={styles.countPill}>
+                                {history.length}{" "}
+                                {history.length === 1 ? "entry" : "entries"}
+                            </span>
+                        </div>
 
-                                            {index !== history.length - 1 && (
-                                                <div
-                                                    className={
-                                                        styles.timelineLine
-                                                    }
-                                                ></div>
-                                            )}
+                        {history.length === 0 ? (
+                            <div className={styles.emptyState}>
+                                <div className={styles.emptyIcon}>
+                                    <img src={flame} alt="" />
+                                </div>
 
-                                        </div>
+                                <h3>No activity yet</h3>
 
+                                <p>
+                                    Your daily reward claims will appear here
+                                    as you build your VELoop streak.
+                                </p>
 
-                                        <div className={styles.historyCard}>
+                                <button
+                                    type="button"
+                                    onClick={() => navigate("/dashboard")}
+                                >
+                                    Start My Streak
+                                    <span>→</span>
+                                </button>
+                            </div>
+                        ) : (
+                            <div className={styles.timeline}>
+                                {history.map((item, index) => {
+                                    const day =
+                                        item.day ||
+                                        item.currentDay ||
+                                        item.rewardDay ||
+                                        "-";
 
-                                            <div className={styles.cardIcon}>
+                                    const description =
+                                        item.description ||
+                                        item.event ||
+                                        item.action ||
+                                        "Streak Activity";
 
-                                                <img
-                                                    src={vesCoin}
-                                                    alt="Reward"
-                                                />
-
-                                            </div>
-
-
-                                            <div className={styles.cardContent}>
-
-                                                <div className={styles.cardTop}>
-
-                                                    <span>
-                                                        DAY {day}
-                                                    </span>
-
-                                                    <small>
-                                                        {formatDate(
-                                                            item.createdAt ||
-                                                            item.date ||
-                                                            item.timestamp
-                                                        )}
-                                                    </small>
-
+                                    return (
+                                        <article
+                                            className={styles.timelineItem}
+                                            key={item._id || item.id || index}
+                                        >
+                                            <div className={styles.timelineRail}>
+                                                <div className={styles.timelineDot}>
+                                                    ✓
                                                 </div>
 
-                                                <h3>
-                                                    {description}
-                                                </h3>
-
-                                                <p>
-                                                    Daily streak activity
-                                                    recorded successfully.
-                                                </p>
-
+                                                {index !== history.length - 1 && (
+                                                    <div
+                                                        className={styles.timelineLine}
+                                                    />
+                                                )}
                                             </div>
 
+                                            <div className={styles.historyCard}>
+                                                <div className={styles.cardIcon}>
+                                                    <img
+                                                        src={vesCoin}
+                                                        alt="Reward"
+                                                    />
+                                                </div>
 
-                                            <div className={styles.completed}>
-                                                ✓
+                                                <div className={styles.cardContent}>
+                                                    <div className={styles.cardTop}>
+                                                        <span className={styles.dayTag}>
+                                                            DAY {day}
+                                                        </span>
+
+                                                        <small>
+                                                            {formatDate(
+                                                                item.createdAt ||
+                                                                item.date ||
+                                                                item.timestamp
+                                                            )}
+                                                        </small>
+                                                    </div>
+
+                                                    <h3>{description}</h3>
+
+                                                    <p>
+                                                        Daily streak activity
+                                                        recorded successfully.
+                                                    </p>
+                                                </div>
+
+                                                <div
+                                                    className={styles.completed}
+                                                    title="Recorded activity"
+                                                >
+                                                    ✓
+                                                </div>
                                             </div>
-
-                                        </div>
-
-                                    </div>
-                                );
-                            })}
-
-                        </div>
-
-                    )}
-
-                </section>
-
+                                        </article>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </section>
+                </div>
             </main>
-
-
-            {/* FOOTER */}
-            <footer className={styles.footer}>
-
-                <div className={styles.footerBrand}>
-
-                    <div className={styles.footerBrandMark}>
-                        V
-                    </div>
-
-                    <strong>
-                        VELoop Rewards
-                    </strong>
-
-                </div>
-
-                <span className={styles.copyright}>
-                    © {new Date().getFullYear()} VELoop.
-                    All rights reserved.
-                </span>
-
-                <div className={styles.footerLinks}>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/privacy-policy")}
-                    >
-                        Privacy
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/terms")}
-                    >
-                        Terms
-                    </button>
-
-                </div>
-
-            </footer>
-
         </div>
     );
 }
 
 export default StreakHistory;
+

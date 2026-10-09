@@ -357,246 +357,109 @@ function Dashboard() {
 
             <main className={styles.main}>
 
-                {/* =================================
-                    HERO
-                ================================== */}
+                {/* REFERENCE DESIGN: DAILY CHECK-IN + ULTIMATE REWARD */}
+                <section className={styles.referenceSummary}>
+                    <div className={styles.referenceLeft}>
+                        <div className={styles.referenceHeading}>
+                            <h1>Daily Check-In <span>Rewards</span></h1>
+                            <p>Check in every day and earn exciting rewards!</p>
+                        </div>
 
-                <section className={styles.hero}>
-
-                    <div className={styles.heroContent}>
-
-                        <span className={styles.heroKicker}>
-                            DAILY CHECK-IN
-                        </span>
-
-                        <h1>
-                            Check-in daily.
-                            <span>
-                                Unlock bigger rewards.
-                            </span>
-                        </h1>
-
-                        <p>
-                            Maintain your streak and unlock
-                            increasingly valuable rewards every day.
-                        </p>
-
-                        <div className={styles.heroStats}>
-
-                            <div>
-                                <strong>
-                                    {streak.currentStreak}
-                                </strong>
-
-                                <span>
-                                    Current Streak
-                                </span>
+                        <div className={styles.referenceStatsLayout}>
+                            <div className={styles.referenceGift}>
+                                <img src={heroGiftImg} alt="Daily rewards gift" />
+                                <img className={styles.referenceFloatingCoin} src={coinImg} alt="" />
                             </div>
 
-                            <div>
-                                <strong>
-                                    {streak.checkedIn}
-                                </strong>
-
-                                <span>
-                                    Days Completed
-                                </span>
-                            </div>
-
-                            <div>
-                                <strong>
-                                    {streak.totalRewards}
-                                </strong>
-
-                                <span>
-                                    Reward Days
-                                </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div className={styles.heroVisual}>
-
-                        <div className={styles.heroGlow}></div>
-
-                        <img
-                            src={heroGiftImg}
-                            alt="VELoop rewards"
-                            className={styles.heroGift}
-                        />
-
-                        <img
-                            src={heroCrownImg}
-                            alt="Ultimate reward"
-                            className={styles.heroCrown}
-                        />
-
-                    </div>
-
-                </section>
-
-
-                {/* =================================
-                    PROGRESS
-                ================================== */}
-
-                <section className={styles.progressCard}>
-
-                    <div className={styles.progressHeader}>
-
-                        <div>
-
-                            <span>
-                                YOUR STREAK
-                            </span>
-
-                            <h2>
-                                {streak.currentStreak} Day Streak
-                            </h2>
-
-                        </div>
-
-                        <div className={styles.progressDay}>
-                            Day {streak.currentDay}
-                            <small>
-                                / {streak.totalRewards}
-                            </small>
-                        </div>
-
-                    </div>
-
-                    <div className={styles.progressTrack}>
-
-                        <div
-                            className={styles.progressFill}
-                            style={{
-                                width: `${progress}%`
-                            }}
-                        />
-
-                    </div>
-
-                    <div className={styles.progressBottom}>
-
-                        <span>
-                            Keep checking in every day
-                        </span>
-
-                        <strong>
-                            {Math.round(progress)}%
-                        </strong>
-
-                    </div>
-
-                </section>
-
-
-                {/* =================================
-                    TODAY
-                ================================== */}
-
-                <section className={styles.todaySection}>
-
-                    <div className={styles.sectionTitle}>
-
-                        <div>
-                            <span>
-                                TODAY'S REWARD
-                            </span>
-
-                            <h2>
-                                Your reward is waiting
-                            </h2>
-                        </div>
-
-                        <div className={styles.dayTag}>
-                            Day {streak.nextRewardDay}
-                        </div>
-
-                    </div>
-
-
-                    <div className={styles.todayCard}>
-
-                        <div className={styles.todayArtwork}>
-
-                            <img
-                                src={getRewardImage(
-                                    streak.nextReward
-                                )}
-                                alt=""
-                            />
-
-                        </div>
-
-                        <div className={styles.todayDetails}>
-
-                            <span>
-                                NEXT REWARD
-                            </span>
-
-                            <h3>
-                                {streak.todayClaimed
-                                    ? "Come back tomorrow"
-                                    : streak.nextReward?.title}
-                            </h3>
-
-                            <p>
-                                {streak.todayClaimed
-                                    ? "Your next reward will unlock when the timer ends."
-                                    : streak.nextReward?.description ||
-                                      "Your daily reward is ready to claim."}
-                            </p>
-
-                        </div>
-
-                        <div className={styles.todayAction}>
-
-                            {streak.todayClaimed ? (
-
-                                <div className={styles.countdownBox}>
-
-                                    <span>
-                                        NEXT CLAIM IN
+                            <div className={styles.referenceStats}>
+                                <div className={styles.referenceStat}>
+                                    <span className={styles.referenceStatIcon}>
+                                        <WalletCards size={20} />
                                     </span>
-
-                                    <strong>
-                                        {countdown}
-                                    </strong>
-
+                                    <div>
+                                        <small>TOTAL REWARDS</small>
+                                        <strong>{streak.totalRewards}</strong>
+                                    </div>
                                 </div>
 
-                            ) : (
+                                <div className={styles.referenceStat}>
+                                    <span className={styles.referenceStatIcon}>
+                                        <Check size={21} />
+                                    </span>
+                                    <div>
+                                        <small>CHECKED IN</small>
+                                        <strong>{streak.checkedIn}</strong>
+                                    </div>
+                                </div>
 
+                                <div className={styles.referenceStat}>
+                                    <span className={styles.referenceStatIcon}>
+                                        <img src={coinImg} alt="" />
+                                    </span>
+                                    <div>
+                                        <small>NEXT REWARD</small>
+                                        <strong className={styles.referenceGold}>
+                                            {streak.nextReward?.title || "See your reward cards"}
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={styles.referenceClaimRow}>
+                            {streak.todayClaimed ? (
+                                <div className={styles.referenceCountdown}>
+                                    <span>Next claim in</span>
+                                    <strong>{countdown}</strong>
+                                </div>
+                            ) : (
                                 <button
                                     type="button"
-                                    className={styles.claimButton}
+                                    className={styles.referenceClaimButton}
                                     onClick={handleClaim}
                                     disabled={claiming}
                                 >
-
-                                    <span>
-                                        {claiming
-                                            ? "Claiming..."
-                                            : "Claim Reward"}
-                                    </span>
-
-                                    {!claiming && (
-                                        <ArrowRight size={17} />
-                                    )}
-
+                                    {claiming ? "Claiming..." : "Claim Reward"}
+                                    {!claiming && <ArrowRight size={16} />}
                                 </button>
-
                             )}
-
                         </div>
-
                     </div>
 
+                    <div className={styles.referenceUltimate}>
+                        <div className={styles.referenceStreakBadge}>
+                            <img src={flameImg} alt="" />
+                            <strong>{streak.currentStreak} Day Streak</strong>
+                            <span>Keep it going!</span>
+                        </div>
+
+                        <div className={styles.referenceUltimateContent}>
+                            <div className={styles.referenceCrown}>
+                                <img src={heroCrownImg} alt="Ultimate reward crown" />
+                            </div>
+
+                            <div className={styles.referenceUltimateText}>
+                                <span>ULTIMATE REWARD</span>
+                                <h2>
+                                    {streak.rewards?.find((reward) => reward.day === 7)?.title || "Day 7"}
+                                </h2>
+                                <div className={styles.referenceGiftLabel}>
+                                    <img src={day7Img} alt="" />
+                                    <span>
+                                        {streak.rewards?.find((reward) => reward.day === 7)?.description || "Day 7 reward"}
+                                    </span>
+                                </div>
+                                <p>Unlock on <strong>Day 7</strong></p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
+                <div className={styles.referenceReminder}>
+                    <span>✦</span>
+                    Come back tomorrow for more rewards!
+                    <span>✦</span>
+                </div>
 
                 {/* =================================
                     MESSAGES
@@ -834,91 +697,15 @@ function Dashboard() {
                 </section>
 
 
-                {/* =================================
-                    QUICK NAVIGATION
-                ================================== */}
-
-                <section className={styles.quickSection}>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/wallet")}
-                        className={styles.quickCard}
-                    >
-
-                        <img
-                            src={coinImg}
-                            alt=""
-                        />
-
-                        <div>
-                            <strong>
-                                VES Wallet
-                            </strong>
-
-                            <span>
-                                View your reward balance
-                            </span>
-                        </div>
-
-                        <ArrowRight size={17} />
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onClick={() =>
-                            navigate("/transactions")
-                        }
-                        className={styles.quickCard}
-                    >
-
-                        <WalletCards size={25} />
-
-                        <div>
-                            <strong>
-                                Transactions
-                            </strong>
-
-                            <span>
-                                View your reward activity
-                            </span>
-                        </div>
-
-                        <ArrowRight size={17} />
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onClick={() =>
-                            navigate("/streak-history")
-                        }
-                        className={styles.quickCard}
-                    >
-
-                        <img
-                            src={flameImg}
-                            alt=""
-                        />
-
-                        <div>
-                            <strong>
-                                Streak History
-                            </strong>
-
-                            <span>
-                                See your previous streak activity
-                            </span>
-                        </div>
-
-                        <ArrowRight size={17} />
-
-                    </button>
-
-                </section>
+                {/* OFFICIAL REWARDS TRUST STRIP */}
+                <div className={styles.trustNotice}>
+                    <img src={trustImg} alt="" />
+                    <div>
+                        <strong>Official rewards only on <span>VeloopRewards.in</span></strong>
+                        <p>Stay active, stay rewarded!</p>
+                    </div>
+                    <ArrowRight className={styles.trustArrow} size={18} />
+                </div>
 
             </main>
 
@@ -927,7 +714,7 @@ function Dashboard() {
                 FOOTER
             ====================================== */}
 
-            <footer className={styles.footer}>
+          {/* <footer className={styles.footer}>
 
                 <div className={styles.footerInner}>
 
@@ -1004,7 +791,7 @@ function Dashboard() {
                     All rights reserved.
                 </div>
 
-            </footer>
+            </footer>*/}
 
 
             {/* =====================================

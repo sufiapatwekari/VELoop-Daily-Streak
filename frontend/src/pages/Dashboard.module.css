@@ -1642,3 +1642,1915 @@
     }
 
 }
+
+
+/* ==========================================
+   VELOOP DASHBOARD — GLASSMORPHISM REDESIGN
+   Append this after the existing CSS
+========================================== */
+
+.page {
+    min-height: 100vh;
+    color: #ffffff;
+    background:
+        radial-gradient(
+            ellipse at 12% 5%,
+            rgba(113, 44, 213, 0.20),
+            transparent 34%
+        ),
+        radial-gradient(
+            ellipse at 90% 30%,
+            rgba(83, 30, 156, 0.14),
+            transparent 36%
+        ),
+        #0a0613;
+    overflow-x: hidden;
+}
+
+.header {
+    background: rgba(12, 7, 24, 0.78);
+    border-bottom: 1px solid rgba(168, 103, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.headerInner {
+    width: min(100% - 48px, 1440px);
+    min-height: 82px;
+    margin: 0 auto;
+}
+
+.main {
+    width: min(100% - 64px, 1440px);
+    margin: 0 auto;
+    padding: 28px 0 40px;
+}
+
+.hero,
+.progressCard,
+.todayCard,
+.rewardCard,
+.benefitCard,
+.quickCard {
+    background: linear-gradient(
+        145deg,
+        rgba(35, 21, 59, 0.70),
+        rgba(15, 10, 29, 0.82)
+    );
+    border: 1px solid rgba(166, 111, 255, 0.24);
+    border-radius: 22px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.045),
+        0 12px 36px rgba(0, 0, 0, 0.20);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.hero:hover,
+.progressCard:hover,
+.todayCard:hover {
+    border-color: rgba(177, 119, 255, 0.42);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 16px 42px rgba(83, 30, 156, 0.13);
+}
+
+.hero {
+    overflow: hidden;
+}
+
+.heroContent {
+    padding: 42px;
+}
+
+.heroKicker,
+.todayDetails > span,
+.sectionTitle > div > span,
+.progressHeader > div > span {
+    color: #c38aff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 3.2vw, 46px);
+    line-height: 1.17;
+    letter-spacing: -1.4px;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    display: block;
+    color: #ffc928;
+    text-shadow: 0 0 24px rgba(255, 201, 40, 0.15);
+}
+
+.heroContent > p {
+    max-width: 520px;
+    color: #c2b8d6;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.heroStats {
+    gap: 24px;
+}
+
+.heroStats strong {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.heroStats span {
+    color: #b9aecb;
+    font-size: 12px;
+}
+
+.heroVisual {
+    min-width: 0;
+}
+
+.heroGift,
+.heroCrown {
+    filter: drop-shadow(0 8px 18px rgba(143, 54, 255, 0.22));
+}
+
+.progressCard {
+    padding: 26px;
+}
+
+.progressHeader h2,
+.sectionTitle h2 {
+    color: #ffffff;
+    font-size: clamp(20px, 2vw, 27px);
+    line-height: 1.3;
+    font-weight: 800;
+}
+
+.progressDay {
+    color: #ffd44b;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.progressTrack {
+    height: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.progressFill {
+    border-radius: inherit;
+    background: linear-gradient(90deg, #873cff, #d28aff, #ffc928);
+    box-shadow: 0 0 16px rgba(157, 77, 255, 0.35);
+}
+
+.progressBottom {
+    color: #b8aecb;
+    font-size: 13px;
+}
+
+.todayCard {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    padding: 26px;
+}
+
+.todayArtwork {
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: radial-gradient(
+        circle,
+        rgba(139, 58, 255, 0.16),
+        transparent 72%
+    );
+}
+
+.todayArtwork img {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 15px rgba(255, 190, 45, 0.12));
+}
+
+.todayDetails h3 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.todayDetails p {
+    color: #bcb1ce;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.claimButton,
+.modalButton {
+    min-height: 46px;
+    padding: 0 22px;
+    border: 1px solid rgba(255, 226, 119, 0.75);
+    border-radius: 12px;
+    color: #201300;
+    background: linear-gradient(135deg, #ffe46b, #ffb900);
+    box-shadow: 0 5px 22px rgba(255, 190, 30, 0.14);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.claimButton:hover,
+.modalButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(255, 190, 30, 0.24);
+}
+
+.countdownBox {
+    padding: 13px 18px;
+    border: 1px solid rgba(165, 106, 255, 0.28);
+    border-radius: 14px;
+    background: rgba(119, 62, 180, 0.12);
+}
+
+.countdownBox strong {
+    color: #dfb3ff;
+    font-size: 22px;
+}
+
+.rewardsSection,
+.benefitsSection {
+    margin-top: 34px;
+}
+
+.sectionTitle {
+    margin-bottom: 20px;
+}
+
+.sectionTitle h2 {
+    margin-top: 7px;
+}
+
+.rewardGrid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.rewardCard {
+    position: relative;
+    min-width: 0;
+    min-height: 255px;
+    padding: 15px 12px;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.rewardCard:hover {
+    transform: translateY(-5px);
+    border-color: rgba(190, 133, 255, 0.65);
+    box-shadow: 0 12px 30px rgba(124, 60, 255, 0.15);
+}
+
+.rewardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    color: #d5c8e7;
+    font-size: 11px;
+}
+
+.rewardImage {
+    display: grid;
+    place-items: center;
+    height: 105px;
+    margin: 8px 0;
+}
+
+.rewardImage img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(255, 190, 30, 0.10));
+}
+
+.rewardCard > strong {
+    display: block;
+    color: #d7b0ff;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.rewardCard > small {
+    display: block;
+    margin-top: 6px;
+    color: #b6abc8;
+    font-size: 12px;
+}
+
+.available {
+    border-color: rgba(255, 197, 38, 0.9);
+    background: linear-gradient(
+        145deg,
+        rgba(90, 59, 20, 0.36),
+        rgba(22, 13, 31, 0.90)
+    );
+    box-shadow:
+        inset 0 0 25px rgba(255, 190, 30, 0.035),
+        0 0 20px rgba(255, 190, 30, 0.06);
+}
+
+.claimNow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 12px;
+    padding: 10px 6px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffe46b, #ffb900);
+    color: #211400;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.claimed {
+    border-color: rgba(40, 220, 144, 0.30);
+}
+
+.locked {
+    opacity: 0.84;
+}
+
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.benefitCard {
+    padding: 22px;
+}
+
+.benefitCard img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.benefitCard h3 {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.benefitCard p {
+    color: #b9aecb;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.quickSection {
+    display: none;
+}
+
+/* Remove the old footer completely */
+.footer {
+    display: none !important;
+}
+
+/* Status messages */
+.successMessage,
+.warningMessage {
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    backdrop-filter: blur(14px);
+}
+
+.successMessage {
+    border: 1px solid rgba(53, 217, 138, 0.3);
+    background: rgba(53, 217, 138, 0.08);
+}
+
+.warningMessage {
+    border: 1px solid rgba(255, 92, 112, 0.3);
+    background: rgba(255, 92, 112, 0.08);
+}
+
+/* Reward details popup */
+.rewardOverlay {
+    background: rgba(4, 2, 10, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.rewardModal {
+    border: 1px solid rgba(177, 119, 255, 0.36);
+    border-radius: 24px;
+    background: linear-gradient(
+        145deg,
+        rgba(39, 23, 63, 0.97),
+        rgba(12, 8, 23, 0.98)
+    );
+    box-shadow: 0 25px 90px rgba(0, 0, 0, 0.55);
+}
+
+.rewardModal h2 {
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.rewardModal p {
+    color: #c0b4d2;
+    font-size: 14px;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+@media (max-width: 1100px) {
+    .main {
+        width: min(100% - 40px, 900px);
+    }
+
+    .rewardGrid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .todayCard {
+        grid-template-columns: 110px minmax(0, 1fr);
+    }
+
+    .todayAction {
+        grid-column: 2;
+    }
+
+    .benefitsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 700px) {
+    .headerInner {
+        width: calc(100% - 28px);
+        min-height: 70px;
+    }
+
+    .main {
+        width: calc(100% - 28px);
+        padding-top: 18px;
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .heroContent {
+        width: 100%;
+        padding: 25px 22px 10px;
+    }
+
+    .hero h1 {
+        font-size: clamp(27px, 7vw, 36px);
+        letter-spacing: -0.8px;
+    }
+
+    .heroContent > p {
+        font-size: 14px;
+    }
+
+    .heroStats {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .heroStats strong {
+        font-size: 19px;
+    }
+
+    .heroStats span {
+        font-size: 11px;
+    }
+
+    .heroVisual {
+        width: 100%;
+        height: 210px;
+    }
+
+    .heroGift {
+        width: 210px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .heroCrown {
+        width: 130px;
+    }
+
+    .progressCard {
+        padding: 20px;
+    }
+
+    .todayCard {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 14px;
+        padding: 18px;
+    }
+
+    .todayArtwork img {
+        width: 78px;
+        height: 78px;
+    }
+
+    .todayDetails h3 {
+        font-size: 18px;
+    }
+
+    .todayDetails p {
+        font-size: 13px;
+    }
+
+    .todayAction {
+        grid-column: 1 / -1;
+    }
+
+    .claimButton,
+    .countdownBox {
+        width: 100%;
+    }
+
+    .rewardGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .rewardCard {
+        min-height: 230px;
+        padding: 13px 10px;
+    }
+
+    .rewardImage {
+        height: 90px;
+    }
+
+    .rewardImage img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .rewardCard > strong {
+        font-size: 16px;
+    }
+
+    .benefitsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .benefitCard {
+        display: grid;
+        grid-template-columns: 46px minmax(0, 1fr);
+        column-gap: 13px;
+        padding: 17px;
+    }
+
+    .benefitCard img {
+        grid-row: span 2;
+    }
+
+    .benefitCard h3 {
+        margin: 0 0 5px;
+    }
+
+    .benefitCard p {
+        margin: 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .headerInner {
+        width: calc(100% - 20px);
+    }
+
+    .main {
+        width: calc(100% - 20px);
+    }
+
+    .heroContent {
+        padding: 22px 16px 8px;
+    }
+
+    .rewardGrid {
+        gap: 8px;
+    }
+
+    .rewardCard {
+        padding: 12px 7px;
+    }
+
+    .rewardTop {
+        font-size: 10px;
+    }
+
+    .rewardCard > strong {
+        font-size: 14px;
+    }
+
+    .rewardCard > small {
+        font-size: 11px;
+    }
+}
+
+/* =========================================
+   REFERENCE DAILY STREAK DASHBOARD
+   Append to the bottom of Dashboard.module.css
+========================================= */
+
+.page {
+    min-height: 100vh;
+    overflow-x: clip;
+    color: #fff;
+    background:
+        radial-gradient(
+            ellipse at 12% 12%,
+            rgba(100, 44, 170, 0.19),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 88% 20%,
+            rgba(75, 35, 130, 0.17),
+            transparent 38%
+        ),
+        #0a0612;
+}
+
+.header {
+    position: relative;
+    background: rgba(12, 7, 23, 0.78);
+    border-bottom: 1px solid rgba(176, 122, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.headerInner {
+    width: min(1440px, calc(100% - 48px));
+    min-height: 76px;
+}
+
+.brand strong {
+    font-size: 20px;
+    letter-spacing: -0.6px;
+}
+
+.brand span {
+    color: #b8abc9;
+    font-size: 12px;
+    letter-spacing: 0;
+}
+
+.brandMark {
+    border-radius: 50%;
+    background: linear-gradient(145deg, #8e4bff, #482080);
+}
+
+.streakBadge,
+.balanceButton,
+.logoutButton {
+    border-color: rgba(170, 111, 255, 0.25);
+    background: rgba(255, 255, 255, 0.035);
+    border-radius: 14px;
+}
+
+.streakBadge {
+    padding: 7px 13px;
+}
+
+.streakBadge small,
+.balanceButton small {
+    font-size: 10px;
+}
+
+.main {
+    width: min(1440px, calc(100% - 64px));
+    padding: 24px 0 35px;
+}
+
+/* Two large panels */
+.referenceSummary {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.referenceLeft,
+.referenceUltimate {
+    position: relative;
+    min-width: 0;
+    min-height: 320px;
+    overflow: hidden;
+    border: 1px solid rgba(155, 91, 239, 0.30);
+    border-radius: 25px;
+    background:
+        linear-gradient(
+            140deg,
+            rgba(28, 17, 48, 0.79),
+            rgba(13, 8, 24, 0.86)
+        );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.045),
+        0 15px 38px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.referenceLeft {
+    padding: 25px 28px;
+}
+
+.referenceHeading h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(25px, 2.3vw, 34px);
+    font-weight: 850;
+    letter-spacing: -1.1px;
+    line-height: 1.25;
+}
+
+.referenceHeading h1 span {
+    color: #ffc928;
+}
+
+.referenceHeading p {
+    margin: 7px 0 16px;
+    color: #b9aecb;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.referenceStatsLayout {
+    display: grid;
+    grid-template-columns: minmax(115px, 0.75fr) minmax(0, 1.8fr);
+    align-items: center;
+    gap: 20px;
+}
+
+.referenceGift {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 190px;
+    border-radius: 20px;
+    background: radial-gradient(
+        circle,
+        rgba(137, 60, 255, 0.15),
+        transparent 70%
+    );
+}
+
+.referenceGift > img:first-child {
+    width: 100%;
+    max-width: 175px;
+    height: 175px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 18px rgba(132, 58, 255, 0.22));
+    animation: referenceFloat 5s ease-in-out infinite;
+}
+
+.referenceGift .floatingCoin {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(255, 190, 30, 0.2));
+}
+
+.referenceStats {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+}
+
+.referenceStat {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 60px;
+    min-width: 0;
+    padding: 10px 13px;
+    border: 1px solid rgba(167, 118, 224, 0.20);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.referenceStatIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 39px;
+    height: 39px;
+    border: 1px solid rgba(176, 117, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(139, 69, 220, 0.15);
+    color: #d6a6ff;
+}
+
+.referenceStat:nth-child(2) .referenceStatIcon {
+    color: #26d99a;
+    border-color: rgba(38, 217, 154, 0.3);
+    background: rgba(38, 217, 154, 0.09);
+}
+
+.referenceStatIcon img {
+    width: 27px;
+    height: 27px;
+    object-fit: contain;
+}
+
+.referenceStat small {
+    display: block;
+    margin-bottom: 3px;
+    color: #b7abc9;
+    font-size: 11px;
+    letter-spacing: 0.25px;
+}
+
+.referenceStat strong {
+    display: block;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 850;
+    overflow-wrap: anywhere;
+}
+
+.referenceStat .referenceGold {
+    color: #ffc928;
+    font-size: 16px;
+}
+
+/* Ultimate reward */
+.referenceUltimate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.referenceUltimate::before {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at 25% 58%,
+        rgba(129, 49, 255, 0.16),
+        transparent 58%
+    );
+    content: "";
+    pointer-events: none;
+}
+
+.referenceStreakBadge {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: calc(100% - 34px);
+    padding: 9px 12px;
+    border: 1px solid rgba(167, 111, 255, 0.28);
+    border-radius: 30px;
+    background: rgba(133, 70, 185, 0.13);
+    font-size: 11px;
+}
+
+.referenceStreakBadge img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.referenceStreakBadge strong {
+    white-space: nowrap;
+    color: #fff;
+}
+
+.referenceStreakBadge span {
+    color: #c8a3f5;
+    white-space: nowrap;
+}
+
+.referenceUltimateContent {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    margin-top: 26px;
+}
+
+.referenceCrown {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+}
+
+.referenceCrown img {
+    width: 100%;
+    max-width: 225px;
+    height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 18px rgba(255, 180, 30, 0.18));
+    animation: referenceFloat 6s ease-in-out infinite;
+}
+
+.referenceUltimateText > span {
+    display: block;
+    color: #cb8bff;
+    font-size: 14px;
+    font-weight: 850;
+    letter-spacing: 0.45px;
+}
+
+.referenceUltimateText h2 {
+    margin: 8px 0 9px;
+    color: #fff;
+    font-size: clamp(34px, 3.4vw, 49px);
+    font-weight: 900;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+}
+
+.referenceGiftLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 100%;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.055);
+    color: #f6efff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.referenceGiftLabel img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.referenceGiftLabel span {
+    overflow-wrap: anywhere;
+}
+
+.referenceUltimateText p {
+    margin: 13px 0 0;
+    color: #b9aecb;
+    font-size: 13px;
+}
+
+.referenceUltimateText p strong {
+    color: #ffc928;
+}
+
+/* Reminder line */
+.referenceReminder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 27px 10px;
+    color: #c0a6e9;
+    text-align: center;
+    font-size: 14px;
+}
+
+.referenceReminder span {
+    color: #bb83ff;
+    text-shadow: 0 0 12px rgba(169, 91, 255, 0.45);
+}
+
+/* Existing reward cards */
+.rewardGrid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.rewardCard {
+    min-width: 0;
+    min-height: 240px;
+    padding: 13px 11px;
+    border: 1px solid rgba(152, 94, 229, 0.23);
+    border-radius: 19px;
+    background: rgba(25, 16, 42, 0.66);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.rewardCard.available {
+    border-color: rgba(255, 197, 36, 0.9);
+    background: linear-gradient(
+        145deg,
+        rgba(89, 57, 21, 0.34),
+        rgba(23, 14, 32, 0.85)
+    );
+    box-shadow:
+        inset 0 0 24px rgba(255, 190, 30, 0.035),
+        0 0 20px rgba(255, 190, 30, 0.07);
+}
+
+.rewardCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(187, 133, 255, 0.55);
+}
+
+.rewardImage {
+    height: 94px;
+}
+
+.rewardImage img {
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+}
+
+.rewardCard > strong {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.rewardCard > small {
+    font-size: 10px;
+}
+
+.claimNow {
+    justify-content: center;
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffe36a, #ffb900);
+    color: #201400;
+    font-size: 11px;
+}
+
+/* Benefits glass strip */
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.benefitCard {
+    padding: 18px;
+    border: 1px solid rgba(152, 94, 229, 0.2);
+    border-radius: 17px;
+    background: rgba(25, 16, 42, 0.62);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.benefitCard img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.benefitCard h3 {
+    color: #fff;
+    font-size: 13px;
+}
+
+.benefitCard p {
+    color: #b9aecb;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Remove old quick links and footer */
+.quickSection,
+.footer {
+    display: none !important;
+}
+
+@keyframes referenceFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+    .main {
+        width: calc(100% - 40px);
+    }
+
+    .referenceSummary {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .referenceLeft {
+        padding: 22px 18px;
+    }
+
+    .referenceStatsLayout {
+        grid-template-columns: 105px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .referenceGift > img:first-child {
+        height: 130px;
+    }
+
+    .referenceGift {
+        min-height: 150px;
+    }
+
+    .referenceUltimate {
+        padding: 20px;
+    }
+
+    .referenceUltimateContent {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        margin-top: 42px;
+        text-align: center;
+    }
+
+    .referenceCrown img {
+        height: 110px;
+    }
+
+    .rewardGrid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .benefitsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .headerInner {
+        width: calc(100% - 24px);
+        min-height: 68px;
+    }
+
+    .brandMark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .brand strong {
+        font-size: 16px;
+    }
+
+    .brand span {
+        font-size: 10px;
+    }
+
+    .headerRight {
+        gap: 6px;
+    }
+
+    .streakBadge {
+        padding: 5px 8px;
+        gap: 5px;
+    }
+
+    .streakBadge small,
+    .balanceButton small {
+        display: none;
+    }
+
+    .balanceButton {
+        padding: 6px 8px;
+        gap: 4px;
+    }
+
+    .main {
+        width: calc(100% - 24px);
+        padding-top: 16px;
+    }
+
+    .referenceSummary {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .referenceLeft,
+    .referenceUltimate {
+        min-height: 0;
+        border-radius: 20px;
+    }
+
+    .referenceLeft {
+        padding: 21px 16px;
+    }
+
+    .referenceHeading h1 {
+        font-size: clamp(23px, 6.2vw, 30px);
+        letter-spacing: -0.8px;
+    }
+
+    .referenceHeading p {
+        font-size: 13px;
+    }
+
+    .referenceStatsLayout {
+        grid-template-columns: 90px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .referenceGift {
+        min-height: 0;
+    }
+
+    .referenceGift > img:first-child {
+        height: 105px;
+    }
+
+    .referenceGift .floatingCoin {
+        width: 28px;
+        height: 28px;
+        right: 0;
+    }
+
+    .referenceStats {
+        gap: 7px;
+    }
+
+    .referenceStat {
+        min-height: 55px;
+        padding: 8px;
+        gap: 9px;
+        border-radius: 12px;
+    }
+
+    .referenceStatIcon {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+    }
+
+    .referenceStat small {
+        font-size: 9px;
+    }
+
+    .referenceStat strong {
+        font-size: 16px;
+    }
+
+    .referenceStat .referenceGold {
+        font-size: 13px;
+    }
+
+    .referenceUltimate {
+        padding: 56px 16px 20px;
+    }
+
+    .referenceStreakBadge {
+        top: 12px;
+        right: 12px;
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+
+    .referenceUltimateContent {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+        gap: 10px;
+        margin-top: 0;
+        text-align: left;
+    }
+
+    .referenceCrown img {
+        height: 120px;
+    }
+
+    .referenceUltimateText > span {
+        font-size: 11px;
+    }
+
+    .referenceUltimateText h2 {
+        font-size: clamp(30px, 8vw, 40px);
+    }
+
+    .referenceGiftLabel {
+        padding: 5px 7px;
+        font-size: 10px;
+    }
+
+    .referenceGiftLabel img {
+        width: 17px;
+        height: 17px;
+    }
+
+    .referenceUltimateText p {
+        font-size: 11px;
+    }
+
+    .referenceReminder {
+        padding: 21px 4px;
+        gap: 7px;
+        font-size: 12px;
+    }
+
+    .sectionTitle h2 {
+        font-size: 19px;
+    }
+
+    .rewardGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .rewardCard {
+        min-height: 220px;
+        padding: 12px 10px;
+        border-radius: 16px;
+    }
+
+    .rewardImage {
+        height: 88px;
+    }
+
+    .rewardImage img {
+        width: 76px;
+        height: 76px;
+    }
+
+    .rewardCard > strong {
+        font-size: 12px;
+    }
+
+    .rewardCard > small {
+        font-size: 10px;
+    }
+
+    .benefitsGrid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .benefitCard {
+        display: grid;
+        grid-template-columns: 45px minmax(0, 1fr);
+        align-items: center;
+        column-gap: 12px;
+        padding: 14px;
+        text-align: left;
+    }
+
+    .benefitCard img {
+        grid-row: span 2;
+        width: 42px;
+        height: 42px;
+        margin: 0;
+    }
+
+    .benefitCard h3 {
+        margin: 0 0 4px;
+    }
+
+    .benefitCard p {
+        margin: 0;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 380px) {
+    .brand {
+        gap: 6px;
+    }
+
+    .brand strong {
+        font-size: 14px;
+    }
+
+    .brand span {
+        font-size: 9px;
+    }
+
+    .brandMark {
+        width: 30px;
+        height: 30px;
+    }
+
+    .logoutButton {
+        width: 32px;
+        height: 32px;
+    }
+
+    .referenceStatsLayout {
+        grid-template-columns: 72px minmax(0, 1fr);
+    }
+
+    .referenceGift > img:first-child {
+        height: 82px;
+    }
+
+    .referenceStat {
+        gap: 7px;
+        padding: 7px;
+    }
+
+    .referenceStatIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .referenceStat small {
+        font-size: 8px;
+    }
+
+    .referenceStat strong {
+        font-size: 14px;
+    }
+
+    .referenceUltimateContent {
+        grid-template-columns: 0.8fr 1fr;
+    }
+
+    .referenceCrown img {
+        height: 95px;
+    }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .referenceGift > img:first-child,
+    .referenceCrown img {
+        animation: none;
+    }
+
+    .rewardCard {
+        transition: none;
+    }
+}
+
+/* Paste this at the BOTTOM of Dashboard.module.css */
+
+.page {
+    min-height: 100vh;
+    overflow-x: clip;
+    color: #fff;
+    background:
+        radial-gradient(ellipse at 12% 12%, rgba(100, 44, 170, .18), transparent 38%),
+        radial-gradient(ellipse at 88% 18%, rgba(75, 35, 130, .16), transparent 38%),
+        #0a0612;
+}
+
+.main {
+    width: min(1440px, calc(100% - 64px));
+    margin-inline: auto;
+    padding: 24px 0 36px;
+}
+
+.header {
+    background: rgba(12, 7, 23, .78);
+    border-bottom: 1px solid rgba(176, 122, 255, .12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.referenceSummary {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.referenceLeft,
+.referenceUltimate {
+    position: relative;
+    min-width: 0;
+    min-height: 320px;
+    overflow: hidden;
+    border: 1px solid rgba(155, 91, 239, .30);
+    border-radius: 25px;
+    background: linear-gradient(140deg, rgba(28, 17, 48, .82), rgba(13, 8, 24, .90));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 15px 38px rgba(0,0,0,.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.referenceLeft { padding: 25px 28px; }
+
+.referenceHeading h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(25px, 2.3vw, 34px);
+    font-weight: 850;
+    letter-spacing: -1.1px;
+    line-height: 1.25;
+}
+.referenceHeading h1 span { color: #ffc928; }
+.referenceHeading p {
+    margin: 7px 0 16px;
+    color: #b9aecb;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.referenceStatsLayout {
+    display: grid;
+    grid-template-columns: minmax(115px, .75fr) minmax(0, 1.8fr);
+    align-items: center;
+    gap: 20px;
+}
+
+.referenceGift {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 180px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(137,60,255,.15), transparent 70%);
+}
+.referenceGift > img:first-child {
+    width: 100%;
+    max-width: 175px;
+    height: 170px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 18px rgba(132,58,255,.22));
+    animation: referenceFloat 5s ease-in-out infinite;
+}
+.referenceFloatingCoin {
+    position: absolute;
+    right: 2px;
+    bottom: 8px;
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.referenceStats { display: grid; gap: 10px; min-width: 0; }
+.referenceStat {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 60px;
+    min-width: 0;
+    padding: 10px 13px;
+    border: 1px solid rgba(167,118,224,.20);
+    border-radius: 15px;
+    background: rgba(255,255,255,.035);
+    box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+.referenceStatIcon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 39px;
+    width: 39px;
+    height: 39px;
+    border: 1px solid rgba(176,117,255,.30);
+    border-radius: 12px;
+    background: rgba(139,69,220,.15);
+    color: #d6a6ff;
+}
+.referenceStat:nth-child(2) .referenceStatIcon {
+    color: #26d99a;
+    border-color: rgba(38,217,154,.3);
+    background: rgba(38,217,154,.09);
+}
+.referenceStatIcon img { width: 27px; height: 27px; object-fit: contain; }
+.referenceStat small {
+    display: block;
+    margin-bottom: 3px;
+    color: #b7abc9;
+    font-size: 11px;
+    letter-spacing: .25px;
+}
+.referenceStat strong {
+    display: block;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 850;
+    overflow-wrap: anywhere;
+}
+.referenceStat .referenceGold { color: #ffc928; font-size: 15px; }
+
+.referenceClaimRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+.referenceClaimButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #ffe36a, #ffb900);
+    color: #211400;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.referenceClaimButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,190,30,.2);
+}
+.referenceClaimButton:disabled { opacity: .6; cursor: wait; }
+.referenceCountdown {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 13px;
+    border: 1px solid rgba(168,113,255,.28);
+    border-radius: 11px;
+    background: rgba(140,78,220,.1);
+}
+.referenceCountdown span { color: #c0b1d6; font-size: 12px; }
+.referenceCountdown strong { color: #d3a4ff; font-size: 16px; }
+
+.referenceUltimate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+.referenceUltimate::before {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 25% 58%, rgba(129,49,255,.16), transparent 58%);
+    content: "";
+    pointer-events: none;
+}
+.referenceStreakBadge {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: calc(100% - 34px);
+    padding: 9px 12px;
+    border: 1px solid rgba(167,111,255,.28);
+    border-radius: 30px;
+    background: rgba(133,70,185,.13);
+    font-size: 11px;
+}
+.referenceStreakBadge img { width: 18px; height: 18px; object-fit: contain; }
+.referenceStreakBadge strong { color: #fff; white-space: nowrap; }
+.referenceStreakBadge span { color: #c8a3f5; white-space: nowrap; }
+
+.referenceUltimateContent {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    margin-top: 26px;
+}
+.referenceCrown { display: grid; place-items: center; min-width: 0; }
+.referenceCrown img {
+    width: 100%;
+    max-width: 225px;
+    height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 18px rgba(255,180,30,.18));
+    animation: referenceFloat 6s ease-in-out infinite;
+}
+.referenceUltimateText > span {
+    display: block;
+    color: #cb8bff;
+    font-size: 14px;
+    font-weight: 850;
+    letter-spacing: .45px;
+}
+.referenceUltimateText h2 {
+    margin: 8px 0 9px;
+    color: #fff;
+    font-size: clamp(30px, 3.2vw, 46px);
+    font-weight: 900;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+}
+.referenceGiftLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 100%;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 25px;
+    background: rgba(255,255,255,.055);
+    color: #f6efff;
+    font-size: 11px;
+    font-weight: 700;
+}
+.referenceGiftLabel img { width: 20px; height: 20px; object-fit: contain; }
+.referenceGiftLabel span { overflow-wrap: anywhere; }
+.referenceUltimateText p { margin: 13px 0 0; color: #b9aecb; font-size: 13px; }
+.referenceUltimateText p strong { color: #ffc928; }
+
+.referenceReminder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 27px 10px;
+    color: #c0a6e9;
+    text-align: center;
+    font-size: 14px;
+}
+.referenceReminder span { color: #bb83ff; text-shadow: 0 0 12px rgba(169,91,255,.45); }
+
+/* Reward cards: glass effect, gold for available/Day 7 */
+.rewardGrid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; }
+.rewardCard {
+    min-width: 0;
+    min-height: 240px;
+    padding: 13px 11px;
+    border: 1px solid rgba(152,94,229,.23);
+    border-radius: 19px;
+    background: rgba(25,16,42,.66);
+    box-shadow: inset 0 1px rgba(255,255,255,.035);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.rewardCard:hover { transform: translateY(-4px); border-color: rgba(187,133,255,.55); }
+.rewardCard.available {
+    border-color: rgba(255,197,36,.9);
+    background: linear-gradient(145deg, rgba(89,57,21,.34), rgba(23,14,32,.85));
+    box-shadow: inset 0 0 24px rgba(255,190,30,.035), 0 0 20px rgba(255,190,30,.07);
+}
+.rewardImage { height: 94px; display: grid; place-items: center; }
+.rewardImage img { width: 84px; height: 84px; object-fit: contain; }
+.claimNow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffe36a, #ffb900);
+    color: #201400;
+    font-size: 11px;
+}
+
+/* Four benefit cards in one glass strip */
+.benefitsGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.benefitCard {
+    padding: 18px;
+    border: 1px solid rgba(152,94,229,.2);
+    border-radius: 17px;
+    background: rgba(25,16,42,.62);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+.benefitCard img { width: 48px; height: 48px; object-fit: contain; }
+.benefitCard h3 { color: #fff; font-size: 13px; }
+.benefitCard p { color: #b9aecb; font-size: 11px; line-height: 1.6; }
+
+.trustNotice {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 20px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,191,35,.25);
+    border-radius: 17px;
+    background: rgba(35,23,41,.55);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+.trustNotice > img { width: 32px; height: 32px; flex-shrink: 0; object-fit: contain; }
+.trustNotice > div { flex: 1; min-width: 0; }
+.trustNotice strong { color: #fff; font-size: 13px; font-weight: 750; }
+.trustNotice strong span { color: #ffc928; }
+.trustNotice p { margin: 3px 0 0; color: #b7abc9; font-size: 12px; }
+.trustArrow { flex-shrink: 0; color: #a99ab9; }
+
+/* Hide the old footer and quick navigation */
+.quickSection, .footer { display: none !important; }
+
+@keyframes referenceFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+    .main { width: calc(100% - 40px); }
+    .referenceSummary { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .referenceLeft { padding: 22px 18px; }
+    .referenceStatsLayout { grid-template-columns: 105px minmax(0, 1fr); gap: 12px; }
+    .referenceGift > img:first-child { height: 130px; }
+    .referenceGift { min-height: 150px; }
+    .referenceUltimate { padding: 20px; }
+    .referenceUltimateContent { grid-template-columns: 1fr; gap: 2px; margin-top: 42px; text-align: center; }
+    .referenceCrown img { height: 110px; }
+    .rewardGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .benefitsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .main { width: calc(100% - 24px); padding-top: 16px; }
+    .referenceSummary { grid-template-columns: 1fr; gap: 14px; }
+    .referenceLeft, .referenceUltimate { min-height: 0; border-radius: 20px; }
+    .referenceLeft { padding: 21px 16px; }
+    .referenceHeading h1 { font-size: clamp(23px, 6.2vw, 30px); letter-spacing: -.8px; }
+    .referenceHeading p { font-size: 13px; }
+    .referenceStatsLayout { grid-template-columns: 90px minmax(0, 1fr); gap: 10px; }
+    .referenceGift { min-height: 0; }
+    .referenceGift > img:first-child { height: 105px; }
+    .referenceFloatingCoin { width: 28px; height: 28px; }
+    .referenceStats { gap: 7px; }
+    .referenceStat { min-height: 55px; padding: 8px; gap: 9px; border-radius: 12px; }
+    .referenceStatIcon { flex-basis: 32px; width: 32px; height: 32px; border-radius: 9px; }
+    .referenceStat small { font-size: 9px; }
+    .referenceStat strong { font-size: 16px; }
+    .referenceStat .referenceGold { font-size: 12px; }
+    .referenceClaimRow { justify-content: stretch; }
+    .referenceClaimButton, .referenceCountdown { width: 100%; justify-content: center; }
+    .referenceUltimate { padding: 56px 16px 20px; }
+    .referenceStreakBadge { top: 12px; right: 12px; padding: 7px 9px; font-size: 10px; }
+    .referenceUltimateContent { grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: 10px; margin-top: 0; text-align: left; }
+    .referenceCrown img { height: 120px; }
+    .referenceUltimateText > span { font-size: 11px; }
+    .referenceUltimateText h2 { font-size: clamp(28px, 8vw, 38px); }
+    .referenceGiftLabel { padding: 5px 7px; font-size: 10px; }
+    .referenceGiftLabel img { width: 17px; height: 17px; }
+    .referenceUltimateText p { font-size: 11px; }
+    .referenceReminder { padding: 21px 4px; gap: 7px; font-size: 12px; }
+    .rewardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .rewardCard { min-height: 220px; padding: 12px 10px; border-radius: 16px; }
+    .rewardImage { height: 88px; }
+    .rewardImage img { width: 76px; height: 76px; }
+    .benefitsGrid { grid-template-columns: 1fr; gap: 9px; }
+    .benefitCard {
+        display: grid;
+        grid-template-columns: 45px minmax(0, 1fr);
+        align-items: center;
+        column-gap: 12px;
+        padding: 14px;
+        text-align: left;
+    }
+    .benefitCard img { grid-row: span 2; width: 42px; height: 42px; margin: 0; }
+    .benefitCard h3 { margin: 0 0 4px; }
+    .benefitCard p { margin: 0; }
+    .trustNotice { padding: 12px; gap: 10px; }
+    .trustNotice strong, .trustNotice p { font-size: 11px; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+    .main { width: calc(100% - 20px); }
+    .referenceStatsLayout { grid-template-columns: 72px minmax(0, 1fr); }
+    .referenceGift > img:first-child { height: 82px; }
+    .referenceStat { gap: 7px; padding: 7px; }
+    .referenceStatIcon { flex-basis: 28px; width: 28px; height: 28px; }
+    .referenceStat small { font-size: 8px; }
+    .referenceStat strong { font-size: 14px; }
+    .referenceUltimateContent { grid-template-columns: .8fr 1fr; }
+    .referenceCrown img { height: 95px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .referenceGift > img:first-child, .referenceCrown img { animation: none; }
+    .rewardCard { transition: none; }
+}

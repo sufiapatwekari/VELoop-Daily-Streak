@@ -1173,3 +1173,725 @@
         grid-column: 1;
     }
 }
+
+
+/* =========================================
+   VELOOP PREMIUM GLASS UI
+   Responsive styling improvements
+========================================= */
+
+.page {
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 15% 8%,
+            rgba(124, 60, 255, 0.22), transparent 35%),
+        radial-gradient(ellipse at 90% 30%,
+            rgba(194, 139, 255, 0.12), transparent 30%),
+        linear-gradient(145deg, #090815, #100b20 55%, #080711);
+    color: #fff;
+}
+
+.navbar {
+    width: min(1320px, calc(100% - 64px));
+    min-height: 88px;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.brandIcon {
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 15px;
+    background: linear-gradient(135deg,#a875ff,#5521b7);
+    box-shadow: 0 0 30px rgba(124,60,255,.4);
+    font-size: 23px;
+}
+
+.brand strong {
+    font-size: 23px;
+}
+
+.brand span {
+    font-size: 10px;
+}
+
+.navLinks {
+    gap: 32px;
+}
+
+.navLinks a {
+    font-size: 14px;
+    transition: color .2s ease;
+}
+
+.navActions {
+    gap: 12px;
+}
+
+.loginButton,
+.registerButton {
+    min-height: 46px;
+    padding: 0 22px;
+    font-size: 14px;
+    border-radius: 13px;
+}
+
+/* Hero */
+
+.hero {
+    width: min(1320px, calc(100% - 64px));
+    min-height: 680px;
+    gap: 35px;
+}
+
+.heroKicker {
+    padding: 10px 15px;
+    font-size: 12px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.heroContent h1 {
+    font-size: clamp(48px, 5.2vw, 76px);
+    line-height: 1.08;
+    letter-spacing: -2.8px;
+}
+
+.heroContent h1 span {
+    background: linear-gradient(90deg,#c5a0ff,#8b52ff,#f1cf78);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.heroContent > p {
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.primaryCta,
+.secondaryCta,
+.finalButton {
+    min-height: 54px;
+    padding: 0 25px;
+    font-size: 15px;
+    border-radius: 14px;
+}
+
+.heroStats {
+    gap: 42px;
+}
+
+.heroStats strong {
+    font-size: 25px;
+}
+
+.heroStats span {
+    font-size: 13px;
+}
+
+/* Reward illustration */
+
+.heroVisual {
+    min-height: 560px;
+}
+
+.visualGlow {
+    width: 440px;
+    height: 440px;
+    background: radial-gradient(circle,
+        rgba(142,82,255,.30),
+        rgba(124,60,255,.07) 52%,
+        transparent 72%);
+}
+
+.rewardOrb {
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(208,177,255,.35);
+    background:
+        radial-gradient(circle at 35% 20%,
+            rgba(176,129,255,.24), transparent 60%),
+        linear-gradient(145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.025));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.40),
+        inset 0 1px 0 rgba(255,255,255,.22),
+        0 0 55px rgba(124,60,255,.16);
+}
+
+.diamondLarge img {
+    width: 120px;
+    height: 120px;
+}
+
+.rewardOrb strong {
+    font-size: 34px;
+}
+
+.rewardOrb span {
+    font-size: 11px;
+}
+
+.floatingReward {
+    min-width: 160px;
+    padding: 15px 17px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 17px;
+    background: linear-gradient(135deg,
+        rgba(255,255,255,.13),
+        rgba(255,255,255,.045));
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.floatingReward img {
+    width: 38px;
+    height: 38px;
+}
+
+.floatingReward span {
+    color: #f0eaff;
+    font-size: 12px;
+}
+
+/* Section headings */
+
+.section,
+.whySection {
+    width: min(1320px, calc(100% - 64px));
+}
+
+.section {
+    margin-top: 105px;
+    margin-bottom: 105px;
+}
+
+.sectionHeading {
+    max-width: 780px;
+    margin-bottom: 50px;
+}
+
+.sectionHeading > span,
+.sectionKicker {
+    font-size: 12px;
+}
+
+.sectionHeading h2 {
+    font-size: clamp(32px, 3.5vw, 46px);
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+}
+
+.sectionHeading p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* Glass cards */
+
+.steps {
+    gap: 22px;
+}
+
+.stepCard,
+.benefitCard {
+    border: 1px solid rgba(255,255,255,.13);
+    background: linear-gradient(145deg,
+        rgba(255,255,255,.105),
+        rgba(255,255,255,.025));
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.stepCard {
+    padding: 34px;
+    border-radius: 24px;
+}
+
+.stepCard:hover,
+.benefitCard:hover {
+    transform: translateY(-6px);
+    border-color: rgba(178,140,255,.48);
+    box-shadow: 0 25px 60px rgba(83,39,160,.20);
+}
+
+.stepNumber {
+    font-size: 12px;
+    color: #d2b6ff;
+}
+
+.stepIcon {
+    width: 66px;
+    height: 66px;
+    border-radius: 19px;
+}
+
+.stepIcon img {
+    width: 47px;
+    height: 47px;
+}
+
+.stepCard h3 {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.stepCard p {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Seven-day rewards */
+
+.rewardSection {
+    width: min(1320px, calc(100% - 64px));
+    padding: 75px 35px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 32px;
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(132,76,255,.18), transparent 55%),
+        linear-gradient(145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.018));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.rewardJourney {
+    gap: 8px;
+}
+
+.rewardCard {
+    min-width: 135px;
+    min-height: 175px;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 21px;
+    background: rgba(255,255,255,.055);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.activeReward {
+    border-color: rgba(255,213,112,.7);
+    background: linear-gradient(145deg,
+        rgba(255,205,95,.17),
+        rgba(255,255,255,.04));
+}
+
+.finalReward {
+    border-color: rgba(255,213,112,.8);
+    background: linear-gradient(145deg,
+        rgba(255,205,95,.20),
+        rgba(255,255,255,.04));
+    box-shadow: 0 0 28px rgba(255,197,72,.10);
+}
+
+.rewardDay {
+    font-size: 11px;
+}
+
+.rewardEmoji,
+.rewardEmoji img {
+    width: 64px;
+    height: 64px;
+}
+
+.rewardCard strong {
+    font-size: 19px;
+}
+
+.rewardCard span:last-child {
+    font-size: 11px;
+}
+
+.journeyLine {
+    width: 15px;
+}
+
+/* Why VELoop */
+
+.whySection {
+    gap: 65px;
+}
+
+.whyContent h2 {
+    font-size: clamp(36px, 4vw, 52px);
+}
+
+.whyContent p {
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+.benefits {
+    gap: 17px;
+}
+
+.benefitCard {
+    min-height: 135px;
+    padding: 23px;
+    border-radius: 21px;
+}
+
+.benefitCard > div {
+    width: 50px;
+    height: 50px;
+}
+
+.benefitCard > div img {
+    width: 36px;
+    height: 36px;
+}
+
+.benefitCard strong {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.benefitCard span {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Final CTA */
+
+.finalCta {
+    width: min(1000px, calc(100% - 64px));
+    padding: 70px 30px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 32px;
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(137,83,255,.24), transparent 65%),
+        linear-gradient(145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.025));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.finalCta > span {
+    font-size: 11px;
+}
+
+.finalCta h2 {
+    font-size: clamp(30px, 4vw, 44px);
+}
+
+.finalCta p {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Keyboard accessibility */
+
+.navLinks a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #d4b5ff;
+    outline-offset: 4px;
+}
+
+/* Tablet */
+
+@media (max-width: 950px) {
+    .navbar,
+    .hero,
+    .section,
+    .whySection,
+    .rewardSection {
+        width: calc(100% - 40px);
+    }
+
+    .hero {
+        padding-top: 35px;
+        padding-bottom: 20px;
+    }
+
+    .heroContent h1 {
+        font-size: clamp(42px, 7vw, 62px);
+    }
+
+    .heroVisual {
+        min-height: 470px;
+    }
+
+    .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .steps .stepCard:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .rewardJourney {
+        justify-content: flex-start;
+    }
+
+    .whySection {
+        gap: 35px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .navbar {
+        width: calc(100% - 28px);
+        min-height: 74px;
+        gap: 10px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brandIcon {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+    }
+
+    .brand strong {
+        font-size: 19px;
+    }
+
+    .brand span {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .navActions {
+        gap: 6px;
+    }
+
+    .loginButton,
+    .registerButton {
+        min-height: 39px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+
+    .hero,
+    .section,
+    .whySection {
+        width: calc(100% - 32px);
+    }
+
+    .hero {
+        margin-top: 15px;
+    }
+
+    .heroContent h1 {
+        font-size: clamp(37px, 10vw, 48px);
+        letter-spacing: -1.8px;
+    }
+
+    .heroContent > p {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .heroKicker {
+        font-size: 10px;
+    }
+
+    .heroActions {
+        gap: 12px;
+    }
+
+    .primaryCta,
+    .secondaryCta {
+        min-height: 50px;
+        font-size: 14px;
+    }
+
+    .heroStats {
+        gap: 22px;
+        flex-wrap: wrap;
+    }
+
+    .heroStats strong {
+        font-size: 21px;
+    }
+
+    .heroStats span {
+        font-size: 11px;
+    }
+
+    .heroVisual {
+        min-height: 345px;
+    }
+
+    .visualGlow {
+        width: 260px;
+        height: 260px;
+    }
+
+    .rewardOrb {
+        width: 205px;
+        height: 205px;
+    }
+
+    .diamondLarge img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .rewardOrb strong {
+        font-size: 25px;
+    }
+
+    .rewardOrb span {
+        font-size: 9px;
+    }
+
+    .floatingReward {
+        min-width: 0;
+        max-width: 145px;
+        padding: 9px 10px;
+        gap: 6px;
+    }
+
+    .floatingReward img {
+        width: 27px;
+        height: 27px;
+    }
+
+    .floatingReward span {
+        font-size: 10px;
+    }
+
+    .topLeftReward,
+    .topRightReward {
+        width: 60px;
+        height: 60px;
+    }
+
+    .rewardOne {
+        top: 25px;
+        right: 0;
+    }
+
+    .rewardTwo {
+        right: 0;
+        bottom: 40px;
+    }
+
+    .rewardThree {
+        left: 0;
+        bottom: 30px;
+    }
+
+    .rewardFour {
+        top: 60px;
+        left: 0;
+    }
+
+    .section {
+        margin-top: 70px;
+        margin-bottom: 70px;
+    }
+
+    .sectionHeading {
+        margin-bottom: 30px;
+    }
+
+    .sectionHeading h2 {
+        font-size: 31px;
+        letter-spacing: -.8px;
+    }
+
+    .sectionHeading p {
+        font-size: 14px;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .steps .stepCard:last-child {
+        grid-column: auto;
+    }
+
+    .stepCard {
+        padding: 25px;
+    }
+
+    .stepCard h3 {
+        font-size: 19px;
+    }
+
+    .stepCard p {
+        font-size: 14px;
+    }
+
+    .rewardSection {
+        width: calc(100% - 20px);
+        padding: 42px 15px;
+        border-radius: 24px;
+    }
+
+    .rewardCard {
+        min-width: 120px;
+        min-height: 160px;
+    }
+
+    .whyContent h2 {
+        font-size: 37px;
+    }
+
+    .whyContent p {
+        font-size: 15px;
+    }
+
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .benefitCard {
+        min-height: 115px;
+        padding: 19px;
+    }
+
+    .benefitCard strong {
+        font-size: 14px;
+    }
+
+    .benefitCard span {
+        font-size: 12px;
+    }
+
+    .finalCta {
+        width: calc(100% - 28px);
+        margin: 65px auto;
+        padding: 45px 20px;
+        border-radius: 24px;
+    }
+
+    .finalCta h2 {
+        font-size: 31px;
+    }
+
+    .finalCta p {
+        font-size: 14px;
+    }
+
+    /* Footer intentionally omitted from Home.jsx */
+}

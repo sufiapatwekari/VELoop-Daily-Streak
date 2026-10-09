@@ -946,3 +946,536 @@
         min-height: 45px;
     }
 }
+
+/* =========================================
+   VELOOP LOGIN UI — RESPONSIVE GLASS THEME
+   Add this at the END of Login.module.css
+========================================= */
+
+/* Consistent sizing */
+.page,
+.page * {
+    box-sizing: border-box;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 32px 24px;
+    background:
+        radial-gradient(
+            circle at 12% 12%,
+            rgba(124, 60, 255, 0.20),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(232, 183, 75, 0.07),
+            transparent 30%
+        ),
+        #080914;
+}
+
+/* Soft background glow */
+.glowOne {
+    width: 420px;
+    height: 420px;
+    background: rgba(124, 60, 255, 0.13);
+    filter: blur(45px);
+}
+
+.glowTwo {
+    width: 380px;
+    height: 380px;
+    background: rgba(92, 54, 170, 0.12);
+    filter: blur(40px);
+}
+
+/* Main glass card — preserves the two-column layout */
+.loginLayout {
+    width: min(1080px, 100%);
+    min-height: 620px;
+    grid-template-columns: 44% 56%;
+    border: 1px solid rgba(177, 143, 255, 0.24);
+    border-radius: 26px;
+    background: rgba(17, 16, 34, 0.82);
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.40),
+        0 0 45px rgba(124, 60, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Left brand panel */
+.brandPanel {
+    padding: 40px;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(124, 60, 255, 0.20),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(25, 21, 48, 0.97),
+            rgba(11, 11, 25, 0.97)
+        );
+    border-right: 1px solid rgba(177, 143, 255, 0.16);
+}
+
+/* Brand */
+.brand {
+    gap: 12px;
+}
+
+.brandIcon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #9b70ff, #632be0);
+    font-size: 21px;
+    box-shadow: 0 7px 24px rgba(124, 60, 255, 0.30);
+}
+
+.brandText strong {
+    font-size: 19px;
+    letter-spacing: -0.4px;
+}
+
+.brandText small {
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* Left heading and description */
+.kicker {
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+}
+
+.kicker img {
+    width: 20px;
+    height: 20px;
+}
+
+.brandContent h1 {
+    margin: 22px 0 18px;
+    font-size: clamp(34px, 3.2vw, 45px);
+    line-height: 1.13;
+    letter-spacing: -1.6px;
+}
+
+.brandContent h1 span {
+    color: #b18aff;
+}
+
+.brandContent > p {
+    max-width: 350px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #b4b5c8;
+}
+
+/* Reward preview glass card */
+.rewardPreview {
+    margin-top: 28px;
+    padding: 16px;
+    gap: 13px;
+    border: 1px solid rgba(177, 143, 255, 0.23);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.rewardPreview:hover {
+    border-color: rgba(177, 143, 255, 0.43);
+    background: rgba(124, 60, 255, 0.09);
+}
+
+.previewIcon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(177, 143, 255, 0.16);
+    background: rgba(124, 60, 255, 0.12);
+}
+
+.previewIcon img {
+    width: 33px;
+    height: 33px;
+}
+
+.rewardPreview strong {
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.rewardPreview .previewText span {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #a6a7bb;
+}
+
+.previewArrow {
+    font-size: 22px;
+    color: #e9c56f;
+}
+
+/* Trust row and bottom text */
+.trustRow {
+    margin-top: 20px;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #a9aabd;
+}
+
+.trustRow img {
+    width: 22px;
+    height: 22px;
+}
+
+.brandFooter {
+    flex-wrap: wrap;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #9292a9;
+}
+
+/* Right form panel */
+.formPanel {
+    padding: 48px 62px;
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(124, 60, 255, 0.10),
+            transparent 42%
+        ),
+        rgba(15, 14, 30, 0.48);
+}
+
+/* Mobile brand */
+.mobileBrand {
+    gap: 12px;
+}
+
+.mobileBrand strong {
+    font-size: 19px;
+}
+
+.mobileBrand small {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+}
+
+/* Form heading */
+.formHeader {
+    margin-bottom: 28px;
+}
+
+.formKicker {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+}
+
+.formHeader h2 {
+    margin: 10px 0 9px;
+    font-size: 34px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.formHeader p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #adaec2;
+}
+
+/* Error message */
+.messageError {
+    margin-bottom: 20px;
+    padding: 13px 15px;
+    gap: 11px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.messageError > span {
+    width: 22px;
+    height: 22px;
+}
+
+/* Form labels */
+.inputGroup {
+    margin-bottom: 20px;
+}
+
+.inputGroup label {
+    margin-bottom: 9px;
+    color: #e0deeb;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Glass input fields */
+.inputWrap {
+    min-height: 52px;
+    gap: 12px;
+    padding: 0 15px;
+    border: 1px solid rgba(177, 143, 255, 0.23);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.inputWrap:hover {
+    border-color: rgba(177, 143, 255, 0.42);
+}
+
+.inputWrap:focus-within {
+    border-color: #9d75ff;
+    background: rgba(124, 60, 255, 0.075);
+    box-shadow: 0 0 0 3px rgba(124, 60, 255, 0.12);
+}
+
+.inputIcon {
+    width: 20px;
+    height: 20px;
+    color: #a99acb;
+}
+
+.inputIcon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.inputWrap input {
+    min-height: 48px;
+    padding: 12px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.inputWrap input::placeholder {
+    color: #89899f;
+    opacity: 1;
+}
+
+/* Sign-in button */
+.loginButton {
+    min-height: 52px;
+    margin-top: 7px;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 13px;
+    background: linear-gradient(135deg, #8955f5, #642ed0);
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 10px 28px rgba(124, 60, 255, 0.24);
+}
+
+.loginButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, #9a6aff, #7540e4);
+    transform: translateY(-1px);
+    box-shadow: 0 13px 30px rgba(124, 60, 255, 0.30);
+}
+
+.loginButton > span:last-child {
+    font-size: 21px;
+}
+
+/* Loading spinner */
+.buttonLoader {
+    width: 16px;
+    height: 16px;
+}
+
+/* Create-account prompt */
+.registerPrompt {
+    margin-top: 25px;
+    padding-top: 22px;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #a5a5ba;
+}
+
+.registerPrompt button {
+    font-size: 13px;
+    color: #b69aff;
+}
+
+.registerPrompt button:hover {
+    color: #d0bdff;
+}
+
+/* Keyboard accessibility */
+.brand:focus-visible,
+.mobileBrand:focus-visible,
+.loginButton:focus-visible,
+.registerPrompt button:focus-visible {
+    outline: 2px solid #c2a8ff;
+    outline-offset: 4px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+@media (max-width: 850px) {
+    .page {
+        padding: 24px;
+    }
+
+    .loginLayout {
+        width: min(560px, 100%);
+        min-height: auto;
+        grid-template-columns: 1fr;
+        border-radius: 24px;
+    }
+
+    .brandPanel {
+        display: none;
+    }
+
+    .formPanel {
+        padding: 42px;
+    }
+
+    .mobileBrand {
+        display: flex;
+        margin-bottom: 34px;
+    }
+
+    .formHeader h2 {
+        font-size: 32px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 560px) {
+    .page {
+        min-height: 100vh;
+        padding: 14px;
+        align-items: center;
+    }
+
+    .loginLayout {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .formPanel {
+        padding: 30px 23px;
+    }
+
+    .mobileBrand {
+        margin-bottom: 30px;
+    }
+
+    .mobileBrand .brandIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .formHeader {
+        margin-bottom: 24px;
+    }
+
+    .formHeader h2 {
+        font-size: 30px;
+    }
+
+    .formHeader p {
+        font-size: 14px;
+    }
+
+    .inputGroup {
+        margin-bottom: 18px;
+    }
+
+    .inputGroup label {
+        font-size: 13px;
+    }
+
+    .inputWrap {
+        min-height: 50px;
+        padding: 0 12px;
+    }
+
+    .inputWrap input {
+        font-size: 14px;
+    }
+
+    .loginButton {
+        min-height: 50px;
+        font-size: 14px;
+    }
+
+    .registerPrompt {
+        margin-top: 22px;
+        padding-top: 19px;
+        font-size: 12px;
+    }
+
+    .registerPrompt button {
+        font-size: 12px;
+    }
+}
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+@media (max-width: 380px) {
+    .page {
+        padding: 10px;
+    }
+
+    .formPanel {
+        padding: 26px 17px;
+    }
+
+    .mobileBrand {
+        margin-bottom: 25px;
+    }
+
+    .formHeader h2 {
+        font-size: 27px;
+    }
+
+    .formHeader p {
+        font-size: 13px;
+    }
+
+    .inputWrap {
+        gap: 9px;
+        padding: 0 10px;
+    }
+
+    .inputWrap input {
+        font-size: 13px;
+    }
+
+    .registerPrompt {
+        column-gap: 5px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .loginButton,
+    .rewardPreview,
+    .inputWrap {
+        transition: none;
+    }
+
+    .buttonLoader {
+        animation-duration: 1.5s;
+    }
+}
+
