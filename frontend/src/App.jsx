@@ -7,8 +7,6 @@ import {
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Terms from "./pages/Terms";
 import Dashboard from "./pages/Dashboard";
 import Wallet from "./pages/Wallet";
 import Transactions from "./pages/Transactions";
@@ -42,23 +40,6 @@ function App() {
                    element={<Register />}
                />
 
-               <Route
-                  path="/privacy-policy"
-                  element={
-              <ProtectedRoute>
-               <PrivacyPolicy />
-              </ProtectedRoute>
-             }
-           />
-
-               <Route
-                path="/terms"
-                element={
-              <ProtectedRoute>
-                  <Terms />
-              </ProtectedRoute>
-               }
-            />
 
                 {/* Protected Routes */}
 
