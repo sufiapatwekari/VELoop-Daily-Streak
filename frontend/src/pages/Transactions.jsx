@@ -102,21 +102,24 @@ function Transactions() {
 
     if (loading) {
         return (
-            <div className={styles.statusPage}>
-                <div className={styles.loader}></div>
-                <p>Loading transaction history...</p>
+            <div className={styles.loadingPage}>
+                <div className={styles.loadingCard}>
+                    <div className={styles.loader}></div>
+                    <img src={flame} alt="" className={styles.loadingImage} />
+                    <h2>Loading your transactions</h2>
+                    <p>Getting your latest wallet activity...</p>
+                </div>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className={styles.statusPage}>
-                <div className={styles.errorCard}>
+            <div className={styles.errorPage}>
+                <div className={styles.errorBox}>
                     <div className={styles.errorIcon}>!</div>
-                    <h2>Unable to load transactions</h2>
+                    <h3>Unable to load transactions</h3>
                     <p>{error}</p>
-
                     <button
                         type="button"
                         onClick={() => navigate("/dashboard")}
@@ -130,6 +133,7 @@ function Transactions() {
 
     return (
         <div className={styles.page}>
+            <div className={styles.panel}>
             {/* PAGE HEADER */}
             <header className={styles.header}>
                 <div className={styles.headerTitle}>
@@ -376,6 +380,7 @@ function Transactions() {
                     )}
                 </section>
             </main>
+            </div>
         </div>
     );
 }

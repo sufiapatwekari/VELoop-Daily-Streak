@@ -1,1298 +1,1011 @@
+/* =========================================================
+   DASHBOARD — mobile first, desktop from 1000px
+   Mobile  = compact app layout (screenshot 2)
+   Desktop = wide dashboard layout (screenshot 1)
+========================================================= */
+
 .page {
+    --bg: #07050f;
+    --panel: rgba(20, 14, 38, 0.82);
+    --panel-solid: #120c24;
+    --line: rgba(151, 104, 255, 0.2);
+    --line-soft: rgba(255, 255, 255, 0.07);
+    --purple: #a77bff;
+    --purple-deep: #7c3cff;
+    --gold: #ffc928;
+    --gold-soft: rgba(255, 201, 40, 0.55);
+    --green: #35d07f;
+    --muted: #9a90b3;
+
     min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at 50% -15%,
-            rgba(112, 52, 220, 0.16),
-            transparent 40%
-        ),
-        #080612;
     color: #fff;
+    font-family: inherit;
+    background:
+        radial-gradient(circle at 50% -10%, rgba(112, 52, 220, 0.2), transparent 45%),
+        radial-gradient(circle at 100% 40%, rgba(80, 30, 160, 0.12), transparent 40%),
+        var(--bg);
 }
 
-
-/* =========================================
-   HEADER
-========================================= */
-
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-
-    border-bottom: 1px solid rgba(151, 104, 255, 0.18);
-
-    background: rgba(8, 6, 18, 0.9);
-
-    backdrop-filter: blur(18px);
+.page button {
+    font-family: inherit;
+    cursor: pointer;
 }
 
-.headerInner {
-    width: min(1180px, calc(100% - 40px));
-    min-height: 72px;
+.page button:focus-visible,
+.rewardCard:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
 
-    margin: auto;
-
+.shell {
+    width: min(560px, 100%);
+    margin: 0 auto;
+    padding: 14px 14px 28px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 14px;
 }
 
+/* ---------- top bar (mobile) ---------- */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.backButton,
 .logoutButton {
     width: 38px;
     height: 38px;
-
-    border: 1px solid rgba(151, 104, 255, 0.22);
-    border-radius: 11px;
-
-    background: rgba(255, 255, 255, 0.025);
-
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
     color: #fff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .backButton:hover,
 .logoutButton:hover {
-    border-color: rgba(255, 201, 40, 0.55);
-    color: #ffc928;
-    transform: translateY(-1px);
+    border-color: var(--gold-soft);
+    color: var(--gold);
 }
 
-.brand {
+.topTitle {
+    margin: 0;
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 10px;
-
-    cursor: pointer;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 700;
 }
 
-.brandMark {
-    width: 39px;
-    height: 39px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    background: linear-gradient(
-        145deg,
-        #7c3cff,
-        #42138e
-    );
-
-    color: #ffffff;
-
-    font-size: 18px;
-    font-weight: 800;
-
-    box-shadow:
-        0 0 25px rgba(124, 60, 255, 0.30);
-}
-
-.brand strong {
-    display: block;
-
-    font-size: 15px;
-    font-weight: 800;
-}
-
-.brand span {
-    display: block;
-
-    margin-top: 2px;
-
-    font-size: 9px;
-
-    color: #877c9b;
-
-    letter-spacing: 0.5px;
-}
-
-.headerRight {
-    margin-left: auto;
-
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.streakBadge,
-.balanceButton {
-    min-height: 38px;
-
-    border: 1px solid rgba(151, 104, 255, 0.2);
-    border-radius: 11px;
-
-    background: rgba(255, 255, 255, 0.025);
-
-    display: flex;
-    align-items: center;
-}
-
-.streakBadge {
-    padding: 5px 11px;
-    gap: 7px;
-}
-
-.streakBadge img {
-    width: 21px;
-    height: 21px;
+.topTitle img {
+    width: 18px;
+    height: 18px;
     object-fit: contain;
 }
 
-.streakBadge span {
-    color: #ffc928;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.streakBadge small {
-    color: #84798f;
-    font-size: 8px;
-}
-
 .balanceButton {
-    padding: 5px 12px;
-
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 13px 4px 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
     color: #fff;
-
-    cursor: pointer;
-
-    gap: 6px;
-
-    transition: 0.2s ease;
+    font-size: 13px;
+    font-weight: 700;
+    transition: border-color 0.2s ease;
 }
 
 .balanceButton:hover {
-    border-color: rgba(255, 201, 40, 0.5);
+    border-color: var(--gold-soft);
 }
 
 .balanceButton img {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
-}
-
-.balanceButton span {
-    font-size: 13px;
-    font-weight: 800;
 }
 
 .balanceButton small {
-    color: #9c8fb0;
-    font-size: 8px;
+    display: none;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
 }
 
+/* ---------- desktop header (hidden on mobile) ---------- */
 
-/* =========================================
-   MAIN
-========================================= */
-
-.main {
-    width: min(1180px, calc(100% - 40px));
-
-    margin: auto;
-
-    padding: 34px 0 70px;
+.pageHead {
+    display: none;
 }
 
+/* ---------- banner (mobile only) ---------- */
 
-/* =========================================
-   HERO
-========================================= */
+.banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 12% 50%, rgba(124, 60, 255, 0.35), transparent 45%),
+        linear-gradient(120deg, #241047, #150b2e 70%);
+}
+
+.bannerIcon {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(167, 123, 255, 0.35);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(167, 123, 255, 0.35), rgba(124, 60, 255, 0.12));
+    color: #fff;
+    box-shadow: 0 0 22px rgba(124, 60, 255, 0.35);
+}
+
+.bannerText {
+    flex: 1;
+    min-width: 0;
+}
+
+.bannerText h2 {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.bannerText h2 span {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.bannerText p {
+    margin: 6px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #cfc5e8;
+}
+
+.bannerText em {
+    font-style: normal;
+    color: var(--purple);
+}
+
+.bannerGift {
+    width: 66px;
+    height: 66px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+/* ---------- summary ---------- */
+
+.summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "streak"
+        "stats"
+        "ultimate";
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+}
 
 .hero {
-    min-height: 300px;
+    display: none;
+    grid-area: hero;
+}
 
-    position: relative;
-
-    overflow: hidden;
-
+.streakRow {
+    grid-area: streak;
     display: flex;
     align-items: center;
-
-    border: 1px solid rgba(145, 90, 255, 0.27);
-    border-radius: 24px;
-
-    background:
-        radial-gradient(
-            circle at 75% 50%,
-            rgba(126, 50, 255, 0.16),
-            transparent 36%
-        ),
-        linear-gradient(
-            135deg,
-            #10091f,
-            #0b0715
-        );
-
-    box-shadow:
-        0 20px 70px rgba(0, 0, 0, 0.35);
-}
-
-.heroContent {
-    width: 58%;
-
-    padding: 48px;
-    position: relative;
-    z-index: 2;
-}
-
-.heroKicker,
-.sectionTitle span {
-    color: #9c67ff;
-
-    font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: 1.7px;
-}
-
-.hero h1 {
-    max-width: 570px;
-
-    margin: 11px 0 12px;
-
-    font-size: clamp(32px, 4vw, 50px);
-
-    line-height: 1.05;
-
-    letter-spacing: -1.7px;
-}
-
-.hero h1 span {
-    display: block;
-
-    color: #ffc928;
-}
-
-.heroContent > p {
-    max-width: 520px;
-
-    margin: 0;
-
-    color: #9b90ad;
-
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-.heroStats {
-    margin-top: 27px;
-
-    display: flex;
-    gap: 26px;
-}
-
-.heroStats div {
-    padding-right: 25px;
-
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.heroStats div:last-child {
-    border-right: none;
-}
-
-.heroStats strong {
-    display: block;
-
-    color: #fff;
-
-    font-size: 20px;
-}
-
-.heroStats span {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #746a80;
-
-    font-size: 8px;
-}
-
-.heroVisual {
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    width: 46%;
-    height: 100%;
-}
-
-.heroGlow {
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background: rgba(127, 49, 255, 0.13);
-
-    filter: blur(50px);
-}
-
-.heroGift {
-    position: absolute;
-
-    width: min(340px, 70%);
-
-    right: 17%;
-    bottom: -10px;
-
-    object-fit: contain;
-
-    animation: floatGift 5s ease-in-out infinite;
-}
-
-.heroCrown {
-    position: absolute;
-
-    width: min(250px, 50%);
-
-    right: -2%;
-    top: 5px;
-
-    object-fit: contain;
-
-    opacity: 0.96;
-
-    animation: floatCrown 6s ease-in-out infinite;
-}
-
-@keyframes floatGift {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-@keyframes floatCrown {
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-7px) rotate(1deg);
-    }
-}
-
-
-/* =========================================
-   PROGRESS
-========================================= */
-
-.progressCard {
-    margin-top: 18px;
-
-    padding: 22px;
-
-    border: 1px solid rgba(145, 90, 255, 0.2);
-    border-radius: 18px;
-
-    background: #0f0a1d;
-}
-
-.progressHeader {
-    display: flex;
     justify-content: space-between;
+    gap: 10px;
+}
+
+.streakPill {
+    display: inline-flex;
     align-items: center;
-}
-
-.progressHeader span {
-    color: #806f91;
-
-    font-size: 8px;
-    font-weight: 800;
-
-    letter-spacing: 1.2px;
-}
-
-.progressHeader h2 {
-    margin: 5px 0 0;
-
-    font-size: 18px;
-}
-
-.progressDay {
-    color: #ffc928;
-
+    gap: 7px;
+    padding: 6px 12px 6px 8px;
+    border: 1px solid var(--gold-soft);
+    border-radius: 999px;
+    background: rgba(255, 201, 40, 0.08);
+    color: var(--gold);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 700;
 }
 
-.progressDay small {
-    color: #766a83;
-    font-weight: 500;
-}
-
-.progressTrack {
-    height: 7px;
-
-    margin-top: 19px;
-
-    overflow: hidden;
-
-    border-radius: 20px;
-
-    background: #21162f;
-}
-
-.progressFill {
-    height: 100%;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            #6b28d9,
-            #a14fff,
-            #ffc928
-        );
-
-    box-shadow:
-        0 0 18px rgba(142, 70, 255, 0.45);
-
-    transition: width 0.5s ease;
-}
-
-.progressBottom {
-    margin-top: 9px;
-
-    display: flex;
-    justify-content: space-between;
-
-    color: #716780;
-
-    font-size: 8px;
-}
-
-.progressBottom strong {
-    color: #b998ff;
-}
-
-
-/* =========================================
-   SECTION TITLES
-========================================= */
-
-.todaySection,
-.rewardsSection,
-.benefitsSection {
-    margin-top: 34px;
-}
-
-.sectionTitle {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-
-    margin-bottom: 15px;
-}
-
-.sectionTitle h2 {
-    margin: 5px 0 0;
-
-    font-size: 21px;
-
-    letter-spacing: -0.5px;
-}
-
-.dayTag,
-.completedBadge {
-    padding: 7px 11px;
-
-    border: 1px solid rgba(255, 201, 40, 0.22);
-    border-radius: 9px;
-
-    background: rgba(255, 201, 40, 0.06);
-
-    color: #ffc928;
-
-    font-size: 8px;
-    font-weight: 800;
-}
-
-.completedBadge {
-    color: #a87aff;
-
-    border-color: rgba(168, 122, 255, 0.25);
-
-    background: rgba(168, 122, 255, 0.06);
-}
-
-
-/* =========================================
-   TODAY CARD
-========================================= */
-
-.todayCard {
-    min-height: 170px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 25px;
-
-    border: 1px solid rgba(255, 201, 40, 0.2);
-    border-radius: 20px;
-
-    background:
-        radial-gradient(
-            circle at 15% 50%,
-            rgba(255, 196, 32, 0.07),
-            transparent 30%
-        ),
-        #110c1f;
-
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-}
-
-.todayArtwork {
-    width: 150px;
-    height: 120px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.todayArtwork img {
-    width: 125px;
-    height: 110px;
-
+.streakPill img {
+    width: 18px;
+    height: 18px;
     object-fit: contain;
 }
 
-.todayDetails {
-    flex: 1;
+.calendarLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(124, 60, 255, 0.1);
+    color: #cdb6ff;
+    font-size: 11px;
+    font-weight: 600;
+    transition: background 0.2s ease;
 }
 
-.todayDetails > span {
-    color: #9470d5;
-
-    font-size: 8px;
-    font-weight: 800;
-
-    letter-spacing: 1.2px;
+.calendarLink:hover {
+    background: rgba(124, 60, 255, 0.22);
 }
 
-.todayDetails h3 {
-    margin: 7px 0 5px;
+/* stats */
 
-    font-size: 22px;
+.stats {
+    grid-area: stats;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
 }
 
-.todayDetails p {
-    max-width: 470px;
-
-    margin: 0;
-
-    color: #83798e;
-
-    font-size: 10px;
-    line-height: 1.6;
-}
-
-.todayAction {
-    margin-left: 25px;
-}
-
-.claimButton {
-    min-width: 155px;
-
-    padding: 13px 17px;
-
-    border: none;
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffc928,
-            #e79c00
-        );
-
-    color: #180f02;
-
+.stat {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
+    min-width: 0;
+    padding: 9px 8px;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+}
 
-    font-size: 10px;
+.stat > div {
+    min-width: 0;
+}
+
+.stat small {
+    display: block;
+    font-size: 9.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stat strong.gold {
+    color: var(--gold);
+    font-size: 13px;
+}
+
+.statIcon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+}
+
+.iconPurple {
+    color: var(--purple);
+}
+
+.iconGreen {
+    color: var(--green);
+    border: 1px solid rgba(53, 208, 127, 0.35);
+    background: rgba(53, 208, 127, 0.1);
+}
+
+.iconGold {
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    background: rgba(255, 201, 40, 0.08);
+}
+
+/* ultimate */
+
+.ultimate {
+    grid-area: ultimate;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 15% 60%, rgba(124, 60, 255, 0.22), transparent 55%),
+        rgba(255, 255, 255, 0.03);
+}
+
+.crown {
+    width: 96px;
+    flex-shrink: 0;
+}
+
+.crown img {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.ultimateText {
+    flex: 1;
+    min-width: 0;
+}
+
+.ultimateLabel {
+    display: block;
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.ultimateText h2 {
+    margin: 4px 0 8px;
+    font-size: 30px;
     font-weight: 800;
-
-    box-shadow:
-        0 10px 25px rgba(255, 183, 0, 0.18);
-
-    transition: 0.2s ease;
+    line-height: 1.1;
 }
 
-.claimButton:hover:not(:disabled) {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 14px 30px rgba(255, 183, 0, 0.25);
+.giftPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 100%;
+    padding: 5px 10px 5px 6px;
+    border: 1px solid var(--line-soft);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 11px;
 }
 
-.claimButton:disabled {
-    opacity: 0.55;
+.giftPill img {
+    width: 24px;
+    height: 17px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    object-fit: cover;
 }
 
-.countdownBox {
-    min-width: 155px;
+.giftPill span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-    padding: 12px 17px;
+.unlockInline {
+    display: none;
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: #e6e0f5;
+}
 
+.unlockInline strong {
+    color: var(--gold);
+}
+
+.unlockTile {
+    width: 78px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 6px;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--purple);
     text-align: center;
-
-    border: 1px solid rgba(151, 104, 255, 0.25);
-    border-radius: 11px;
-
-    background: #0a0712;
 }
 
-.countdownBox span {
+.unlockTile span {
     display: block;
-
-    color: #756b82;
-
-    font-size: 7px;
-    font-weight: 800;
-
-    letter-spacing: 1px;
+    color: #cfc5e8;
+    font-size: 10px;
+    line-height: 1.35;
 }
 
-.countdownBox strong {
+.unlockTile strong {
     display: block;
-
-    margin-top: 5px;
-
-    color: #b88bff;
-
-    font-size: 17px;
+    color: #fff;
+    font-size: 11px;
 }
 
+/* ---------- reminder ---------- */
 
-/* =========================================
-   MESSAGES
-========================================= */
+.reminder {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reminderLine {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line));
+}
+
+.reminderLine:last-child {
+    background: linear-gradient(270deg, transparent, var(--line));
+}
+
+.reminder p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #d6cdee;
+    font-size: 11.5px;
+    text-align: center;
+}
+
+.reminder p svg {
+    flex-shrink: 0;
+    color: var(--purple);
+    fill: var(--purple);
+}
+
+.reminder p strong {
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- messages ---------- */
 
 .successMessage,
 .warningMessage {
-    margin-top: 15px;
-
-    padding: 12px 15px;
-
-    border-radius: 11px;
-
     display: flex;
     align-items: center;
-    gap: 9px;
-
-    font-size: 10px;
+    gap: 10px;
+    padding: 11px 13px;
+    border-radius: 12px;
+    font-size: 12.5px;
 }
 
 .successMessage {
-    border: 1px solid rgba(53, 217, 138, 0.25);
-
-    background: rgba(53, 217, 138, 0.06);
-
-    color: #58e9a1;
+    border: 1px solid rgba(53, 208, 127, 0.35);
+    background: rgba(53, 208, 127, 0.1);
+    color: #8ff0bd;
 }
 
 .warningMessage {
-    border: 1px solid rgba(255, 92, 112, 0.22);
+    border: 1px solid rgba(255, 110, 110, 0.35);
+    background: rgba(255, 110, 110, 0.09);
+    color: #ffaaaa;
+}
 
-    background: rgba(255, 92, 112, 0.05);
-
-    color: #ff8291;
+.warningMessage span {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 110, 110, 0.2);
+    font-weight: 800;
 }
 
 .warningMessage p {
     margin: 0;
 }
 
-
-/* =========================================
-   REWARD GRID
-========================================= */
+/* ---------- reward cards ---------- */
 
 .rewardGrid {
     display: grid;
-
-    grid-template-columns:
-        repeat(7, minmax(0, 1fr));
-
-    gap: 9px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
 }
 
 .rewardCard {
+    position: relative;
+    grid-column: span 3;
     min-width: 0;
-
-    padding: 13px 10px;
-
-    text-align: left;
-
-    border: 1px solid rgba(145, 90, 255, 0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 7px 8px;
+    border: 1px solid var(--line);
     border-radius: 14px;
+    background: linear-gradient(180deg, rgba(28, 19, 52, 0.9), rgba(14, 9, 28, 0.95));
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
 
-    background: #0f0a1d;
-
-    color: #fff;
-
-    transition: 0.22s ease;
+.rewardCard:nth-child(n + 5) {
+    grid-column: span 4;
 }
 
 .rewardCard:hover {
-    transform: translateY(-3px);
-
-    border-color: rgba(145, 90, 255, 0.4);
-
-    box-shadow:
-        0 15px 30px rgba(0, 0, 0, 0.28);
-}
-
-.rewardCard.available {
-    border-color: rgba(255, 201, 40, 0.5);
-
-    background:
-        radial-gradient(
-            circle at 50% 25%,
-            rgba(255, 201, 40, 0.08),
-            transparent 50%
-        ),
-        #110d1f;
-
-    box-shadow:
-        0 0 30px rgba(255, 201, 40, 0.08);
+    border-color: rgba(167, 123, 255, 0.5);
 }
 
 .rewardCard.claimed {
-    border-color: rgba(53, 217, 138, 0.2);
+    border-color: rgba(53, 208, 127, 0.55);
+    background: linear-gradient(180deg, rgba(20, 52, 40, 0.75), rgba(10, 22, 20, 0.95));
 }
 
-.rewardCard.locked {
-    opacity: 0.62;
+.rewardCard.available {
+    border-color: var(--gold);
+    background: linear-gradient(180deg, rgba(60, 42, 12, 0.7), rgba(22, 14, 8, 0.95));
+    box-shadow: 0 0 20px rgba(255, 201, 40, 0.22);
+}
+
+.rewardCard.vip {
+    border-color: var(--gold-soft);
+    background: linear-gradient(180deg, rgba(52, 36, 12, 0.6), rgba(18, 12, 10, 0.95));
 }
 
 .rewardTop {
+    width: 100%;
+    min-height: 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
 
-    color: #897c9a;
+.dayChip {
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e9e3f7;
+    font-size: 10px;
+    font-weight: 600;
+}
 
-    font-size: 8px;
+.available .dayChip {
+    background: rgba(255, 201, 40, 0.2);
+    color: #ffe08a;
+}
+
+.claimed .dayChip {
+    background: rgba(53, 208, 127, 0.15);
+}
+
+.claimedBadge {
+    width: 17px;
+    height: 17px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--green);
+    color: #04210f;
+}
+
+.tagSoft,
+.tagVip {
+    padding: 3px 7px;
+    border-radius: 999px;
+    font-size: 9px;
     font-weight: 700;
 }
 
-.claimed .rewardTop svg {
-    color: #42df93;
+.tagSoft {
+    background: rgba(124, 60, 255, 0.35);
+    color: #d8c5ff;
 }
 
-.available .rewardTop {
-    color: #ffc928;
+.tagVip {
+    background: rgba(255, 201, 40, 0.22);
+    color: #ffd75a;
 }
 
-.available .rewardTop svg {
-    color: #ffc928;
+.tagToday {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 3px 9px;
+    border-radius: 0 13px 0 10px;
+    background: var(--gold);
+    color: #2b1b00;
+    font-size: 9.5px;
+    font-weight: 800;
 }
 
 .rewardImage {
-    height: 84px;
-
+    width: 100%;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .rewardImage img {
-    width: 72px;
-    height: 70px;
-
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
 }
 
-.rewardCard > strong {
-    display: block;
-
-    min-height: 30px;
-
-    color: #fff;
-
+.rewardLabel {
     font-size: 10px;
-    line-height: 1.4;
+    font-weight: 600;
+    color: #e9e3f7;
 }
 
-.rewardCard > small {
-    display: block;
-
-    margin-top: 5px;
-
-    color: #6f647b;
-
-    font-size: 7px;
-}
-
-.claimed .rewardCard > small {
-    color: #42df93;
-}
-
-.claimNow {
-    margin-top: 9px;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-
-    color: #ffc928;
-
-    font-size: 7px;
+.rewardAmount {
+    font-size: 20px;
     font-weight: 800;
+    line-height: 1.1;
+    color: var(--purple);
 }
 
+.claimed .rewardAmount {
+    color: var(--green);
+}
 
-/* =========================================
-   BENEFITS
-========================================= */
+.available .rewardAmount,
+.vip .rewardAmount {
+    color: var(--gold);
+}
+
+.rewardSub {
+    min-height: 13px;
+    font-size: 9.5px;
+    color: var(--muted);
+}
+
+.statusLocked,
+.statusClaimed,
+.claimButton {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 6px 4px;
+    border-radius: 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+}
+
+.statusLocked {
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.vip .statusLocked {
+    border-color: var(--gold-soft);
+    color: #e8d28a;
+}
+
+.statusClaimed {
+    border: 1px solid rgba(53, 208, 127, 0.4);
+    background: rgba(53, 208, 127, 0.14);
+    color: #8ff0bd;
+}
+
+.claimButton {
+    border: 0;
+    background: linear-gradient(180deg, #ffd23d, #f5a90f);
+    color: #2b1b00;
+    box-shadow: 0 4px 14px rgba(255, 190, 30, 0.3);
+}
+
+.claimButton:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.claimDesktop {
+    display: none;
+}
+
+/* ---------- benefits ---------- */
+
+.benefits {
+    padding: 14px 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
+}
+
+.benefitsTitle {
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #f1ecff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.benefitsTitle svg {
+    color: var(--gold);
+    fill: var(--gold);
+}
 
 .benefitsGrid {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 10px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.benefitCard {
-    padding: 18px;
-
-    border: 1px solid rgba(145, 90, 255, 0.16);
-    border-radius: 15px;
-
-    background: #0e091b;
-
+.benefitItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 0 5px;
     text-align: center;
 }
 
-.benefitCard img {
-    width: 64px;
-    height: 56px;
+.benefitItem + .benefitItem {
+    border-left: 1px solid var(--line-soft);
+}
 
-    margin: 0 auto 9px;
-
+.benefitItem img {
+    width: 40px;
+    height: 40px;
     object-fit: contain;
 }
 
-.benefitCard h3 {
+.benefitItem h4 {
     margin: 0;
-
-    font-size: 11px;
+    font-size: 10.5px;
+    font-weight: 700;
 }
 
-.benefitCard p {
-    margin: 7px 0 0;
-
-    color: #73697f;
-
-    font-size: 8px;
-    line-height: 1.6;
+.benefitItem p {
+    margin: 3px 0 0;
+    font-size: 8.5px;
+    line-height: 1.4;
+    color: var(--muted);
 }
 
+/* ---------- trust strip ---------- */
 
-/* =========================================
-   QUICK LINKS
-========================================= */
-
-.quickSection {
-    margin-top: 18px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 10px;
-}
-
-.quickCard {
-    padding: 15px;
-
-    border: 1px solid rgba(145, 90, 255, 0.18);
+.trustNotice {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
     border-radius: 14px;
-
-    background: #0e091b;
-
-    color: #fff;
-
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-
-    text-align: left;
-
-    transition: 0.2s ease;
+    background: var(--panel);
 }
 
-.quickCard:hover {
-    border-color: rgba(255, 201, 40, 0.35);
-    transform: translateY(-2px);
-}
-
-.quickCard > img,
-.quickCard > svg {
-    width: 32px;
-    height: 32px;
-
-    object-fit: contain;
-
-    color: #a66cff;
-}
-
-.quickCard div {
-    flex: 1;
-}
-
-.quickCard strong {
-    display: block;
-
-    font-size: 10px;
-}
-
-.quickCard span {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #72687e;
-
-    font-size: 8px;
-}
-
-
-/* =========================================
-   FOOTER
-========================================= */
-
-.footer {
-    border-top: 1px solid rgba(145, 90, 255, 0.15);
-
-    background: #070510;
-}
-
-.footerInner {
-    width: min(1180px, calc(100% - 40px));
-
-    margin: auto;
-
-    padding: 30px 0;
-
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-}
-
-.footerLogo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.footerBrandMark {
-    width: 39px;
-    height: 39px;
-
+.trustNotice > img {
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
+    object-fit: contain;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.trustText {
+    flex: 1;
+    min-width: 0;
+}
 
-    border-radius: 12px;
+.trustText strong {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+}
 
-    background: linear-gradient(
-        145deg,
-        #7c3cff,
-        #42138e
-    );
-
-    color: #ffffff;
-
-    font-size: 18px;
+.trustText strong span {
+    color: var(--gold);
     font-weight: 800;
-
-    box-shadow:
-        0 0 25px rgba(124, 60, 255, 0.30);
 }
 
-.footerLogo strong {
-    font-size: 12px;
+.trustText p {
+    margin: 2px 0 0;
+    font-size: 10.5px;
+    color: var(--muted);
 }
 
-.footerBrand p {
-    max-width: 280px;
-
-    margin: 9px 0 0;
-
-    color: #625a6d;
-
-    font-size: 8px;
-    line-height: 1.6;
+.trustArrow {
+    flex-shrink: 0;
+    color: #d6cdee;
 }
 
-.footerLinks {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    gap: 15px;
-}
-
-.footerLinks button {
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    color: #777083;
-
-    font-size: 8px;
-
-    transition: 0.2s ease;
-}
-
-.footerLinks button:hover {
-    color: #ffc928;
-}
-
-.footerBottom {
-    padding: 13px 20px;
-
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-
-    text-align: center;
-
-    color: #514a5a;
-
-    font-size: 7px;
-}
-
-
-/* =========================================
-   MODAL
-========================================= */
+/* ---------- reward modal ---------- */
 
 .rewardOverlay {
     position: fixed;
-
     inset: 0;
-
     z-index: 100;
-
-    padding: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(2, 1, 7, 0.82);
-
-    backdrop-filter: blur(9px);
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    background: rgba(4, 2, 10, 0.78);
+    backdrop-filter: blur(6px);
 }
 
 .rewardModal {
-    width: min(390px, 100%);
-
     position: relative;
-
-    padding: 30px;
-
-    border: 1px solid rgba(145, 90, 255, 0.35);
-    border-radius: 20px;
-
-    background:
-        radial-gradient(
-            circle at 50% 0,
-            rgba(120, 50, 240, 0.16),
-            transparent 45%
-        ),
-        #100a20;
-
+    width: min(380px, 100%);
+    padding: 28px 22px 22px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: var(--panel-solid);
     text-align: center;
-
-    box-shadow:
-        0 30px 90px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
 }
 
 .closeButton {
     position: absolute;
-
     top: 12px;
     right: 12px;
-
-    width: 32px;
-    height: 32px;
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 9px;
-
-    background: rgba(255, 255, 255, 0.04);
-
-    color: #aaa;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
 }
 
 .modalRewardImage {
-    width: 130px;
+    width: 110px;
     height: 110px;
-
-    margin: 0 auto 12px;
-
     object-fit: contain;
 }
 
 .modalDay {
-    color: #ffc928;
-
-    font-size: 8px;
-    font-weight: 800;
-
-    letter-spacing: 1.4px;
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 201, 40, 0.14);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .rewardModal h2 {
-    margin: 8px 0;
-
-    font-size: 23px;
+    margin: 12px 0 8px;
+    font-size: 21px;
 }
 
 .rewardModal p {
-    margin: 0 auto;
-
-    color: #80758d;
-
-    font-size: 10px;
-    line-height: 1.7;
+    margin: 0;
+    color: #bdb3d6;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 .modalButton {
-    margin-top: 20px;
-
-    padding: 11px 25px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: #ffc928;
-
-    color: #170d00;
-
-    font-size: 9px;
-    font-weight: 800;
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #8a4dff, #5a22c2);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
 }
 
-
-/* =========================================
-   LOADING / ERROR
-========================================= */
+/* ---------- loading / error ---------- */
 
 .loadingPage,
 .errorPage {
     min-height: 100vh;
-
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    background: #080612;
-}
-
-.loadingPage {
-    flex-direction: column;
+    gap: 14px;
+    padding: 24px;
+    background:
+        radial-gradient(circle, rgba(124, 60, 255, 0.14), transparent 45%),
+        #07050f;
+    color: #fff;
+    text-align: center;
 }
 
 .loadingLogo {
-    width: 60px;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(151, 104, 255, 0.25);
+    border-radius: 20px;
+    background: rgba(124, 60, 255, 0.12);
 }
 
 .loadingLogo img {
-    width: 48px;
-    height: 48px;
-
+    width: 38px;
+    height: 38px;
     object-fit: contain;
-
-    animation: loadingFloat 1.4s ease-in-out infinite;
 }
 
 .loadingSpinner {
-    width: 25px;
-    height: 25px;
-
-    margin-top: 15px;
-
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    border-top-color: #ffc928;
-
+    width: 34px;
+    height: 34px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #a77bff;
     border-radius: 50%;
-
     animation: spin 0.8s linear infinite;
 }
 
 .loadingPage p {
-    margin-top: 12px;
-
-    color: #766b80;
-
-    font-size: 9px;
+    margin: 0;
+    color: #9a90b3;
+    font-size: 13px;
 }
 
-@keyframes loadingFloat {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
+.errorBox {
+    width: min(400px, 100%);
+    padding: 28px;
+    border: 1px solid rgba(151, 104, 255, 0.22);
+    border-radius: 20px;
+    background: rgba(20, 14, 38, 0.9);
+}
 
-    50% {
-        transform: translateY(-5px);
-    }
+.errorIcon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: rgba(255, 90, 90, 0.14);
+    color: #ff8a8a;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.errorBox h2 {
+    margin: 0 0 6px;
+    font-size: 19px;
+}
+
+.errorBox p {
+    margin: 0 0 14px;
+    color: #9a90b3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.errorBox button {
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #8a4dff, #5a22c2);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 @keyframes spin {
@@ -1301,2256 +1014,438 @@
     }
 }
 
-.errorBox {
-    width: min(390px, calc(100% - 40px));
-
-    padding: 30px;
-
-    border: 1px solid rgba(255, 92, 112, 0.2);
-    border-radius: 18px;
-
-    background: #100a1a;
-
-    text-align: center;
-}
-
-.errorIcon {
-    width: 40px;
-    height: 40px;
-
-    margin: auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(255, 92, 112, 0.1);
-
-    color: #ff7283;
-
-    font-weight: 800;
-}
-
-.errorBox h2 {
-    margin: 15px 0 8px;
-
-    font-size: 19px;
-}
-
-.errorBox p {
-    color: #817687;
-
-    font-size: 10px;
-    line-height: 1.6;
-}
-
-.errorBox button {
-    margin-top: 10px;
-
-    padding: 10px 18px;
-
-    border: none;
-    border-radius: 9px;
-
-    background: #ffc928;
-
-    color: #180e00;
-
-    font-size: 9px;
-    font-weight: 800;
-}
-
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 1024px) {
-
-    .heroContent {
-        width: 62%;
-        padding: 38px;
-    }
-
-    .heroVisual {
-        width: 44%;
-    }
-
-    .heroGift {
-        width: 300px;
-        right: 7%;
-    }
-
-    .heroCrown {
-        width: 200px;
-        right: -5%;
-    }
-
-    .rewardGrid {
-        grid-template-columns:
-            repeat(4, 1fr);
-    }
-
-    .benefitsGrid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-    .headerInner {
-        width: min(100% - 24px, 600px);
-
-        min-height: 62px;
-    }
-
-    .brand span {
-        display: none;
-    }
-
-    .brand strong {
-        font-size: 13px;
-    }
-
-    .brandMark {
-        width: 34px;
-        height: 34px;
-    }
-
-    .streakBadge small {
-        display: none;
-    }
-
-    .balanceButton {
-        padding: 5px 8px;
-    }
-
-    .balanceButton small {
-        display: none;
-    }
-
-    .logoutButton {
-        width: 34px;
-        height: 34px;
-    }
-
-    .main {
-        width: min(100% - 24px, 600px);
-
-        padding-top: 20px;
-    }
-
-    .hero {
-        min-height: auto;
-
-        display: block;
-    }
-
-    .heroContent {
-        width: 100%;
-
-        padding: 27px 22px 10px;
-    }
-
-    .hero h1 {
-        font-size: 32px;
-        letter-spacing: -1px;
-    }
-
-    .heroContent > p {
-        font-size: 11px;
-    }
-
-    .heroStats {
-        gap: 15px;
-    }
-
-    .heroStats div {
-        padding-right: 14px;
-    }
-
-    .heroStats strong {
-        font-size: 16px;
-    }
-
-    .heroVisual {
-        position: relative;
-
-        width: 100%;
-        height: 210px;
-
-        margin-top: 5px;
-    }
-
-    .heroGift {
-        width: 230px;
-
-        right: 50%;
-
-        transform: translateX(50%);
-
-        bottom: -15px;
-    }
-
-    .heroCrown {
-        width: 150px;
-
-        right: -15px;
-        top: -20px;
-    }
-
-    .todayCard {
-        padding: 17px;
-
-        display: grid;
-
-        grid-template-columns: 88px 1fr;
-        gap: 12px;
-    }
-
-    .todayArtwork {
-        width: 88px;
-        height: 100px;
-
-        grid-row: span 2;
-    }
-
-    .todayArtwork img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .todayDetails h3 {
-        font-size: 16px;
-    }
-
-    .todayAction {
-        margin: 2px 0 0;
-    }
-
-    .claimButton,
-    .countdownBox {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .rewardGrid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .quickSection {
-        grid-template-columns: 1fr;
-    }
-
-    .footerInner {
-        flex-direction: column;
-    }
-
-    .footerLinks {
-        gap: 12px;
-    }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media (max-width: 420px) {
-
-    .headerRight {
-        gap: 5px;
-    }
-
-    .streakBadge {
-        padding: 5px 7px;
-    }
-
-    .balanceButton span {
-        font-size: 11px;
-    }
-
-    .hero h1 {
-        font-size: 28px;
-    }
-
-    .heroStats {
-        display: grid;
-
-        grid-template-columns:
-            repeat(3, 1fr);
-
-        gap: 5px;
-    }
-
-    .heroStats div {
-        padding-right: 0;
-
-        border-right: none;
-    }
-
-    .heroStats strong {
-        font-size: 14px;
-    }
-
-    .heroStats span {
-        font-size: 7px;
-    }
-
-    .sectionTitle h2 {
-        font-size: 18px;
-    }
-
-    .todayCard {
-        grid-template-columns: 72px 1fr;
-    }
-
-    .todayArtwork {
-        width: 72px;
-    }
-
-    .todayArtwork img {
-        width: 68px;
-    }
-
-    .rewardGrid {
-        gap: 7px;
-    }
-
-    .rewardCard {
-        padding: 10px 8px;
-    }
-
-    .rewardImage {
-        height: 70px;
-    }
-
-    .rewardImage img {
-        width: 58px;
-        height: 58px;
-    }
-
-}
-
-
-/* ==========================================
-   VELOOP DASHBOARD — GLASSMORPHISM REDESIGN
-   Append this after the existing CSS
-========================================== */
-
-.page {
-    min-height: 100vh;
-    color: #ffffff;
-    background:
-        radial-gradient(
-            ellipse at 12% 5%,
-            rgba(113, 44, 213, 0.20),
-            transparent 34%
-        ),
-        radial-gradient(
-            ellipse at 90% 30%,
-            rgba(83, 30, 156, 0.14),
-            transparent 36%
-        ),
-        #0a0613;
-    overflow-x: hidden;
-}
-
-.header {
-    background: rgba(12, 7, 24, 0.78);
-    border-bottom: 1px solid rgba(168, 103, 255, 0.12);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-}
-
-.headerInner {
-    width: min(100% - 48px, 1440px);
-    min-height: 82px;
-    margin: 0 auto;
-}
-
-.main {
-    width: min(100% - 64px, 1440px);
-    margin: 0 auto;
-    padding: 28px 0 40px;
-}
-
-.hero,
-.progressCard,
-.todayCard,
-.rewardCard,
-.benefitCard,
-.quickCard {
-    background: linear-gradient(
-        145deg,
-        rgba(35, 21, 59, 0.70),
-        rgba(15, 10, 29, 0.82)
-    );
-    border: 1px solid rgba(166, 111, 255, 0.24);
-    border-radius: 22px;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.045),
-        0 12px 36px rgba(0, 0, 0, 0.20);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    transition:
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        transform 0.25s ease;
-}
-
-.hero:hover,
-.progressCard:hover,
-.todayCard:hover {
-    border-color: rgba(177, 119, 255, 0.42);
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.06),
-        0 16px 42px rgba(83, 30, 156, 0.13);
-}
-
-.hero {
-    overflow: hidden;
-}
-
-.heroContent {
-    padding: 42px;
-}
-
-.heroKicker,
-.todayDetails > span,
-.sectionTitle > div > span,
-.progressHeader > div > span {
-    color: #c38aff;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.1px;
-}
-
-.hero h1 {
-    font-size: clamp(30px, 3.2vw, 46px);
-    line-height: 1.17;
-    letter-spacing: -1.4px;
-    font-weight: 800;
-}
-
-.hero h1 span {
-    display: block;
-    color: #ffc928;
-    text-shadow: 0 0 24px rgba(255, 201, 40, 0.15);
-}
-
-.heroContent > p {
-    max-width: 520px;
-    color: #c2b8d6;
-    font-size: 15px;
-    line-height: 1.75;
-}
-
-.heroStats {
-    gap: 24px;
-}
-
-.heroStats strong {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: 800;
-}
-
-.heroStats span {
-    color: #b9aecb;
-    font-size: 12px;
-}
-
-.heroVisual {
-    min-width: 0;
-}
-
-.heroGift,
-.heroCrown {
-    filter: drop-shadow(0 8px 18px rgba(143, 54, 255, 0.22));
-}
-
-.progressCard {
-    padding: 26px;
-}
-
-.progressHeader h2,
-.sectionTitle h2 {
-    color: #ffffff;
-    font-size: clamp(20px, 2vw, 27px);
-    line-height: 1.3;
-    font-weight: 800;
-}
-
-.progressDay {
-    color: #ffd44b;
-    font-size: 19px;
-    font-weight: 800;
-}
-
-.progressTrack {
-    height: 9px;
-    overflow: hidden;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.progressFill {
-    border-radius: inherit;
-    background: linear-gradient(90deg, #873cff, #d28aff, #ffc928);
-    box-shadow: 0 0 16px rgba(157, 77, 255, 0.35);
-}
-
-.progressBottom {
-    color: #b8aecb;
-    font-size: 13px;
-}
-
-.todayCard {
-    display: grid;
-    grid-template-columns: 150px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 24px;
-    padding: 26px;
-}
-
-.todayArtwork {
-    display: grid;
-    place-items: center;
-    border-radius: 18px;
-    background: radial-gradient(
-        circle,
-        rgba(139, 58, 255, 0.16),
-        transparent 72%
-    );
-}
-
-.todayArtwork img {
-    width: 125px;
-    height: 125px;
-    object-fit: contain;
-    filter: drop-shadow(0 6px 15px rgba(255, 190, 45, 0.12));
-}
-
-.todayDetails h3 {
-    color: #ffffff;
-    font-size: 22px;
-    font-weight: 800;
-}
-
-.todayDetails p {
-    color: #bcb1ce;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.claimButton,
-.modalButton {
-    min-height: 46px;
-    padding: 0 22px;
-    border: 1px solid rgba(255, 226, 119, 0.75);
-    border-radius: 12px;
-    color: #201300;
-    background: linear-gradient(135deg, #ffe46b, #ffb900);
-    box-shadow: 0 5px 22px rgba(255, 190, 30, 0.14);
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.claimButton:hover,
-.modalButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 26px rgba(255, 190, 30, 0.24);
-}
-
-.countdownBox {
-    padding: 13px 18px;
-    border: 1px solid rgba(165, 106, 255, 0.28);
-    border-radius: 14px;
-    background: rgba(119, 62, 180, 0.12);
-}
-
-.countdownBox strong {
-    color: #dfb3ff;
-    font-size: 22px;
-}
-
-.rewardsSection,
-.benefitsSection {
-    margin-top: 34px;
-}
-
-.sectionTitle {
-    margin-bottom: 20px;
-}
-
-.sectionTitle h2 {
-    margin-top: 7px;
-}
-
-.rewardGrid {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.rewardCard {
-    position: relative;
-    min-width: 0;
-    min-height: 255px;
-    padding: 15px 12px;
-    color: #ffffff;
-    text-align: center;
-    cursor: pointer;
-}
-
-.rewardCard:hover {
-    transform: translateY(-5px);
-    border-color: rgba(190, 133, 255, 0.65);
-    box-shadow: 0 12px 30px rgba(124, 60, 255, 0.15);
-}
-
-.rewardTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 5px;
-    color: #d5c8e7;
-    font-size: 11px;
-}
-
-.rewardImage {
-    display: grid;
-    place-items: center;
-    height: 105px;
-    margin: 8px 0;
-}
-
-.rewardImage img {
-    width: 85px;
-    height: 85px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(255, 190, 30, 0.10));
-}
-
-.rewardCard > strong {
-    display: block;
-    color: #d7b0ff;
-    font-size: 17px;
-    font-weight: 800;
-}
-
-.rewardCard > small {
-    display: block;
-    margin-top: 6px;
-    color: #b6abc8;
-    font-size: 12px;
-}
-
-.available {
-    border-color: rgba(255, 197, 38, 0.9);
-    background: linear-gradient(
-        145deg,
-        rgba(90, 59, 20, 0.36),
-        rgba(22, 13, 31, 0.90)
-    );
-    box-shadow:
-        inset 0 0 25px rgba(255, 190, 30, 0.035),
-        0 0 20px rgba(255, 190, 30, 0.06);
-}
-
-.claimNow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 12px;
-    padding: 10px 6px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #ffe46b, #ffb900);
-    color: #211400;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.claimed {
-    border-color: rgba(40, 220, 144, 0.30);
-}
-
-.locked {
-    opacity: 0.84;
-}
-
-.benefitsGrid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-}
-
-.benefitCard {
-    padding: 22px;
-}
-
-.benefitCard img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    margin-bottom: 12px;
-}
-
-.benefitCard h3 {
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 800;
-}
-
-.benefitCard p {
-    color: #b9aecb;
-    font-size: 13px;
-    line-height: 1.65;
-}
-
-.quickSection {
-    display: none;
-}
-
-/* Remove the old footer completely */
-.footer {
-    display: none !important;
-}
-
-/* Status messages */
-.successMessage,
-.warningMessage {
-    border-radius: 12px;
-    padding: 14px 18px;
-    font-size: 14px;
-    backdrop-filter: blur(14px);
-}
-
-.successMessage {
-    border: 1px solid rgba(53, 217, 138, 0.3);
-    background: rgba(53, 217, 138, 0.08);
-}
-
-.warningMessage {
-    border: 1px solid rgba(255, 92, 112, 0.3);
-    background: rgba(255, 92, 112, 0.08);
-}
-
-/* Reward details popup */
-.rewardOverlay {
-    background: rgba(4, 2, 10, 0.78);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.rewardModal {
-    border: 1px solid rgba(177, 119, 255, 0.36);
-    border-radius: 24px;
-    background: linear-gradient(
-        145deg,
-        rgba(39, 23, 63, 0.97),
-        rgba(12, 8, 23, 0.98)
-    );
-    box-shadow: 0 25px 90px rgba(0, 0, 0, 0.55);
-}
-
-.rewardModal h2 {
-    color: #ffffff;
-    font-size: 25px;
-}
-
-.rewardModal p {
-    color: #c0b4d2;
-    font-size: 14px;
-}
-
-/* ==========================================
-   TABLET
-========================================== */
-@media (max-width: 1100px) {
-    .main {
-        width: min(100% - 40px, 900px);
-    }
-
-    .rewardGrid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .todayCard {
-        grid-template-columns: 110px minmax(0, 1fr);
-    }
-
-    .todayAction {
-        grid-column: 2;
-    }
-
-    .benefitsGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-/* ==========================================
-   MOBILE
-========================================== */
-@media (max-width: 700px) {
-    .headerInner {
-        width: calc(100% - 28px);
-        min-height: 70px;
-    }
-
-    .main {
-        width: calc(100% - 28px);
-        padding-top: 18px;
-    }
-
-    .hero {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .heroContent {
-        width: 100%;
-        padding: 25px 22px 10px;
-    }
-
-    .hero h1 {
-        font-size: clamp(27px, 7vw, 36px);
-        letter-spacing: -0.8px;
-    }
-
-    .heroContent > p {
-        font-size: 14px;
-    }
-
-    .heroStats {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .heroStats strong {
-        font-size: 19px;
-    }
-
-    .heroStats span {
-        font-size: 11px;
-    }
-
-    .heroVisual {
-        width: 100%;
-        height: 210px;
-    }
-
-    .heroGift {
-        width: 210px;
-        right: 50%;
-        transform: translateX(50%);
-    }
-
-    .heroCrown {
-        width: 130px;
-    }
-
-    .progressCard {
-        padding: 20px;
-    }
-
-    .todayCard {
-        grid-template-columns: 82px minmax(0, 1fr);
-        gap: 14px;
-        padding: 18px;
-    }
-
-    .todayArtwork img {
-        width: 78px;
-        height: 78px;
-    }
-
-    .todayDetails h3 {
-        font-size: 18px;
-    }
-
-    .todayDetails p {
-        font-size: 13px;
-    }
-
-    .todayAction {
-        grid-column: 1 / -1;
-    }
-
-    .claimButton,
-    .countdownBox {
-        width: 100%;
-    }
-
-    .rewardGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-    }
-
-    .rewardCard {
-        min-height: 230px;
-        padding: 13px 10px;
-    }
-
-    .rewardImage {
-        height: 90px;
-    }
-
-    .rewardImage img {
-        width: 72px;
-        height: 72px;
-    }
-
-    .rewardCard > strong {
-        font-size: 16px;
-    }
-
-    .benefitsGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .benefitCard {
-        display: grid;
-        grid-template-columns: 46px minmax(0, 1fr);
-        column-gap: 13px;
-        padding: 17px;
-    }
-
-    .benefitCard img {
-        grid-row: span 2;
-    }
-
-    .benefitCard h3 {
-        margin: 0 0 5px;
-    }
-
-    .benefitCard p {
-        margin: 0;
-    }
-}
+/* small phones */
 
 @media (max-width: 380px) {
-    .headerInner {
-        width: calc(100% - 20px);
+    .shell {
+        padding: 10px 10px 24px;
     }
 
-    .main {
-        width: calc(100% - 20px);
+    .bannerGift {
+        width: 54px;
+        height: 54px;
     }
 
-    .heroContent {
-        padding: 22px 16px 8px;
-    }
-
-    .rewardGrid {
-        gap: 8px;
-    }
-
-    .rewardCard {
-        padding: 12px 7px;
-    }
-
-    .rewardTop {
-        font-size: 10px;
-    }
-
-    .rewardCard > strong {
-        font-size: 14px;
-    }
-
-    .rewardCard > small {
-        font-size: 11px;
-    }
-}
-
-/* =========================================
-   REFERENCE DAILY STREAK DASHBOARD
-   Append to the bottom of Dashboard.module.css
-========================================= */
-
-.page {
-    min-height: 100vh;
-    overflow-x: clip;
-    color: #fff;
-    background:
-        radial-gradient(
-            ellipse at 12% 12%,
-            rgba(100, 44, 170, 0.19),
-            transparent 38%
-        ),
-        radial-gradient(
-            ellipse at 88% 20%,
-            rgba(75, 35, 130, 0.17),
-            transparent 38%
-        ),
-        #0a0612;
-}
-
-.header {
-    position: relative;
-    background: rgba(12, 7, 23, 0.78);
-    border-bottom: 1px solid rgba(176, 122, 255, 0.12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-.headerInner {
-    width: min(1440px, calc(100% - 48px));
-    min-height: 76px;
-}
-
-.brand strong {
-    font-size: 20px;
-    letter-spacing: -0.6px;
-}
-
-.brand span {
-    color: #b8abc9;
-    font-size: 12px;
-    letter-spacing: 0;
-}
-
-.brandMark {
-    border-radius: 50%;
-    background: linear-gradient(145deg, #8e4bff, #482080);
-}
-
-.streakBadge,
-.balanceButton,
-.logoutButton {
-    border-color: rgba(170, 111, 255, 0.25);
-    background: rgba(255, 255, 255, 0.035);
-    border-radius: 14px;
-}
-
-.streakBadge {
-    padding: 7px 13px;
-}
-
-.streakBadge small,
-.balanceButton small {
-    font-size: 10px;
-}
-
-.main {
-    width: min(1440px, calc(100% - 64px));
-    padding: 24px 0 35px;
-}
-
-/* Two large panels */
-.referenceSummary {
-    display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    gap: 20px;
-    align-items: stretch;
-}
-
-.referenceLeft,
-.referenceUltimate {
-    position: relative;
-    min-width: 0;
-    min-height: 320px;
-    overflow: hidden;
-    border: 1px solid rgba(155, 91, 239, 0.30);
-    border-radius: 25px;
-    background:
-        linear-gradient(
-            140deg,
-            rgba(28, 17, 48, 0.79),
-            rgba(13, 8, 24, 0.86)
-        );
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.045),
-        0 15px 38px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-.referenceLeft {
-    padding: 25px 28px;
-}
-
-.referenceHeading h1 {
-    margin: 0;
-    color: #fff;
-    font-size: clamp(25px, 2.3vw, 34px);
-    font-weight: 850;
-    letter-spacing: -1.1px;
-    line-height: 1.25;
-}
-
-.referenceHeading h1 span {
-    color: #ffc928;
-}
-
-.referenceHeading p {
-    margin: 7px 0 16px;
-    color: #b9aecb;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.referenceStatsLayout {
-    display: grid;
-    grid-template-columns: minmax(115px, 0.75fr) minmax(0, 1.8fr);
-    align-items: center;
-    gap: 20px;
-}
-
-.referenceGift {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-width: 0;
-    min-height: 190px;
-    border-radius: 20px;
-    background: radial-gradient(
-        circle,
-        rgba(137, 60, 255, 0.15),
-        transparent 70%
-    );
-}
-
-.referenceGift > img:first-child {
-    width: 100%;
-    max-width: 175px;
-    height: 175px;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(132, 58, 255, 0.22));
-    animation: referenceFloat 5s ease-in-out infinite;
-}
-
-.referenceGift .floatingCoin {
-    position: absolute;
-    right: 5px;
-    bottom: 10px;
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(255, 190, 30, 0.2));
-}
-
-.referenceStats {
-    display: grid;
-    gap: 10px;
-    min-width: 0;
-}
-
-.referenceStat {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    min-height: 60px;
-    min-width: 0;
-    padding: 10px 13px;
-    border: 1px solid rgba(167, 118, 224, 0.20);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.035);
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
-}
-
-.referenceStatIcon {
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    width: 39px;
-    height: 39px;
-    border: 1px solid rgba(176, 117, 255, 0.3);
-    border-radius: 12px;
-    background: rgba(139, 69, 220, 0.15);
-    color: #d6a6ff;
-}
-
-.referenceStat:nth-child(2) .referenceStatIcon {
-    color: #26d99a;
-    border-color: rgba(38, 217, 154, 0.3);
-    background: rgba(38, 217, 154, 0.09);
-}
-
-.referenceStatIcon img {
-    width: 27px;
-    height: 27px;
-    object-fit: contain;
-}
-
-.referenceStat small {
-    display: block;
-    margin-bottom: 3px;
-    color: #b7abc9;
-    font-size: 11px;
-    letter-spacing: 0.25px;
-}
-
-.referenceStat strong {
-    display: block;
-    color: #fff;
-    font-size: 19px;
-    font-weight: 850;
-    overflow-wrap: anywhere;
-}
-
-.referenceStat .referenceGold {
-    color: #ffc928;
-    font-size: 16px;
-}
-
-/* Ultimate reward */
-.referenceUltimate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-}
-
-.referenceUltimate::before {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        ellipse at 25% 58%,
-        rgba(129, 49, 255, 0.16),
-        transparent 58%
-    );
-    content: "";
-    pointer-events: none;
-}
-
-.referenceStreakBadge {
-    position: absolute;
-    top: 17px;
-    right: 17px;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    max-width: calc(100% - 34px);
-    padding: 9px 12px;
-    border: 1px solid rgba(167, 111, 255, 0.28);
-    border-radius: 30px;
-    background: rgba(133, 70, 185, 0.13);
-    font-size: 11px;
-}
-
-.referenceStreakBadge img {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-.referenceStreakBadge strong {
-    white-space: nowrap;
-    color: #fff;
-}
-
-.referenceStreakBadge span {
-    color: #c8a3f5;
-    white-space: nowrap;
-}
-
-.referenceUltimateContent {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(120px, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 18px;
-    width: 100%;
-    margin-top: 26px;
-}
-
-.referenceCrown {
-    display: grid;
-    place-items: center;
-    min-width: 0;
-}
-
-.referenceCrown img {
-    width: 100%;
-    max-width: 225px;
-    height: 180px;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(255, 180, 30, 0.18));
-    animation: referenceFloat 6s ease-in-out infinite;
-}
-
-.referenceUltimateText > span {
-    display: block;
-    color: #cb8bff;
-    font-size: 14px;
-    font-weight: 850;
-    letter-spacing: 0.45px;
-}
-
-.referenceUltimateText h2 {
-    margin: 8px 0 9px;
-    color: #fff;
-    font-size: clamp(34px, 3.4vw, 49px);
-    font-weight: 900;
-    line-height: 1.05;
-    overflow-wrap: anywhere;
-}
-
-.referenceGiftLabel {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    max-width: 100%;
-    padding: 6px 10px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.055);
-    color: #f6efff;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.referenceGiftLabel img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-}
-
-.referenceGiftLabel span {
-    overflow-wrap: anywhere;
-}
-
-.referenceUltimateText p {
-    margin: 13px 0 0;
-    color: #b9aecb;
-    font-size: 13px;
-}
-
-.referenceUltimateText p strong {
-    color: #ffc928;
-}
-
-/* Reminder line */
-.referenceReminder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 27px 10px;
-    color: #c0a6e9;
-    text-align: center;
-    font-size: 14px;
-}
-
-.referenceReminder span {
-    color: #bb83ff;
-    text-shadow: 0 0 12px rgba(169, 91, 255, 0.45);
-}
-
-/* Existing reward cards */
-.rewardGrid {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.rewardCard {
-    min-width: 0;
-    min-height: 240px;
-    padding: 13px 11px;
-    border: 1px solid rgba(152, 94, 229, 0.23);
-    border-radius: 19px;
-    background: rgba(25, 16, 42, 0.66);
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-}
-
-.rewardCard.available {
-    border-color: rgba(255, 197, 36, 0.9);
-    background: linear-gradient(
-        145deg,
-        rgba(89, 57, 21, 0.34),
-        rgba(23, 14, 32, 0.85)
-    );
-    box-shadow:
-        inset 0 0 24px rgba(255, 190, 30, 0.035),
-        0 0 20px rgba(255, 190, 30, 0.07);
-}
-
-.rewardCard:hover {
-    transform: translateY(-4px);
-    border-color: rgba(187, 133, 255, 0.55);
-}
-
-.rewardImage {
-    height: 94px;
-}
-
-.rewardImage img {
-    width: 84px;
-    height: 84px;
-    object-fit: contain;
-}
-
-.rewardCard > strong {
-    font-size: 12px;
-    line-height: 1.4;
-}
-
-.rewardCard > small {
-    font-size: 10px;
-}
-
-.claimNow {
-    justify-content: center;
-    width: 100%;
-    padding: 10px 5px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #ffe36a, #ffb900);
-    color: #201400;
-    font-size: 11px;
-}
-
-/* Benefits glass strip */
-.benefitsGrid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.benefitCard {
-    padding: 18px;
-    border: 1px solid rgba(152, 94, 229, 0.2);
-    border-radius: 17px;
-    background: rgba(25, 16, 42, 0.62);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-}
-
-.benefitCard img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-}
-
-.benefitCard h3 {
-    color: #fff;
-    font-size: 13px;
-}
-
-.benefitCard p {
-    color: #b9aecb;
-    font-size: 11px;
-    line-height: 1.6;
-}
-
-/* Remove old quick links and footer */
-.quickSection,
-.footer {
-    display: none !important;
-}
-
-@keyframes referenceFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-6px);
-    }
-}
-
-/* Tablet */
-@media (max-width: 1100px) {
-    .main {
-        width: calc(100% - 40px);
-    }
-
-    .referenceSummary {
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-    }
-
-    .referenceLeft {
-        padding: 22px 18px;
-    }
-
-    .referenceStatsLayout {
-        grid-template-columns: 105px minmax(0, 1fr);
-        gap: 12px;
-    }
-
-    .referenceGift > img:first-child {
-        height: 130px;
-    }
-
-    .referenceGift {
-        min-height: 150px;
-    }
-
-    .referenceUltimate {
-        padding: 20px;
-    }
-
-    .referenceUltimateContent {
-        grid-template-columns: 1fr;
-        gap: 2px;
-        margin-top: 42px;
-        text-align: center;
-    }
-
-    .referenceCrown img {
-        height: 110px;
-    }
-
-    .rewardGrid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .benefitsGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-    .headerInner {
-        width: calc(100% - 24px);
-        min-height: 68px;
-    }
-
-    .brandMark {
-        width: 34px;
-        height: 34px;
-    }
-
-    .brand strong {
-        font-size: 16px;
-    }
-
-    .brand span {
-        font-size: 10px;
-    }
-
-    .headerRight {
+    .stat {
+        padding: 8px 6px;
         gap: 6px;
     }
 
-    .streakBadge {
-        padding: 5px 8px;
-        gap: 5px;
+    .statIcon {
+        width: 26px;
+        height: 26px;
     }
 
-    .streakBadge small,
-    .balanceButton small {
+    .crown {
+        width: 80px;
+    }
+
+    .ultimateText h2 {
+        font-size: 26px;
+    }
+
+    .unlockTile {
+        width: 66px;
+    }
+
+    .rewardAmount {
+        font-size: 18px;
+    }
+}
+
+/* =========================================================
+   DESKTOP (screenshot 1)
+========================================================= */
+
+@media (min-width: 1000px) {
+
+    .shell {
+        width: min(1180px, 100%);
+        padding: 28px 28px 36px;
+        gap: 22px;
+    }
+
+    .topbar,
+    .banner,
+    .streakRow,
+    .unlockTile {
         display: none;
     }
 
-    .balanceButton {
-        padding: 6px 8px;
-        gap: 4px;
+    /* header */
+
+    .pageHead {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
     }
 
-    .main {
-        width: calc(100% - 24px);
-        padding-top: 16px;
+    .pageHeadText h1 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 800;
     }
 
-    .referenceSummary {
-        grid-template-columns: 1fr;
-        gap: 14px;
+    .pageHeadText p {
+        margin: 6px 0 0;
+        color: #c9bfe3;
+        font-size: 14px;
     }
 
-    .referenceLeft,
-    .referenceUltimate {
-        min-height: 0;
-        border-radius: 20px;
-    }
-
-    .referenceLeft {
-        padding: 21px 16px;
-    }
-
-    .referenceHeading h1 {
-        font-size: clamp(23px, 6.2vw, 30px);
-        letter-spacing: -0.8px;
-    }
-
-    .referenceHeading p {
-        font-size: 13px;
-    }
-
-    .referenceStatsLayout {
-        grid-template-columns: 90px minmax(0, 1fr);
+    .pageHeadActions {
+        display: flex;
+        align-items: center;
         gap: 10px;
     }
 
-    .referenceGift {
-        min-height: 0;
-    }
-
-    .referenceGift > img:first-child {
-        height: 105px;
-    }
-
-    .referenceGift .floatingCoin {
-        width: 28px;
-        height: 28px;
-        right: 0;
-    }
-
-    .referenceStats {
-        gap: 7px;
-    }
-
-    .referenceStat {
-        min-height: 55px;
-        padding: 8px;
-        gap: 9px;
+    .logoutButton {
         border-radius: 12px;
     }
 
-    .referenceStatIcon {
-        width: 32px;
-        height: 32px;
-        border-radius: 9px;
+    .balanceButton {
+        padding: 4px 14px 4px 8px;
     }
 
-    .referenceStat small {
-        font-size: 9px;
+    .balanceButton small {
+        display: inline;
     }
 
-    .referenceStat strong {
-        font-size: 16px;
+    .streakTab {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 12px 26px 12px 34px;
+        border: 1px solid var(--line);
+        border-radius: 0 16px 16px 0;
+        background: linear-gradient(120deg, #2a1456, #1a0d36);
+        clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%);
     }
 
-    .referenceStat .referenceGold {
-        font-size: 13px;
+    .streakTab img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
     }
 
-    .referenceUltimate {
-        padding: 56px 16px 20px;
+    .streakTab strong {
+        display: block;
+        color: var(--gold);
+        font-size: 15px;
+        font-weight: 700;
     }
 
-    .referenceStreakBadge {
-        top: 12px;
-        right: 12px;
-        padding: 7px 9px;
-        font-size: 10px;
-    }
-
-    .referenceUltimateContent {
-        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-        gap: 10px;
-        margin-top: 0;
-        text-align: left;
-    }
-
-    .referenceCrown img {
-        height: 120px;
-    }
-
-    .referenceUltimateText > span {
-        font-size: 11px;
-    }
-
-    .referenceUltimateText h2 {
-        font-size: clamp(30px, 8vw, 40px);
-    }
-
-    .referenceGiftLabel {
-        padding: 5px 7px;
-        font-size: 10px;
-    }
-
-    .referenceGiftLabel img {
-        width: 17px;
-        height: 17px;
-    }
-
-    .referenceUltimateText p {
-        font-size: 11px;
-    }
-
-    .referenceReminder {
-        padding: 21px 4px;
-        gap: 7px;
+    .streakTab span {
+        display: block;
+        margin-top: 2px;
+        color: #d6cdee;
         font-size: 12px;
     }
 
-    .sectionTitle h2 {
+    /* summary */
+
+    .summary {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        grid-template-areas:
+            "hero ultimate"
+            "stats ultimate";
+        gap: 18px 26px;
+        padding: 0;
+        border: 0;
+        background: none;
+    }
+
+    .hero {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding-top: 6px;
+    }
+
+    .heroGift {
+        width: 190px;
+        flex-shrink: 0;
+    }
+
+    .heroGift img {
+        width: 100%;
+        display: block;
+        object-fit: contain;
+    }
+
+    .heroText h2 {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1.1;
+    }
+
+    .heroText h2 span {
+        margin-top: 2px;
+        color: var(--gold);
+        font-size: 56px;
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -1px;
+    }
+
+    .heroText p {
+        margin: 10px 0 0;
+        color: #ddd5f0;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .heroText p em {
+        font-style: normal;
+        color: var(--purple);
+    }
+
+    .stat {
+        gap: 12px;
+        padding: 14px 14px;
+        border-radius: 14px;
+    }
+
+    .stat small {
+        font-size: 12.5px;
+    }
+
+    .stat strong {
+        margin-top: 4px;
+        font-size: 21px;
+    }
+
+    .stat strong.gold {
+        font-size: 17px;
+    }
+
+    .statIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .iconGold {
+        width: 42px;
+        height: 42px;
+    }
+
+    .ultimate {
+        flex-direction: row;
+        padding: 26px 28px;
+        gap: 22px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background:
+            radial-gradient(circle at 25% 55%, rgba(124, 60, 255, 0.28), transparent 55%),
+            var(--panel);
+    }
+
+    .crown {
+        width: 46%;
+        max-width: 250px;
+    }
+
+    .ultimateText {
+        text-align: center;
+    }
+
+    .ultimateLabel {
         font-size: 19px;
     }
 
+    .ultimateText h2 {
+        margin: 10px 0 14px;
+        font-size: 46px;
+    }
+
+    .giftPill {
+        padding: 8px 14px 8px 10px;
+        font-size: 14px;
+    }
+
+    .giftPill img {
+        width: 30px;
+        height: 22px;
+    }
+
+    .unlockInline {
+        display: block;
+    }
+
+    /* reminder */
+
+    .reminder p {
+        font-size: 13px;
+    }
+
+    /* cards */
+
     .rewardGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(7, minmax(0, 1fr));
         gap: 10px;
     }
 
+    .rewardCard,
+    .rewardCard:nth-child(n + 5) {
+        grid-column: auto;
+    }
+
     .rewardCard {
-        min-height: 220px;
-        padding: 12px 10px;
+        gap: 7px;
+        padding: 12px 10px 12px;
         border-radius: 16px;
     }
 
-    .rewardImage {
-        height: 88px;
+    .rewardCard:hover {
+        transform: translateY(-2px);
     }
 
-    .rewardImage img {
-        width: 76px;
-        height: 76px;
-    }
-
-    .rewardCard > strong {
+    .dayChip {
+        padding: 4px 11px;
         font-size: 12px;
     }
 
-    .rewardCard > small {
-        font-size: 10px;
+    .tagSoft,
+    .tagVip {
+        padding: 4px 9px;
+        font-size: 10.5px;
+    }
+
+    .tagToday {
+        padding: 5px 12px;
+        font-size: 12px;
+        border-radius: 0 15px 0 12px;
+    }
+
+    .rewardImage {
+        height: 82px;
+        margin-top: 4px;
+    }
+
+    .rewardLabel {
+        font-size: 13px;
+    }
+
+    .rewardAmount {
+        font-size: 28px;
+    }
+
+    .rewardSub {
+        min-height: 16px;
+        font-size: 12px;
+    }
+
+    .statusLocked,
+    .statusClaimed,
+    .claimButton {
+        padding: 9px 6px;
+        border-radius: 10px;
+        font-size: 13px;
+    }
+
+    .claimDesktop {
+        display: inline;
+    }
+
+    .claimMobile {
+        display: none;
+    }
+
+    /* benefits */
+
+    .benefits {
+        padding: 18px 8px;
+    }
+
+    .benefitsTitle {
+        display: none;
     }
 
     .benefitsGrid {
-        grid-template-columns: 1fr;
-        gap: 9px;
+        gap: 0;
     }
 
-    .benefitCard {
-        display: grid;
-        grid-template-columns: 45px minmax(0, 1fr);
-        align-items: center;
-        column-gap: 12px;
-        padding: 14px;
+    .benefitItem {
+        flex-direction: row;
+        justify-content: center;
+        gap: 14px;
+        padding: 0 16px;
         text-align: left;
     }
 
-    .benefitCard img {
-        grid-row: span 2;
-        width: 42px;
-        height: 42px;
-        margin: 0;
+    .benefitItem img {
+        width: 48px;
+        height: 48px;
     }
 
-    .benefitCard h3 {
-        margin: 0 0 4px;
-    }
-
-    .benefitCard p {
-        margin: 0;
-    }
-}
-
-/* Small mobile */
-@media (max-width: 380px) {
-    .brand {
-        gap: 6px;
-    }
-
-    .brand strong {
+    .benefitItem h4 {
         font-size: 14px;
     }
 
-    .brand span {
-        font-size: 9px;
+    .benefitItem p {
+        margin-top: 4px;
+        font-size: 12px;
     }
 
-    .brandMark {
-        width: 30px;
-        height: 30px;
+    /* trust */
+
+    .trustNotice {
+        justify-content: center;
+        padding: 12px 20px;
+        border: 0;
+        background: none;
     }
 
-    .logoutButton {
-        width: 32px;
-        height: 32px;
-    }
-
-    .referenceStatsLayout {
-        grid-template-columns: 72px minmax(0, 1fr);
-    }
-
-    .referenceGift > img:first-child {
-        height: 82px;
-    }
-
-    .referenceStat {
-        gap: 7px;
-        padding: 7px;
-    }
-
-    .referenceStatIcon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .referenceStat small {
-        font-size: 8px;
-    }
-
-    .referenceStat strong {
-        font-size: 14px;
-    }
-
-    .referenceUltimateContent {
-        grid-template-columns: 0.8fr 1fr;
-    }
-
-    .referenceCrown img {
-        height: 95px;
-    }
-}
-
-/* Respect reduced-motion settings */
-@media (prefers-reduced-motion: reduce) {
-    .referenceGift > img:first-child,
-    .referenceCrown img {
-        animation: none;
-    }
-
-    .rewardCard {
-        transition: none;
-    }
-}
-
-/* Paste this at the BOTTOM of Dashboard.module.css */
-
-.page {
-    min-height: 100vh;
-    overflow-x: clip;
-    color: #fff;
-    background:
-        radial-gradient(ellipse at 12% 12%, rgba(100, 44, 170, .18), transparent 38%),
-        radial-gradient(ellipse at 88% 18%, rgba(75, 35, 130, .16), transparent 38%),
-        #0a0612;
-}
-
-.main {
-    width: min(1440px, calc(100% - 64px));
-    margin-inline: auto;
-    padding: 24px 0 36px;
-}
-
-.header {
-    background: rgba(12, 7, 23, .78);
-    border-bottom: 1px solid rgba(176, 122, 255, .12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-.referenceSummary {
-    display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    gap: 20px;
-    align-items: stretch;
-}
-
-.referenceLeft,
-.referenceUltimate {
-    position: relative;
-    min-width: 0;
-    min-height: 320px;
-    overflow: hidden;
-    border: 1px solid rgba(155, 91, 239, .30);
-    border-radius: 25px;
-    background: linear-gradient(140deg, rgba(28, 17, 48, .82), rgba(13, 8, 24, .90));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 15px 38px rgba(0,0,0,.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-.referenceLeft { padding: 25px 28px; }
-
-.referenceHeading h1 {
-    margin: 0;
-    color: #fff;
-    font-size: clamp(25px, 2.3vw, 34px);
-    font-weight: 850;
-    letter-spacing: -1.1px;
-    line-height: 1.25;
-}
-.referenceHeading h1 span { color: #ffc928; }
-.referenceHeading p {
-    margin: 7px 0 16px;
-    color: #b9aecb;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.referenceStatsLayout {
-    display: grid;
-    grid-template-columns: minmax(115px, .75fr) minmax(0, 1.8fr);
-    align-items: center;
-    gap: 20px;
-}
-
-.referenceGift {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-width: 0;
-    min-height: 180px;
-    border-radius: 20px;
-    background: radial-gradient(circle, rgba(137,60,255,.15), transparent 70%);
-}
-.referenceGift > img:first-child {
-    width: 100%;
-    max-width: 175px;
-    height: 170px;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(132,58,255,.22));
-    animation: referenceFloat 5s ease-in-out infinite;
-}
-.referenceFloatingCoin {
-    position: absolute;
-    right: 2px;
-    bottom: 8px;
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-}
-
-.referenceStats { display: grid; gap: 10px; min-width: 0; }
-.referenceStat {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    min-height: 60px;
-    min-width: 0;
-    padding: 10px 13px;
-    border: 1px solid rgba(167,118,224,.20);
-    border-radius: 15px;
-    background: rgba(255,255,255,.035);
-    box-shadow: inset 0 1px rgba(255,255,255,.025);
-}
-.referenceStatIcon {
-    display: grid;
-    place-items: center;
-    flex: 0 0 39px;
-    width: 39px;
-    height: 39px;
-    border: 1px solid rgba(176,117,255,.30);
-    border-radius: 12px;
-    background: rgba(139,69,220,.15);
-    color: #d6a6ff;
-}
-.referenceStat:nth-child(2) .referenceStatIcon {
-    color: #26d99a;
-    border-color: rgba(38,217,154,.3);
-    background: rgba(38,217,154,.09);
-}
-.referenceStatIcon img { width: 27px; height: 27px; object-fit: contain; }
-.referenceStat small {
-    display: block;
-    margin-bottom: 3px;
-    color: #b7abc9;
-    font-size: 11px;
-    letter-spacing: .25px;
-}
-.referenceStat strong {
-    display: block;
-    color: #fff;
-    font-size: 19px;
-    font-weight: 850;
-    overflow-wrap: anywhere;
-}
-.referenceStat .referenceGold { color: #ffc928; font-size: 15px; }
-
-.referenceClaimRow {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
-}
-.referenceClaimButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    min-height: 42px;
-    padding: 0 20px;
-    border: 0;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #ffe36a, #ffb900);
-    color: #211400;
-    font-size: 13px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: transform .2s ease, box-shadow .2s ease;
-}
-.referenceClaimButton:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255,190,30,.2);
-}
-.referenceClaimButton:disabled { opacity: .6; cursor: wait; }
-.referenceCountdown {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 9px 13px;
-    border: 1px solid rgba(168,113,255,.28);
-    border-radius: 11px;
-    background: rgba(140,78,220,.1);
-}
-.referenceCountdown span { color: #c0b1d6; font-size: 12px; }
-.referenceCountdown strong { color: #d3a4ff; font-size: 16px; }
-
-.referenceUltimate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-}
-.referenceUltimate::before {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 25% 58%, rgba(129,49,255,.16), transparent 58%);
-    content: "";
-    pointer-events: none;
-}
-.referenceStreakBadge {
-    position: absolute;
-    top: 17px;
-    right: 17px;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    max-width: calc(100% - 34px);
-    padding: 9px 12px;
-    border: 1px solid rgba(167,111,255,.28);
-    border-radius: 30px;
-    background: rgba(133,70,185,.13);
-    font-size: 11px;
-}
-.referenceStreakBadge img { width: 18px; height: 18px; object-fit: contain; }
-.referenceStreakBadge strong { color: #fff; white-space: nowrap; }
-.referenceStreakBadge span { color: #c8a3f5; white-space: nowrap; }
-
-.referenceUltimateContent {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(120px, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 18px;
-    width: 100%;
-    margin-top: 26px;
-}
-.referenceCrown { display: grid; place-items: center; min-width: 0; }
-.referenceCrown img {
-    width: 100%;
-    max-width: 225px;
-    height: 180px;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(255,180,30,.18));
-    animation: referenceFloat 6s ease-in-out infinite;
-}
-.referenceUltimateText > span {
-    display: block;
-    color: #cb8bff;
-    font-size: 14px;
-    font-weight: 850;
-    letter-spacing: .45px;
-}
-.referenceUltimateText h2 {
-    margin: 8px 0 9px;
-    color: #fff;
-    font-size: clamp(30px, 3.2vw, 46px);
-    font-weight: 900;
-    line-height: 1.05;
-    overflow-wrap: anywhere;
-}
-.referenceGiftLabel {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    max-width: 100%;
-    padding: 6px 10px;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 25px;
-    background: rgba(255,255,255,.055);
-    color: #f6efff;
-    font-size: 11px;
-    font-weight: 700;
-}
-.referenceGiftLabel img { width: 20px; height: 20px; object-fit: contain; }
-.referenceGiftLabel span { overflow-wrap: anywhere; }
-.referenceUltimateText p { margin: 13px 0 0; color: #b9aecb; font-size: 13px; }
-.referenceUltimateText p strong { color: #ffc928; }
-
-.referenceReminder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 27px 10px;
-    color: #c0a6e9;
-    text-align: center;
-    font-size: 14px;
-}
-.referenceReminder span { color: #bb83ff; text-shadow: 0 0 12px rgba(169,91,255,.45); }
-
-/* Reward cards: glass effect, gold for available/Day 7 */
-.rewardGrid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; }
-.rewardCard {
-    min-width: 0;
-    min-height: 240px;
-    padding: 13px 11px;
-    border: 1px solid rgba(152,94,229,.23);
-    border-radius: 19px;
-    background: rgba(25,16,42,.66);
-    box-shadow: inset 0 1px rgba(255,255,255,.035);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.rewardCard:hover { transform: translateY(-4px); border-color: rgba(187,133,255,.55); }
-.rewardCard.available {
-    border-color: rgba(255,197,36,.9);
-    background: linear-gradient(145deg, rgba(89,57,21,.34), rgba(23,14,32,.85));
-    box-shadow: inset 0 0 24px rgba(255,190,30,.035), 0 0 20px rgba(255,190,30,.07);
-}
-.rewardImage { height: 94px; display: grid; place-items: center; }
-.rewardImage img { width: 84px; height: 84px; object-fit: contain; }
-.claimNow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
-    padding: 10px 5px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #ffe36a, #ffb900);
-    color: #201400;
-    font-size: 11px;
-}
-
-/* Four benefit cards in one glass strip */
-.benefitsGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.benefitCard {
-    padding: 18px;
-    border: 1px solid rgba(152,94,229,.2);
-    border-radius: 17px;
-    background: rgba(25,16,42,.62);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-}
-.benefitCard img { width: 48px; height: 48px; object-fit: contain; }
-.benefitCard h3 { color: #fff; font-size: 13px; }
-.benefitCard p { color: #b9aecb; font-size: 11px; line-height: 1.6; }
-
-.trustNotice {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    margin-top: 20px;
-    padding: 14px 18px;
-    border: 1px solid rgba(255,191,35,.25);
-    border-radius: 17px;
-    background: rgba(35,23,41,.55);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-}
-.trustNotice > img { width: 32px; height: 32px; flex-shrink: 0; object-fit: contain; }
-.trustNotice > div { flex: 1; min-width: 0; }
-.trustNotice strong { color: #fff; font-size: 13px; font-weight: 750; }
-.trustNotice strong span { color: #ffc928; }
-.trustNotice p { margin: 3px 0 0; color: #b7abc9; font-size: 12px; }
-.trustArrow { flex-shrink: 0; color: #a99ab9; }
-
-/* Hide the old footer and quick navigation */
-.quickSection, .footer { display: none !important; }
-
-@keyframes referenceFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-/* Tablet */
-@media (max-width: 1100px) {
-    .main { width: calc(100% - 40px); }
-    .referenceSummary { grid-template-columns: 1fr 1fr; gap: 14px; }
-    .referenceLeft { padding: 22px 18px; }
-    .referenceStatsLayout { grid-template-columns: 105px minmax(0, 1fr); gap: 12px; }
-    .referenceGift > img:first-child { height: 130px; }
-    .referenceGift { min-height: 150px; }
-    .referenceUltimate { padding: 20px; }
-    .referenceUltimateContent { grid-template-columns: 1fr; gap: 2px; margin-top: 42px; text-align: center; }
-    .referenceCrown img { height: 110px; }
-    .rewardGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .benefitsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-    .main { width: calc(100% - 24px); padding-top: 16px; }
-    .referenceSummary { grid-template-columns: 1fr; gap: 14px; }
-    .referenceLeft, .referenceUltimate { min-height: 0; border-radius: 20px; }
-    .referenceLeft { padding: 21px 16px; }
-    .referenceHeading h1 { font-size: clamp(23px, 6.2vw, 30px); letter-spacing: -.8px; }
-    .referenceHeading p { font-size: 13px; }
-    .referenceStatsLayout { grid-template-columns: 90px minmax(0, 1fr); gap: 10px; }
-    .referenceGift { min-height: 0; }
-    .referenceGift > img:first-child { height: 105px; }
-    .referenceFloatingCoin { width: 28px; height: 28px; }
-    .referenceStats { gap: 7px; }
-    .referenceStat { min-height: 55px; padding: 8px; gap: 9px; border-radius: 12px; }
-    .referenceStatIcon { flex-basis: 32px; width: 32px; height: 32px; border-radius: 9px; }
-    .referenceStat small { font-size: 9px; }
-    .referenceStat strong { font-size: 16px; }
-    .referenceStat .referenceGold { font-size: 12px; }
-    .referenceClaimRow { justify-content: stretch; }
-    .referenceClaimButton, .referenceCountdown { width: 100%; justify-content: center; }
-    .referenceUltimate { padding: 56px 16px 20px; }
-    .referenceStreakBadge { top: 12px; right: 12px; padding: 7px 9px; font-size: 10px; }
-    .referenceUltimateContent { grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: 10px; margin-top: 0; text-align: left; }
-    .referenceCrown img { height: 120px; }
-    .referenceUltimateText > span { font-size: 11px; }
-    .referenceUltimateText h2 { font-size: clamp(28px, 8vw, 38px); }
-    .referenceGiftLabel { padding: 5px 7px; font-size: 10px; }
-    .referenceGiftLabel img { width: 17px; height: 17px; }
-    .referenceUltimateText p { font-size: 11px; }
-    .referenceReminder { padding: 21px 4px; gap: 7px; font-size: 12px; }
-    .rewardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .rewardCard { min-height: 220px; padding: 12px 10px; border-radius: 16px; }
-    .rewardImage { height: 88px; }
-    .rewardImage img { width: 76px; height: 76px; }
-    .benefitsGrid { grid-template-columns: 1fr; gap: 9px; }
-    .benefitCard {
-        display: grid;
-        grid-template-columns: 45px minmax(0, 1fr);
+    .trustText {
+        flex: initial;
+        display: flex;
         align-items: center;
-        column-gap: 12px;
-        padding: 14px;
-        text-align: left;
     }
-    .benefitCard img { grid-row: span 2; width: 42px; height: 42px; margin: 0; }
-    .benefitCard h3 { margin: 0 0 4px; }
-    .benefitCard p { margin: 0; }
-    .trustNotice { padding: 12px; gap: 10px; }
-    .trustNotice strong, .trustNotice p { font-size: 11px; }
+
+    .trustText strong {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .trustText p {
+        margin: 0 0 0 18px;
+        padding-left: 18px;
+        border-left: 1px solid var(--line);
+        font-size: 14px;
+        color: #e6e0f5;
+    }
+
+    .trustArrow {
+        display: none;
+    }
 }
 
-/* Small phones */
-@media (max-width: 380px) {
-    .main { width: calc(100% - 20px); }
-    .referenceStatsLayout { grid-template-columns: 72px minmax(0, 1fr); }
-    .referenceGift > img:first-child { height: 82px; }
-    .referenceStat { gap: 7px; padding: 7px; }
-    .referenceStatIcon { flex-basis: 28px; width: 28px; height: 28px; }
-    .referenceStat small { font-size: 8px; }
-    .referenceStat strong { font-size: 14px; }
-    .referenceUltimateContent { grid-template-columns: .8fr 1fr; }
-    .referenceCrown img { height: 95px; }
+/* tablets / small laptops: tighten the 7-column row */
+
+@media (min-width: 1000px) and (max-width: 1150px) {
+    .rewardAmount {
+        font-size: 24px;
+    }
+
+    .heroText h2 span {
+        font-size: 46px;
+    }
+
+    .benefitItem {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 8px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .referenceGift > img:first-child, .referenceCrown img { animation: none; }
-    .rewardCard { transition: none; }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }

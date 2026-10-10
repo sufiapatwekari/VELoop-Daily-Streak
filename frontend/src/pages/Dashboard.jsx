@@ -2,9 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     ArrowRight,
+    CalendarCheck,
+    CalendarDays,
     Check,
+    ChevronLeft,
+    ChevronRight,
     Lock,
     LogOut,
+    Sparkle,
+    Star,
     WalletCards,
     X
 } from "lucide-react";
@@ -199,6 +205,25 @@ function Dashboard() {
         return styles.locked;
     };
 
+    /* UI-only helpers (no data is changed) */
+
+    const getCardTag = (reward) => {
+        if (reward.status === "AVAILABLE") return "Today";
+        if (reward.day === 7) return "VIP";
+        if (reward.rewardType === "GIFT_CARD" && reward.day === 5) return "Gift Card";
+        if (reward.day === 6) return "Coin";
+        return "";
+    };
+
+    const getTagClass = (tag) => {
+        if (tag === "Today") return styles.tagToday;
+        if (tag === "VIP") return styles.tagVip;
+        return styles.tagSoft;
+    };
+
+    const getAmountText = (reward) =>
+        String(reward.title ?? "").replace(/\s*VES?\s*$/i, "");
+
     if (loading) {
 
         return (
@@ -253,86 +278,82 @@ function Dashboard() {
         );
     }
 
-    const progress =
-        streak?.totalRewards
-            ? Math.min(
-                (streak.currentDay /
-                    streak.totalRewards) * 100,
-                100
-            )
-            : 0;
+    const ultimateReward =
+        streak.rewards?.find((reward) => reward.day === 7);
 
     return (
 
         <div className={styles.page}>
 
-            {/* =====================================
-                HEADER
-            ====================================== */}
+            <div className={styles.shell}>
 
-            <header className={styles.header}>
+                {/* =====================================
+                    MOBILE TOP BAR
+                ====================================== */}
 
-                <div className={styles.headerInner}>
+                <div className={styles.topbar}>
 
-                    <div
-                        className={styles.brand}
-                        onClick={() => navigate("/dashboard")}
+                    <button
+                        type="button"
+                        className={styles.backButton}
+                        onClick={() => navigate(-1)}
+                        aria-label="Go back"
                     >
+                        <ChevronLeft size={20} />
+                    </button>
 
-                        <div className={styles.brandMark}>
-                            V
-                        </div>
+                    <h1 className={styles.topTitle}>
+                        Daily Streak
+                        <img src={flameImg} alt="" />
+                    </h1>
 
-                        <div>
-                            <strong>
-                                VELoop
-                            </strong>
+                    <button
+                        type="button"
+                        className={styles.balanceButton}
+                        onClick={() => navigate("/wallet")}
+                        aria-label="Open wallet"
+                    >
+                        <img src={coinImg} alt="" />
+                        <span>{streak.vesBalance}</span>
+                    </button>
 
-                            <span>
-                                Daily Streak
-                            </span>
-                        </div>
+                    <button
+                        type="button"
+                        className={styles.logoutButton}
+                        onClick={handleLogout}
+                        aria-label="Logout"
+                    >
+                        <LogOut size={17} />
+                    </button>
 
+                </div>
+
+
+                {/* =====================================
+                    DESKTOP PAGE HEADER
+                ====================================== */}
+
+                <header className={styles.pageHead}>
+
+                    <div className={styles.pageHeadText}>
+                        <h1>Daily Streak</h1>
+                        <p>
+                            Check in daily, maintain your streak, and
+                            unlock bigger rewards every day!
+                        </p>
                     </div>
 
-                    <div className={styles.headerRight}>
-
-                        <div className={styles.streakBadge}>
-
-                            <img
-                                src={flameImg}
-                                alt=""
-                            />
-
-                            <span>
-                                {streak.currentStreak}
-                            </span>
-
-                            <small>
-                                day streak
-                            </small>
-
-                        </div>
+                    <div className={styles.pageHeadActions}>
 
                         <button
                             type="button"
                             className={styles.balanceButton}
                             onClick={() => navigate("/wallet")}
+                            aria-label="Open wallet"
                         >
-
-                            <img
-                                src={coinImg}
-                                alt=""
-                            />
-
-                            <span>
-                                {streak.vesBalance}
-                            </span>
-
-                            <small>
-                                VES
-                            </small>
-
+                            <img src={coinImg} alt="" />
+                            <span>{streak.vesBalance}</span>
+                            <small>VES</small>
                         </button>
 
                         <button
@@ -344,126 +365,202 @@ function Dashboard() {
                             <LogOut size={17} />
                         </button>
 
-                    </div>
-
-                </div>
-
-            </header>
-
-
-            {/* =====================================
-                MAIN
-            ====================================== */}
-
-            <main className={styles.main}>
-
-                {/* REFERENCE DESIGN: DAILY CHECK-IN + ULTIMATE REWARD */}
-                <section className={styles.referenceSummary}>
-                    <div className={styles.referenceLeft}>
-                        <div className={styles.referenceHeading}>
-                            <h1>Daily Check-In <span>Rewards</span></h1>
-                            <p>Check in every day and earn exciting rewards!</p>
-                        </div>
-
-                        <div className={styles.referenceStatsLayout}>
-                            <div className={styles.referenceGift}>
-                                <img src={heroGiftImg} alt="Daily rewards gift" />
-                                <img className={styles.referenceFloatingCoin} src={coinImg} alt="" />
-                            </div>
-
-                            <div className={styles.referenceStats}>
-                                <div className={styles.referenceStat}>
-                                    <span className={styles.referenceStatIcon}>
-                                        <WalletCards size={20} />
-                                    </span>
-                                    <div>
-                                        <small>TOTAL REWARDS</small>
-                                        <strong>{streak.totalRewards}</strong>
-                                    </div>
-                                </div>
-
-                                <div className={styles.referenceStat}>
-                                    <span className={styles.referenceStatIcon}>
-                                        <Check size={21} />
-                                    </span>
-                                    <div>
-                                        <small>CHECKED IN</small>
-                                        <strong>{streak.checkedIn}</strong>
-                                    </div>
-                                </div>
-
-                                <div className={styles.referenceStat}>
-                                    <span className={styles.referenceStatIcon}>
-                                        <img src={coinImg} alt="" />
-                                    </span>
-                                    <div>
-                                        <small>NEXT REWARD</small>
-                                        <strong className={styles.referenceGold}>
-                                            {streak.nextReward?.title || "See your reward cards"}
-                                        </strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className={styles.referenceClaimRow}>
-                            {streak.todayClaimed ? (
-                                <div className={styles.referenceCountdown}>
-                                    <span>Next claim in</span>
-                                    <strong>{countdown}</strong>
-                                </div>
-                            ) : (
-                                <button
-                                    type="button"
-                                    className={styles.referenceClaimButton}
-                                    onClick={handleClaim}
-                                    disabled={claiming}
-                                >
-                                    {claiming ? "Claiming..." : "Claim Reward"}
-                                    {!claiming && <ArrowRight size={16} />}
-                                </button>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className={styles.referenceUltimate}>
-                        <div className={styles.referenceStreakBadge}>
+                        <div className={styles.streakTab}>
                             <img src={flameImg} alt="" />
-                            <strong>{streak.currentStreak} Day Streak</strong>
-                            <span>Keep it going!</span>
-                        </div>
-
-                        <div className={styles.referenceUltimateContent}>
-                            <div className={styles.referenceCrown}>
-                                <img src={heroCrownImg} alt="Ultimate reward crown" />
-                            </div>
-
-                            <div className={styles.referenceUltimateText}>
-                                <span>ULTIMATE REWARD</span>
-                                <h2>
-                                    {streak.rewards?.find((reward) => reward.day === 7)?.title || "Day 7"}
-                                </h2>
-                                <div className={styles.referenceGiftLabel}>
-                                    <img src={day7Img} alt="" />
-                                    <span>
-                                        {streak.rewards?.find((reward) => reward.day === 7)?.description || "Day 7 reward"}
-                                    </span>
-                                </div>
-                                <p>Unlock on <strong>Day 7</strong></p>
+                            <div>
+                                <strong>{streak.currentStreak} Day Streak</strong>
+                                <span>Keep it going!</span>
                             </div>
                         </div>
+
                     </div>
+
+                </header>
+
+
+                {/* =====================================
+                    MOBILE BANNER
+                ====================================== */}
+
+                <section className={styles.banner}>
+
+                    <div className={styles.bannerIcon}>
+                        <CalendarCheck size={34} />
+                    </div>
+
+                    <div className={styles.bannerText}>
+                        <h2>
+                            Login Daily &amp; Earn
+                            <br />
+                            <span>Bigger Rewards!</span>
+                        </h2>
+                        <p>
+                            Maintain your streak and unlock{" "}
+                            <em>exciting rewards</em> every day.
+                        </p>
+                    </div>
+
+                    <img
+                        className={styles.bannerGift}
+                        src={heroGiftImg}
+                        alt=""
+                    />
+
                 </section>
 
-                <div className={styles.referenceReminder}>
-                    <span>✦</span>
-                    Come back tomorrow for more rewards!
-                    <span>✦</span>
+
+                {/* =====================================
+                    SUMMARY
+                ====================================== */}
+
+                <section className={styles.summary}>
+
+                    {/* Desktop hero */}
+                    <div className={styles.hero}>
+
+                        <div className={styles.heroGift}>
+                            <img src={heroGiftImg} alt="Daily rewards gift" />
+                        </div>
+
+                        <div className={styles.heroText}>
+                            <h2>
+                                Daily Check-In
+                                <span>Rewards</span>
+                            </h2>
+                            <p>
+                                Check in every day and earn
+                                <br />
+                                <em>exciting rewards!</em>
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    {/* Mobile streak row */}
+                    <div className={styles.streakRow}>
+
+                        <div className={styles.streakPill}>
+                            <img src={flameImg} alt="" />
+                            <span>{streak.currentStreak} Day Streak</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            className={styles.calendarLink}
+                            onClick={() => navigate("/streak-history")}
+                        >
+                            <CalendarDays size={14} />
+                            Streak Calendar
+                            <ChevronRight size={14} />
+                        </button>
+
+                    </div>
+
+
+                    {/* Stats */}
+                    <div className={styles.stats}>
+
+                        <div className={styles.stat}>
+                            <span className={`${styles.statIcon} ${styles.iconPurple}`}>
+                                <WalletCards size={20} />
+                            </span>
+                            <div>
+                                <small>Total Rewards</small>
+                                <strong>{streak.totalRewards}</strong>
+                            </div>
+                        </div>
+
+                        <div className={styles.stat}>
+                            <span className={`${styles.statIcon} ${styles.iconGreen}`}>
+                                <CalendarCheck size={20} />
+                            </span>
+                            <div>
+                                <small>Checked In</small>
+                                <strong>{streak.checkedIn}</strong>
+                            </div>
+                        </div>
+
+                        <div className={styles.stat}>
+                            <span className={`${styles.statIcon} ${styles.iconGold}`}>
+                                <Star size={18} />
+                            </span>
+                            <div>
+                                <small>Next Reward</small>
+                                <strong className={styles.gold}>
+                                    {streak.nextReward?.title || "See your reward cards"}
+                                </strong>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    {/* Ultimate reward */}
+                    <div className={styles.ultimate}>
+
+                        <div className={styles.crown}>
+                            <img src={heroCrownImg} alt="Ultimate reward crown" />
+                        </div>
+
+                        <div className={styles.ultimateText}>
+                            <span className={styles.ultimateLabel}>
+                                Ultimate Reward
+                            </span>
+
+                            <h2>
+                                {ultimateReward?.title || "Day 7"}
+                            </h2>
+
+                            <div className={styles.giftPill}>
+                                <img src={day5Img} alt="" />
+                                <span>
+                                    {ultimateReward?.description || "Day 7 reward"}
+                                </span>
+                            </div>
+
+                            <p className={styles.unlockInline}>
+                                Unlock on <strong>Day 7</strong>
+                            </p>
+                        </div>
+
+                        <div className={styles.unlockTile}>
+                            <Lock size={22} />
+                            <span>
+                                Unlock on
+                                <strong>Day 7</strong>
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                {/* =====================================
+                    REMINDER
+                ====================================== */}
+
+                <div className={styles.reminder}>
+
+                    <span className={styles.reminderLine}></span>
+
+                    <p>
+                        <Sparkle size={11} />
+                        {streak.todayClaimed
+                            ? <>Next claim in <strong>{countdown}</strong></>
+                            : "Come back tomorrow for more rewards!"}
+                        <Sparkle size={11} />
+                    </p>
+
+                    <span className={styles.reminderLine}></span>
+
                 </div>
 
-                {/* =================================
+
+                {/* =====================================
                     MESSAGES
-                ================================== */}
+                ====================================== */}
 
                 {claimMessage && (
 
@@ -492,204 +589,167 @@ function Dashboard() {
                 )}
 
 
-                {/* =================================
+                {/* =====================================
                     7 DAY REWARD GRID
-                ================================== */}
+                ====================================== */}
 
-                <section className={styles.rewardsSection}>
+                <section className={styles.rewardGrid}>
 
-                    <div className={styles.sectionTitle}>
+                    {streak.rewards.map((reward) => {
 
-                        <div>
+                        const tag = getCardTag(reward);
 
-                            <span>
-                                STREAK CALENDAR
-                            </span>
+                        return (
 
-                            <h2>
-                                7-Day Reward Journey
-                            </h2>
-
-                        </div>
-
-                        <div className={styles.completedBadge}>
-                            {streak.checkedIn} / {streak.totalRewards}
-                        </div>
-
-                    </div>
-
-
-                    <div className={styles.rewardGrid}>
-
-                        {streak.rewards.map((reward) => (
-
-                            <button
+                            <article
                                 key={reward.day}
-                                type="button"
+                                role="button"
+                                tabIndex={0}
                                 className={`${styles.rewardCard} ${getDayStatusClass(
                                     reward.status
-                                )}`}
-                                onClick={() =>
-                                    handleRewardClick(reward)
-                                }
+                                )} ${reward.day === 7 ? styles.vip : ""}`}
+                                onClick={() => handleRewardClick(reward)}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        handleRewardClick(reward);
+                                    }
+                                }}
                             >
 
                                 <div className={styles.rewardTop}>
 
-                                    <span>
+                                    <span className={styles.dayChip}>
                                         Day {reward.day}
                                     </span>
 
                                     {reward.status === "CLAIMED" && (
-                                        <Check size={14} />
+                                        <span className={styles.claimedBadge}>
+                                            <Check size={12} strokeWidth={3} />
+                                        </span>
                                     )}
 
-                                    {reward.status === "LOCKED" && (
-                                        <Lock size={13} />
+                                    {reward.status !== "CLAIMED" && tag && (
+                                        <span className={getTagClass(tag)}>
+                                            {tag}
+                                        </span>
                                     )}
 
                                 </div>
 
 
                                 <div className={styles.rewardImage}>
-
                                     <img
                                         src={getRewardImage(reward)}
                                         alt=""
                                     />
-
                                 </div>
 
 
-                                <strong>
-                                    {reward.title}
+                                <span className={styles.rewardLabel}>
+                                    {reward.day === 7
+                                        ? "Ultimate Reward"
+                                        : "Daily Reward"}
+                                </span>
+
+                                <strong className={styles.rewardAmount}>
+                                    {getAmountText(reward)}
                                 </strong>
 
-                                <small>
-                                    {reward.status === "CLAIMED"
-                                        ? "Claimed"
-                                        : reward.status === "AVAILABLE"
-                                        ? "Available today"
-                                        : "Locked"}
+                                <small className={styles.rewardSub}>
+                                    {reward.description}
                                 </small>
 
 
-                                {reward.status === "AVAILABLE" && (
+                                {reward.status === "AVAILABLE" ? (
 
-                                    <span className={styles.claimNow}>
-                                        Claim now
-                                        <ArrowRight size={13} />
-                                    </span>
+                                    <button
+                                        type="button"
+                                        className={styles.claimButton}
+                                        disabled={claiming}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleClaim();
+                                        }}
+                                    >
+                                        {claiming ? (
+                                            "Claiming..."
+                                        ) : (
+                                            <>
+                                                <span className={styles.claimDesktop}>Claim Reward</span>
+                                                <span className={styles.claimMobile}>Claim Now</span>
+                                                <ChevronRight size={14} />
+                                            </>
+                                        )}
+                                    </button>
+
+                                ) : reward.status === "CLAIMED" ? (
+
+                                    <div className={styles.statusClaimed}>
+                                        <Check size={13} strokeWidth={3} />
+                                        Claimed
+                                    </div>
+
+                                ) : (
+
+                                    <div className={styles.statusLocked}>
+                                        <Lock size={12} />
+                                        Locked
+                                    </div>
 
                                 )}
 
-                            </button>
-
-                        ))}
-
-                    </div>
+                            </article>
+                        );
+                    })}
 
                 </section>
 
 
-                {/* =================================
+                {/* =====================================
                     BENEFITS
-                ================================== */}
+                ====================================== */}
 
-                <section className={styles.benefitsSection}>
+                <section className={styles.benefits}>
 
-                    <div className={styles.sectionTitle}>
-
-                        <div>
-
-                            <span>
-                                WHY MAINTAIN YOUR STREAK?
-                            </span>
-
-                            <h2>
-                                Bigger consistency. Bigger rewards.
-                            </h2>
-
-                        </div>
-
-                    </div>
-
+                    <h3 className={styles.benefitsTitle}>
+                        <Sparkle size={10} />
+                        Why Maintain Your Streak?
+                        <Sparkle size={10} />
+                    </h3>
 
                     <div className={styles.benefitsGrid}>
 
-                        <div className={styles.benefitCard}>
-
-                            <img
-                                src={activeImg}
-                                alt=""
-                            />
-
-                            <h3>
-                                Stay Active
-                            </h3>
-
-                            <p>
-                                Keep your daily streak alive
-                                and never miss an eligible reward.
-                            </p>
-
+                        <div className={styles.benefitItem}>
+                            <img src={activeImg} alt="" />
+                            <div>
+                                <h4>Stay Active</h4>
+                                <p>Keep your streak alive &amp; earn more!</p>
+                            </div>
                         </div>
 
-
-                        <div className={styles.benefitCard}>
-
-                            <img
-                                src={biggerStreakImg}
-                                alt=""
-                            />
-
-                            <h3>
-                                Bigger Streak
-                            </h3>
-
-                            <p>
-                                Stay consistent to unlock
-                                higher-value rewards.
-                            </p>
-
+                        <div className={styles.benefitItem}>
+                            <img src={biggerStreakImg} alt="" />
+                            <div>
+                                <h4>Bigger Streak</h4>
+                                <p>More consecutive logins, bigger rewards!</p>
+                            </div>
                         </div>
 
-
-                        <div className={styles.benefitCard}>
-
-                            <img
-                                src={exclusiveImg}
-                                alt=""
-                            />
-
-                            <h3>
-                                Exclusive Rewards
-                            </h3>
-
-                            <p>
-                                Reach later days to unlock
-                                special reward types.
-                            </p>
-
+                        <div className={styles.benefitItem}>
+                            <img src={exclusiveImg} alt="" />
+                            <div>
+                                <h4>Exclusive Rewards</h4>
+                                <p>Get coins, gift cards &amp; special bonuses!</p>
+                            </div>
                         </div>
 
-
-                        <div className={styles.benefitCard}>
-
-                            <img
-                                src={trustImg}
-                                alt=""
-                            />
-
-                            <h3>
-                                Don't Miss Out
-                            </h3>
-
-                            <p>
-                                Come back every day to protect
-                                your progress.
-                            </p>
-
+                        <div className={styles.benefitItem}>
+                            <img src={trustImg} alt="" />
+                            <div>
+                                <h4>Don't Miss Out</h4>
+                                <p>Come back every day &amp; unlock all rewards!</p>
+                            </div>
                         </div>
 
                     </div>
@@ -697,101 +757,22 @@ function Dashboard() {
                 </section>
 
 
-                {/* OFFICIAL REWARDS TRUST STRIP */}
+                {/* =====================================
+                    OFFICIAL REWARDS STRIP
+                ====================================== */}
+
                 <div className={styles.trustNotice}>
                     <img src={trustImg} alt="" />
-                    <div>
-                        <strong>Official rewards only on <span>VeloopRewards.in</span></strong>
+                    <div className={styles.trustText}>
+                        <strong>
+                            Official rewards only on <span>VeloopRewards.in</span>
+                        </strong>
                         <p>Stay active, stay rewarded!</p>
                     </div>
                     <ArrowRight className={styles.trustArrow} size={18} />
                 </div>
 
-            </main>
-
-
-            {/* =====================================
-                FOOTER
-            ====================================== */}
-
-          {/* <footer className={styles.footer}>
-
-                <div className={styles.footerInner}>
-
-                    <div className={styles.footerBrand}>
-
-                      <div className={styles.footerLogo}>
-
-                           <div className={styles.footerBrandMark}>
-                                V
-                           </div>
-
-                            <strong>
-                             VELoop Rewards
-                            </strong>
-
-                      </div>
-
-                        <p>
-                            Stay active. Build your streak.
-                            Unlock your rewards.
-                        </p>
-
-                    </div>
-
-
-                    <div className={styles.footerLinks}>
-
-                        <button
-                            onClick={() =>
-                                navigate("/wallet")
-                            }
-                        >
-                            Wallet
-                        </button>
-
-                        <button
-                            onClick={() =>
-                                navigate("/transactions")
-                            }
-                        >
-                            Transactions
-                        </button>
-
-                        <button
-                            onClick={() =>
-                                navigate("/streak-history")
-                            }
-                        >
-                            Streak History
-                        </button>
-
-                        <button
-                            onClick={() =>
-                                navigate("/privacy-policy")
-                            }
-                        >
-                            Privacy
-                        </button>
-
-                        <button
-                            onClick={() =>
-                                navigate("/terms")
-                            }
-                        >
-                            Terms
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div className={styles.footerBottom}>
-                    © {new Date().getFullYear()} VELoop Rewards.
-                    All rights reserved.
-                </div>
-
-            </footer>*/}
+            </div>
 
 
             {/* =====================================
@@ -820,6 +801,7 @@ function Dashboard() {
                             onClick={() =>
                                 setSelectedReward(null)
                             }
+                            aria-label="Close"
                         >
                             <X size={18} />
                         </button>
