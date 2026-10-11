@@ -1,6 +1,7 @@
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RefreshCw } from "lucide-react";
 import { getStreakHistory } from "../services/streakApi";
 import styles from "./StreakHistory.module.css";
 
@@ -12,32 +13,46 @@ function StreakHistory() {
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [refreshing, setRefreshing] = useState(false);
+    const [refreshError, setRefreshError] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const loadHistory = async () => {
-            try {
-                const data = await getStreakHistory();
+    const loadHistory = useCallback(async (isRefresh = false) => {
+        if (isRefresh) {
+            setRefreshing(true);
+            setRefreshError("");
+        }
 
-                const historyData = Array.isArray(data)
-                    ? data
-                    : data.history || data.data || [];
+        try {
+            const data = await getStreakHistory();
 
-                setHistory(historyData);
-            } catch (error) {
-                console.error(error);
+            const historyData = Array.isArray(data)
+                ? data
+                : data.history || data.data || [];
 
-                setError(
-                    error.response?.data?.message ||
-                    "Failed to load streak history."
-                );
-            } finally {
-                setLoading(false);
+            setHistory(historyData);
+            setError("");
+        } catch (error) {
+            console.error(error);
+
+            const message =
+                error.response?.data?.message ||
+                "Failed to load streak history.";
+
+            if (isRefresh) {
+                setRefreshError(message);
+            } else {
+                setError(message);
             }
-        };
-
-        loadHistory();
+        } finally {
+            setLoading(false);
+            setRefreshing(false);
+        }
     }, []);
+
+    useEffect(() => {
+        loadHistory();
+    }, [loadHistory]);
 
     const formatDate = (date) => {
         if (!date) return "N/A";
@@ -102,11 +117,15 @@ function StreakHistory() {
                         <button
                             type="button"
                             className={styles.headerButton}
-                            onClick={() => window.location.reload()}
+                            onClick={() => loadHistory(true)}
+                            disabled={refreshing}
                             aria-label="Refresh streak history"
                             title="Refresh"
                         >
-                            ↻
+                            <RefreshCw
+                                size={17}
+                                className={refreshing ? styles.spinIcon : ""}
+                            />
                         </button>
 
                         <button
@@ -154,6 +173,13 @@ function StreakHistory() {
 
                 {/* MAIN CONTENT */}
                 <div className={styles.main}>
+                    {refreshError && (
+                        <div className={styles.refreshError} role="alert">
+                            <span>!</span>
+                            {refreshError}
+                        </div>
+                    )}
+
                     <section className={styles.headingRow}>
                         <div>
                             <span className={styles.eyebrow}>

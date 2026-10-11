@@ -7,6 +7,41 @@ import vesCoin from "../../assests/VEs_Coin.png";
 import flame from "../../assests/Flame.png";
 import trust from "../../assests/Trust.png";
 
+/* Save small user info so the dashboard can show it */
+const saveUserInfo = (data, typedEmail) => {
+    try {
+        const apiUser = data?.user || data?.userData || data?.profile || {};
+
+        const email = String(
+            apiUser.email || data?.email || typedEmail || ""
+        ).trim();
+
+        let savedNames = {};
+
+        try {
+            savedNames = JSON.parse(
+                localStorage.getItem("veloopNames") || "{}"
+            );
+        } catch {
+            savedNames = {};
+        }
+
+        const name =
+            apiUser.name ||
+            apiUser.fullName ||
+            data?.name ||
+            savedNames[email.toLowerCase()] ||
+            "";
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify({ name, email })
+        );
+    } catch (storageError) {
+        console.error(storageError);
+    }
+};
+
 function Login() {
     const navigate = useNavigate();
 
@@ -42,6 +77,8 @@ function Login() {
             const token = response.data.token;
 
             localStorage.setItem("token", token);
+
+            saveUserInfo(response.data, formData.email);
 
             navigate("/dashboard");
 

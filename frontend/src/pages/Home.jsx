@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowRight, Clock, Sparkle } from "lucide-react";
+
 import styles from "./Home.module.css";
 
 import vesCoin from "../../assests/VEs_Coin.png";
@@ -13,817 +16,660 @@ import trust from "../../assests/Trust.png";
 import topLeft from "../../assests/Top_Left.png";
 import topRight from "../../assests/Top_right.png";
 
+/* the 7 reward days (same content as before) */
+const REWARDS = [
+    { day: 1, img: vesCoin, amount: "+5 VES", label: "First Claim" },
+    { day: 2, img: vesCoin, amount: "+10 VES", label: "Keep Going" },
+    { day: 3, img: vesCoin, amount: "+15 VES", label: "Build Momentum" },
+    { day: 4, img: day4, amount: "₹1", label: "Amazon Gift Card" },
+    { day: 5, img: day5, amount: "₹2", label: "Amazon Gift Card" },
+    { day: 6, img: vesCoin, amount: "+30 VES", label: "Almost There" },
+    { day: 7, img: day7, amount: "₹5", label: "Ultimate Reward" }
+];
+
+const STEPS = [
+    {
+        number: "01",
+        img: trust,
+        title: "Create your account",
+        text: "Register with your email and start your VELoop reward journey."
+    },
+    {
+        number: "02",
+        img: stayActive,
+        title: "Check in every day",
+        text: "Claim your daily reward and continue your streak without missing a day."
+    },
+    {
+        number: "03",
+        img: exclusiveReward,
+        title: "Unlock rewards",
+        text: "Progress through seven days and unlock VES and gift-card rewards."
+    }
+];
+
+const BENEFITS = [
+    {
+        img: flame,
+        title: "Keep your streak alive",
+        text: "Return every day and continue your journey."
+    },
+    {
+        img: vesCoin,
+        title: "Build your VES balance",
+        text: "Earn VES through your daily reward claims."
+    },
+    {
+        img: exclusiveReward,
+        title: "Unlock special rewards",
+        text: "Reach gift-card reward days as you progress."
+    },
+    {
+        img: trust,
+        title: "One secure reward journey",
+        text: "Your streak and reward progress stay tied to your account."
+    }
+];
+
+const pad = (n) => String(n).padStart(2, "0");
+
 function Home() {
     const navigate = useNavigate();
+    const pageRef = useRef(null);
+
+    const [activeDay, setActiveDay] = useState(1);
+    const [autoPlay, setAutoPlay] = useState(true);
+
+    const current = REWARDS[activeDay - 1];
+
+    /* preview auto-cycles through the 7 days */
+    useEffect(() => {
+        if (!autoPlay) {
+            return;
+        }
+
+        if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        const timer = setInterval(() => {
+            setActiveDay((day) => (day >= 7 ? 1 : day + 1));
+        }, 2800);
+
+        return () => clearInterval(timer);
+    }, [autoPlay]);
+
+    /* fade-in sections as they scroll into view */
+    useEffect(() => {
+        const nodes = pageRef.current
+            ? pageRef.current.querySelectorAll("[data-reveal]")
+            : [];
+
+        if (!("IntersectionObserver" in window)) {
+            nodes.forEach((node) => node.classList.add(styles.revealIn));
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add(styles.revealIn);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        nodes.forEach((node) => observer.observe(node));
+
+        return () => observer.disconnect();
+    }, []);
+
+    const scrollToSection = (e, id) => {
+        e.preventDefault();
+
+        document
+            .getElementById(id)
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const selectDay = (day) => {
+        setActiveDay(day);
+        setAutoPlay(false);
+    };
 
     return (
-        <div className={styles.page}>
+        <div className={styles.page} ref={pageRef}>
 
-            {/* ================================
-                NAVBAR
-            ================================= */}
+            {/* background layers */}
+            <div className={styles.bg} aria-hidden="true">
+                <span className={styles.orbA}></span>
+                <span className={styles.orbB}></span>
+                <span className={styles.orbC}></span>
+                <span className={styles.gridPattern}></span>
+            </div>
 
-            <header className={styles.navbar}>
+            <div className={styles.content}>
 
-                <button
-                    type="button"
-                    className={styles.brand}
-                    onClick={() => navigate("/")}
-                >
-                    <div className={styles.brandIcon}>
-                        V
-                    </div>
+                {/* ================================
+                    NAVBAR
+                ================================= */}
 
-                    <div>
-                        <strong>VELoop</strong>
-                        <span>DAILY STREAK</span>
-                    </div>
-                </button>
+                <div className={styles.navWrap}>
+                    <header className={styles.navbar}>
 
-                <nav className={styles.navLinks}>
-                    <a href="#how-it-works">
-                        How It Works
-                    </a>
+                        <button
+                            type="button"
+                            className={styles.brand}
+                            onClick={() => navigate("/")}
+                        >
+                            <span className={styles.brandIcon}>V</span>
 
-                    <a href="#rewards">
-                        Rewards
-                    </a>
+                            <span className={styles.brandText}>
+                                <strong>VELoop</strong>
+                                <small>DAILY STREAK</small>
+                            </span>
+                        </button>
 
-                    <a href="#why-veloop">
-                        Why VELoop
-                    </a>
-                </nav>
+                        <nav className={styles.navLinks}>
+                            <a
+                                href="#how-it-works"
+                                onClick={(e) => scrollToSection(e, "how-it-works")}
+                            >
+                                How It Works
+                            </a>
 
-                <div className={styles.navActions}>
+                            <a
+                                href="#rewards"
+                                onClick={(e) => scrollToSection(e, "rewards")}
+                            >
+                                Rewards
+                            </a>
 
-                    <button
-                        type="button"
-                        className={styles.loginButton}
-                        onClick={() => navigate("/login")}
-                    >
-                        Login
-                    </button>
+                            <a
+                                href="#why-veloop"
+                                onClick={(e) => scrollToSection(e, "why-veloop")}
+                            >
+                                Why VELoop
+                            </a>
+                        </nav>
 
-                    <button
-                        type="button"
-                        className={styles.registerButton}
-                        onClick={() => navigate("/register")}
-                    >
-                        Register
-                    </button>
+                        <div className={styles.navActions}>
+                            <button
+                                type="button"
+                                className={styles.loginButton}
+                                onClick={() => navigate("/login")}
+                            >
+                                Login
+                            </button>
 
-                </div>
-
-            </header>
-
-
-            {/* ================================
-                HERO
-            ================================= */}
-
-            <main>
-
-                <section className={styles.hero}>
-
-                    <div className={styles.heroContent}>
-
-                        <div className={styles.heroKicker}>
-                            <img
-                                src={flame}
-                                alt=""
-                            />
-                            DAILY STREAK REWARDS
+                            <button
+                                type="button"
+                                className={styles.registerButton}
+                                onClick={() => navigate("/register")}
+                            >
+                                Register
+                            </button>
                         </div>
 
-                        <h1>
-                            Show up every day.
-                            <br />
-                            <span>Earn something back.</span>
-                        </h1>
+                    </header>
+                </div>
 
-                        <p>
-                            Build your daily streak, collect VES rewards,
-                            and unlock exciting gift-card rewards as you
-                            keep going.
-                        </p>
 
-                        <div className={styles.heroActions}>
+                <main>
+
+                    {/* ================================
+                        HERO
+                    ================================= */}
+
+                    <section className={`${styles.container} ${styles.hero}`}>
+
+                        <div className={styles.heroContent}>
+
+                            <div className={styles.kicker}>
+                                <img src={flame} alt="" />
+                                DAILY STREAK REWARDS
+                            </div>
+
+                            <h1 className={styles.title}>
+                                Show up every day.
+                                <span>Earn something back.</span>
+                            </h1>
+
+                            <p className={styles.lead}>
+                                Build your daily streak, collect VES rewards,
+                                and unlock exciting gift-card rewards as you
+                                keep going.
+                            </p>
+
+                            <div className={styles.whatIs}>
+                                <span className={styles.whatIsIcon}>
+                                    <Sparkle size={15} />
+                                </span>
+
+                                <p>
+                                    <strong>What is VELoop?</strong>{" "}
+                                    A daily check-in rewards app. Claim once
+                                    every 24 hours, grow a 7-day streak and
+                                    collect VES coins and Amazon gift cards.
+                                </p>
+                            </div>
+
+                            <div className={styles.heroActions}>
+
+                                <button
+                                    type="button"
+                                    className={styles.primaryCta}
+                                    onClick={() => navigate("/register")}
+                                >
+                                    Start Your Streak
+                                    <ArrowRight size={18} />
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className={styles.secondaryCta}
+                                    onClick={() => navigate("/login")}
+                                >
+                                    Already a member?
+                                </button>
+
+                            </div>
+
+                            <div className={styles.heroStats}>
+
+                                <div className={styles.statChip}>
+                                    <strong>7</strong>
+                                    <span>Reward Days</span>
+                                </div>
+
+                                <div className={styles.statChip}>
+                                    <strong>24h</strong>
+                                    <span>Claim Cycle</span>
+                                </div>
+
+                                <div className={styles.statChip}>
+                                    <strong>
+                                        <img src={vesCoin} alt="" />
+                                    </strong>
+                                    <span>VES Rewards</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        {/* ---------- interactive dashboard preview ---------- */}
+
+                        <div
+                            className={styles.preview}
+                            onMouseEnter={() => setAutoPlay(false)}
+                            onMouseLeave={() => setAutoPlay(true)}
+                        >
+
+                            <span className={styles.previewGlow}></span>
+
+                            <img
+                                src={topLeft}
+                                alt=""
+                                className={styles.decorGift}
+                            />
+
+                            <img
+                                src={topRight}
+                                alt=""
+                                className={styles.decorCrown}
+                            />
+
+                            <div className={`${styles.chip} ${styles.chipStreak}`}>
+                                <img src={flame} alt="" />
+                                <span>7 Day Streak</span>
+                            </div>
+
+                            <div className={`${styles.chip} ${styles.chipBigger}`}>
+                                <img src={biggerStreak} alt="" />
+                                <span>Bigger Streak</span>
+                            </div>
+
+                            <div className={styles.window}>
+
+                                <div className={styles.windowBar}>
+
+                                    <div className={styles.windowTitle}>
+                                        <img src={flame} alt="" />
+                                        <span>Daily Streak</span>
+                                    </div>
+
+                                    <span className={styles.livePill}>
+                                        <i></i>
+                                        Live preview
+                                    </span>
+
+                                </div>
+
+
+                                <div className={styles.spotlight} key={current.day}>
+
+                                    <div className={styles.spotImage}>
+                                        <img src={current.img} alt="" />
+                                    </div>
+
+                                    <div className={styles.spotText}>
+                                        <span className={styles.dayPill}>
+                                            DAY {pad(current.day)}
+                                        </span>
+
+                                        <strong>{current.amount}</strong>
+
+                                        <small>{current.label}</small>
+                                    </div>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    className={styles.claimDemo}
+                                    onClick={() => navigate("/register")}
+                                >
+                                    Claim this reward
+                                    <ArrowRight size={16} />
+                                </button>
+
+
+                                <div className={styles.dayTiles}>
+                                    {REWARDS.map((reward) => (
+                                        <button
+                                            key={reward.day}
+                                            type="button"
+                                            className={`${styles.tile} ${
+                                                reward.day === activeDay
+                                                    ? styles.tileActive
+                                                    : ""
+                                            } ${
+                                                reward.day === 7
+                                                    ? styles.tileFinal
+                                                    : ""
+                                            }`}
+                                            onClick={() => selectDay(reward.day)}
+                                            aria-label={`Day ${reward.day}: ${reward.amount}`}
+                                            aria-pressed={reward.day === activeDay}
+                                        >
+                                            <small>D{reward.day}</small>
+                                            <img src={reward.img} alt="" />
+                                        </button>
+                                    ))}
+                                </div>
+
+
+                                <p className={styles.windowFoot}>
+                                    <Clock size={13} />
+                                    Claim once every 24 hours
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    {/* ================================
+                        HOW IT WORKS
+                    ================================= */}
+
+                    <section
+                        id="how-it-works"
+                        className={`${styles.container} ${styles.section}`}
+                    >
+
+                        <div
+                            className={`${styles.heading} ${styles.reveal}`}
+                            data-reveal
+                        >
+                            <span>SIMPLE BY DESIGN</span>
+
+                            <h2>How your daily streak works</h2>
+
+                            <p>
+                                Stay consistent. Claim once every 24 hours.
+                                Keep your streak alive and unlock the next
+                                reward.
+                            </p>
+                        </div>
+
+
+                        <div className={styles.steps}>
+                            {STEPS.map((step, index) => (
+                                <article
+                                    key={step.number}
+                                    className={`${styles.stepCard} ${styles.reveal}`}
+                                    style={{ "--d": `${index * 90}ms` }}
+                                    data-reveal
+                                >
+                                    <div className={styles.stepTop}>
+                                        <span className={styles.stepNumber}>
+                                            {step.number}
+                                        </span>
+
+                                        <div className={styles.stepIcon}>
+                                            <img src={step.img} alt="" />
+                                        </div>
+                                    </div>
+
+                                    <h3>{step.title}</h3>
+                                    <p>{step.text}</p>
+                                </article>
+                            ))}
+                        </div>
+
+                    </section>
+
+
+                    {/* ================================
+                        REWARD JOURNEY
+                    ================================= */}
+
+                    <section
+                        id="rewards"
+                        className={`${styles.container} ${styles.section}`}
+                    >
+
+                        <div
+                            className={`${styles.journeyPanel} ${styles.reveal}`}
+                            data-reveal
+                        >
+
+                            <div className={styles.heading}>
+                                <span className={styles.gold}>
+                                    YOUR REWARD JOURNEY
+                                </span>
+
+                                <h2>Seven days. Seven reasons to return.</h2>
+
+                                <p>
+                                    Every successful claim moves you closer to
+                                    the ultimate reward.
+                                </p>
+                            </div>
+
+
+                            <div className={styles.track}>
+                                {REWARDS.map((reward) => (
+                                    <div
+                                        key={reward.day}
+                                        className={`${styles.rewardCard} ${
+                                            reward.day === 1
+                                                ? styles.firstReward
+                                                : ""
+                                        } ${
+                                            reward.day === 7
+                                                ? styles.finalReward
+                                                : ""
+                                        }`}
+                                    >
+                                        <span className={styles.rewardDay}>
+                                            DAY {pad(reward.day)}
+                                        </span>
+
+                                        <div className={styles.rewardImage}>
+                                            <img src={reward.img} alt="" />
+                                        </div>
+
+                                        <strong>{reward.amount}</strong>
+
+                                        <small>{reward.label}</small>
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    {/* ================================
+                        WHY VELOOP
+                    ================================= */}
+
+                    <section
+                        id="why-veloop"
+                        className={`${styles.container} ${styles.section} ${styles.why}`}
+                    >
+
+                        <div
+                            className={`${styles.whyContent} ${styles.reveal}`}
+                            data-reveal
+                        >
+
+                            <span className={styles.kickerText}>
+                                WHY VELOOP?
+                            </span>
+
+                            <h2>
+                                Small daily actions.
+                                <span>Real rewards.</span>
+                            </h2>
+
+                            <p>
+                                VELoop turns consistency into a simple reward
+                                journey. Your streak grows one day at a time,
+                                while your wallet keeps track of your earned
+                                VES.
+                            </p>
 
                             <button
                                 type="button"
                                 className={styles.primaryCta}
                                 onClick={() => navigate("/register")}
                             >
-                                Start Your Streak
-                                <span>→</span>
-                            </button>
-
-                            <button
-                                type="button"
-                                className={styles.secondaryCta}
-                                onClick={() => navigate("/login")}
-                            >
-                                Already a member?
+                                Start Earning
+                                <ArrowRight size={18} />
                             </button>
 
                         </div>
 
-                        <div className={styles.heroStats}>
 
-                            <div>
-                                <strong>7</strong>
-                                <span>Reward Days</span>
-                            </div>
+                        <div className={styles.benefits}>
+                            {BENEFITS.map((benefit, index) => (
+                                <article
+                                    key={benefit.title}
+                                    className={`${styles.benefitCard} ${styles.reveal}`}
+                                    style={{ "--d": `${index * 80}ms` }}
+                                    data-reveal
+                                >
+                                    <div className={styles.benefitIcon}>
+                                        <img src={benefit.img} alt="" />
+                                    </div>
 
-                            <div>
-                                <strong>24h</strong>
-                                <span>Claim Cycle</span>
-                            </div>
-
-                            <div>
-                                <strong>
-                                    <img
-                                        src={vesCoin}
-                                        alt=""
-                                    />
-                                </strong>
-                                <span>VES Rewards</span>
-                            </div>
-
+                                    <div>
+                                        <strong>{benefit.title}</strong>
+                                        <span>{benefit.text}</span>
+                                    </div>
+                                </article>
+                            ))}
                         </div>
 
-                    </div>
+                    </section>
 
 
-                    {/* HERO REWARD VISUAL */}
+                    {/* ================================
+                        FINAL CTA
+                    ================================= */}
 
-                    <div className={styles.heroVisual}>
-
-                        <div className={styles.visualGlow}></div>
-
-                        <img
-                            src={topLeft}
-                            alt=""
-                            className={styles.topLeftReward}
-                        />
-
-                        <img
-                            src={topRight}
-                            alt=""
-                            className={styles.topRightReward}
-                        />
-
-                        <div className={styles.rewardOrb}>
-
-                            <div className={styles.diamondLarge}>
-                                <img
-                                    src={vesCoin}
-                                    alt="VES coins"
-                                />
-                            </div>
-
-                            <strong>
-                                +5 VES
-                            </strong>
-
-                            <span>
-                                DAY 01 REWARD
-                            </span>
-
-                        </div>
-
+                    <section className={`${styles.container} ${styles.ctaWrap}`}>
 
                         <div
-                            className={`${styles.floatingReward} ${styles.rewardOne}`}
+                            className={`${styles.finalCta} ${styles.reveal}`}
+                            data-reveal
                         >
-                            <img
-                                src={vesCoin}
-                                alt=""
-                            />
-                            <span>
-                                +10 VES
-                            </span>
-                        </div>
 
-
-                        <div
-                            className={`${styles.floatingReward} ${styles.rewardTwo}`}
-                        >
-                            <img
-                                src={day4}
-                                alt=""
-                            />
-                            <span>
-                                ₹1 Gift Card
-                            </span>
-                        </div>
-
-
-                        <div
-                            className={`${styles.floatingReward} ${styles.rewardThree}`}
-                        >
-                            <img
-                                src={biggerStreak}
-                                alt=""
-                            />
-                            <span>
-                                Bigger Streak
-                            </span>
-                        </div>
-
-
-                        <div
-                            className={`${styles.floatingReward} ${styles.rewardFour}`}
-                        >
-                            <img
-                                src={flame}
-                                alt=""
-                            />
-                            <span>
-                                7 Day Streak
-                            </span>
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                {/* ================================
-                    HOW IT WORKS
-                ================================= */}
-
-                <section
-                    id="how-it-works"
-                    className={styles.section}
-                >
-
-                    <div className={styles.sectionHeading}>
-
-                        <span>
-                            SIMPLE BY DESIGN
-                        </span>
-
-                        <h2>
-                            How your daily streak works
-                        </h2>
-
-                        <p>
-                            Stay consistent. Claim once every 24 hours.
-                            Keep your streak alive and unlock the next reward.
-                        </p>
-
-                    </div>
-
-
-                    <div className={styles.steps}>
-
-                        <div className={styles.stepCard}>
-
-                            <div className={styles.stepNumber}>
-                                01
+                            <div className={styles.finalIcon}>
+                                <img src={vesCoin} alt="" />
                             </div>
 
-                            <div className={styles.stepIcon}>
-                                <img
-                                    src={trust}
-                                    alt=""
-                                />
-                            </div>
+                            <span className={styles.gold}>
+                                YOUR NEXT REWARD IS ONE CLAIM AWAY
+                            </span>
 
-                            <h3>
-                                Create your account
-                            </h3>
+                            <h2>Ready to start your streak?</h2>
 
                             <p>
-                                Register with your email and start your
-                                VELoop reward journey.
+                                Create your VELoop account and begin your
+                                seven-day reward journey.
                             </p>
+
+                            <div className={styles.finalActions}>
+
+                                <button
+                                    type="button"
+                                    className={styles.primaryCta}
+                                    onClick={() => navigate("/register")}
+                                >
+                                    Create Your Account
+                                    <ArrowRight size={18} />
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className={styles.secondaryCta}
+                                    onClick={() => navigate("/login")}
+                                >
+                                    I already have an account
+                                </button>
+
+                            </div>
 
                         </div>
 
+                    </section>
 
-                        <div className={styles.stepCard}>
-
-                            <div className={styles.stepNumber}>
-                                02
-                            </div>
-
-                            <div className={styles.stepIcon}>
-                                <img
-                                    src={stayActive}
-                                    alt=""
-                                />
-                            </div>
-
-                            <h3>
-                                Check in every day
-                            </h3>
-
-                            <p>
-                                Claim your daily reward and continue your
-                                streak without missing a day.
-                            </p>
-
-                        </div>
-
-
-                        <div className={styles.stepCard}>
-
-                            <div className={styles.stepNumber}>
-                                03
-                            </div>
-
-                            <div className={styles.stepIcon}>
-                                <img
-                                    src={exclusiveReward}
-                                    alt=""
-                                />
-                            </div>
-
-                            <h3>
-                                Unlock rewards
-                            </h3>
-
-                            <p>
-                                Progress through seven days and unlock
-                                VES and gift-card rewards.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </section>
+                </main>
 
 
                 {/* ================================
-                    REWARD JOURNEY
+                    FOOTER
                 ================================= */}
 
-                <section
-                    id="rewards"
-                    className={`${styles.section} ${styles.rewardSection}`}
-                >
+                <footer className={`${styles.container} ${styles.footer}`}>
 
-                    <div className={styles.sectionHeading}>
+                    <div className={styles.footerBrand}>
+                        <span className={styles.brandIcon}>V</span>
 
-                        <span>
-                            YOUR REWARD JOURNEY
-                        </span>
-
-                        <h2>
-                            Seven days. Seven reasons to return.
-                        </h2>
-
-                        <p>
-                            Every successful claim moves you closer to
-                            the ultimate reward.
-                        </p>
-
+                        <div>
+                            <strong>VELoop</strong>
+                            <small>Reward • Repeat • Grow</small>
+                        </div>
                     </div>
 
+                    <p>© 2026 VELoop. Daily streak rewards.</p>
 
-                    <div className={styles.rewardJourney}>
+                </footer>
 
-                        {/* DAY 01 */}
-
-                        <div
-                            className={`${styles.rewardCard} ${styles.activeReward}`}
-                        >
-                            <div className={styles.rewardDay}>
-                                DAY 01
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={vesCoin}
-                                    alt="VES reward"
-                                />
-                            </div>
-
-                            <strong>
-                                +5 VES
-                            </strong>
-
-                            <span>
-                                First Claim
-                            </span>
-                        </div>
-
-
-                        <div className={styles.journeyLine}></div>
-
-
-                        {/* DAY 02 */}
-
-                        <div className={styles.rewardCard}>
-
-                            <div className={styles.rewardDay}>
-                                DAY 02
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={vesCoin}
-                                    alt="VES reward"
-                                />
-                            </div>
-
-                            <strong>
-                                +10 VES
-                            </strong>
-
-                            <span>
-                                Keep Going
-                            </span>
-
-                        </div>
-
-
-                        <div className={styles.journeyLine}></div>
-
-
-                        {/* DAY 03 */}
-
-                        <div className={styles.rewardCard}>
-
-                            <div className={styles.rewardDay}>
-                                DAY 03
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={vesCoin}
-                                    alt="VES reward"
-                                />
-                            </div>
-
-                            <strong>
-                                +15 VES
-                            </strong>
-
-                            <span>
-                                Build Momentum
-                            </span>
-
-                        </div>
-
-
-                        <div className={styles.journeyLine}></div>
-
-
-                        {/* DAY 04 */}
-
-                        <div className={styles.rewardCard}>
-
-                            <div className={styles.rewardDay}>
-                                DAY 04
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={day4}
-                                    alt="Amazon gift card"
-                                />
-                            </div>
-
-                            <strong>
-                                ₹1
-                            </strong>
-
-                            <span>
-                                Amazon Gift Card
-                            </span>
-
-                        </div>
-
-
-                        <div className={styles.journeyLine}></div>
-
-
-                        {/* DAY 05 */}
-
-                        <div className={styles.rewardCard}>
-
-                            <div className={styles.rewardDay}>
-                                DAY 05
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={day5}
-                                    alt="Amazon gift card"
-                                />
-                            </div>
-
-                            <strong>
-                                ₹2
-                            </strong>
-
-                            <span>
-                                Amazon Gift Card
-                            </span>
-
-                        </div>
-
-
-                        <div className={styles.journeyLine}></div>
-
-
-                        {/* DAY 06 */}
-
-                        <div className={styles.rewardCard}>
-
-                            <div className={styles.rewardDay}>
-                                DAY 06
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={vesCoin}
-                                    alt="VES reward"
-                                />
-                            </div>
-
-                            <strong>
-                                +30 VES
-                            </strong>
-
-                            <span>
-                                Almost There
-                            </span>
-
-                        </div>
-
-
-                        <div className={styles.journeyLine}></div>
-
-
-                        {/* DAY 07 */}
-
-                        <div
-                            className={`${styles.rewardCard} ${styles.finalReward}`}
-                        >
-
-                            <div className={styles.rewardDay}>
-                                DAY 07
-                            </div>
-
-                            <div className={styles.rewardEmoji}>
-                                <img
-                                    src={day7}
-                                    alt="Ultimate reward"
-                                />
-                            </div>
-
-                            <strong>
-                                ₹5
-                            </strong>
-
-                            <span>
-                                Ultimate Reward
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                {/* ================================
-                    WHY VELOOP
-                ================================= */}
-
-                <section
-                    id="why-veloop"
-                    className={styles.whySection}
-                >
-
-                    <div className={styles.whyContent}>
-
-                        <span className={styles.sectionKicker}>
-                            WHY VELOOP?
-                        </span>
-
-                        <h2>
-                            Small daily actions.
-                            <br />
-                            <span>Real rewards.</span>
-                        </h2>
-
-                        <p>
-                            VELoop turns consistency into a simple reward
-                            journey. Your streak grows one day at a time,
-                            while your wallet keeps track of your earned VES.
-                        </p>
-
-                        <button
-                            type="button"
-                            className={styles.primaryCta}
-                            onClick={() => navigate("/register")}
-                        >
-                            Start Earning
-                            <span>→</span>
-                        </button>
-
-                    </div>
-
-
-                    <div className={styles.benefits}>
-
-                        <div className={styles.benefitCard}>
-
-                            <div>
-                                <img
-                                    src={flame}
-                                    alt=""
-                                />
-                            </div>
-
-                            <section>
-                                <strong>
-                                    Keep your streak alive
-                                </strong>
-
-                                <span>
-                                    Return every day and continue your journey.
-                                </span>
-                            </section>
-
-                        </div>
-
-
-                        <div className={styles.benefitCard}>
-
-                            <div>
-                                <img
-                                    src={vesCoin}
-                                    alt=""
-                                />
-                            </div>
-
-                            <section>
-                                <strong>
-                                    Build your VES balance
-                                </strong>
-
-                                <span>
-                                    Earn VES through your daily reward claims.
-                                </span>
-                            </section>
-
-                        </div>
-
-
-                        <div className={styles.benefitCard}>
-
-                            <div>
-                                <img
-                                    src={exclusiveReward}
-                                    alt=""
-                                />
-                            </div>
-
-                            <section>
-                                <strong>
-                                    Unlock special rewards
-                                </strong>
-
-                                <span>
-                                    Reach gift-card reward days as you progress.
-                                </span>
-                            </section>
-
-                        </div>
-
-
-                        <div className={styles.benefitCard}>
-
-                            <div>
-                                <img
-                                    src={trust}
-                                    alt=""
-                                />
-                            </div>
-
-                            <section>
-                                <strong>
-                                    One secure reward journey
-                                </strong>
-
-                                <span>
-                                    Your streak and reward progress stay tied
-                                    to your account.
-                                </span>
-                            </section>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                {/* ================================
-                    FINAL CTA
-                ================================= */}
-
-                <section className={styles.finalCta}>
-
-                    <div className={styles.finalIcon}>
-                        <img
-                            src={vesCoin}
-                            alt=""
-                        />
-                    </div>
-
-                    <span>
-                        YOUR NEXT REWARD IS ONE CLAIM AWAY
-                    </span>
-
-                    <h2>
-                        Ready to start your streak?
-                    </h2>
-
-                    <p>
-                        Create your VELoop account and begin your
-                        seven-day reward journey.
-                    </p>
-
-                    <button
-                        type="button"
-                        className={styles.finalButton}
-                        onClick={() => navigate("/register")}
-                    >
-                        Create Your Account
-                        <span>→</span>
-                    </button>
-
-                </section>
-
-            </main>
-
-
-            {/* ================================
-                FOOTER
-            ================================= */}
-
-          {/*  <footer className={styles.footer}>
-
-                <div className={styles.footerBrand}>
-
-                    <div className={styles.brandIcon}>
-                        V
-                    </div>
-
-                    <div>
-                        <strong>VELoop</strong>
-                        <span>Daily Streak Rewards</span>
-                    </div>
-
-                </div>
-
-
-                <div className={styles.footerLinks}>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/login")}
-                    >
-                        Login
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/register")}
-                    >
-                        Register
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/privacy-policy")}
-                    >
-                        Privacy
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={() => navigate("/terms")}
-                    >
-                        Terms
-                    </button>
-
-                </div>
-
-
-                <div className={styles.footerBottom}>
-                    © 2026 VELoop. Daily streak rewards.
-                </div>
-
-            </footer>*/}
+            </div>
 
         </div>
     );

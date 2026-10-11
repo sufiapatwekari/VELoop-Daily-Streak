@@ -21,9 +21,16 @@ function Transactions() {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [refreshing, setRefreshing] = useState(false);
+    const [refreshError, setRefreshError] = useState("");
     const [filter, setFilter] = useState("all");
 
-    const loadTransactions = async () => {
+    const loadTransactions = async (isRefresh = false) => {
+        if (isRefresh === true) {
+            setRefreshing(true);
+            setRefreshError("");
+        }
+
         try {
             setError("");
 
@@ -39,12 +46,18 @@ function Transactions() {
         } catch (err) {
             console.error(err);
 
-            setError(
+            const message =
                 err.response?.data?.message ||
-                "Failed to load transaction history."
-            );
+                "Failed to load transaction history.";
+
+            if (isRefresh === true) {
+                setRefreshError(message);
+            } else {
+                setError(message);
+            }
         } finally {
             setLoading(false);
+            setRefreshing(false);
         }
     };
 
@@ -153,11 +166,15 @@ function Transactions() {
                     <button
                         type="button"
                         className={styles.iconButton}
-                        onClick={loadTransactions}
+                        onClick={() => loadTransactions(true)}
+                        disabled={refreshing}
                         aria-label="Refresh transactions"
                         title="Refresh transactions"
                     >
-                        <RefreshCw size={17} />
+                        <RefreshCw
+                            size={17}
+                            className={refreshing ? styles.spinIcon : ""}
+                        />
                     </button>
 
                     <button
@@ -173,6 +190,13 @@ function Transactions() {
             </header>
 
             <main className={styles.main}>
+                {refreshError && (
+                    <div className={styles.refreshError} role="alert">
+                        <span>!</span>
+                        {refreshError}
+                    </div>
+                )}
+
                 {/* SUMMARY CARDS */}
                 <section className={styles.balanceGrid}>
                     <article className={styles.balanceCard}>

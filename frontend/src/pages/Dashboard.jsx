@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+    ArrowLeft,
     ArrowRight,
     CalendarCheck,
     CalendarDays,
     Check,
-    ChevronLeft,
+    ChevronDown,
     ChevronRight,
     Lock,
     LogOut,
@@ -34,20 +35,58 @@ import biggerStreakImg from "../../assests/Bigger_Streak.png";
 import exclusiveImg from "../../assests/Exclusive-reward.png";
 import trustImg from "../../assests/Trust.png";
 
+/* ---- small helpers to read the signed-in user's info ---- */
+
+const readStoredUser = () => {
+    try {
+        const raw = localStorage.getItem("user");
+        return raw ? JSON.parse(raw) || {} : {};
+    } catch {
+        return {};
+    }
+};
+
+const readTokenUser = () => {
+    try {
+        const payload = localStorage.getItem("token")?.split(".")[1];
+
+        if (!payload) {
+            return {};
+        }
+
+        const json = decodeURIComponent(
+            atob(payload.replace(/-/g, "+").replace(/_/g, "/"))
+                .split("")
+                .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+                .join("")
+        );
+
+        return JSON.parse(json) || {};
+    } catch {
+        return {};
+    }
+};
+
 function Dashboard() {
 
     const [streak, setStreak] = useState(null);
     const [loading, setLoading] = useState(true);
     const [claiming, setClaiming] = useState(false);
     const [error, setError] = useState("");
-    const [claimMessage, setClaimMessage] = useState("");
+    const [toast, setToast] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [selectedReward, setSelectedReward] = useState(null);
     const [countdown, setCountdown] = useState("00:00:00");
 
     const navigate = useNavigate();
 
+    const goToLogin = () => {
+        navigate("/login");
+    };
+
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
 
         navigate("/login", {
             replace: true
@@ -85,13 +124,15 @@ function Dashboard() {
 
             setClaiming(true);
             setError("");
-            setClaimMessage("");
+            setToast(null);
 
             const data = await claimStreak();
 
-            setClaimMessage(
-                `${data.reward.title} claimed successfully!`
-            );
+            setToast({
+                id: Date.now(),
+                title: "Reward Claimed!",
+                message: `${data.reward.title} claimed successfully!`
+            });
 
             await loadStreak();
 
@@ -161,6 +202,48 @@ function Dashboard() {
         return () => clearInterval(timer);
 
     }, [streak?.nextClaimAt]);
+
+    /* success toast auto-dismiss */
+    useEffect(() => {
+
+        if (!toast) {
+            return;
+        }
+
+        const timer = setTimeout(() => setToast(null), 5000);
+
+        return () => clearTimeout(timer);
+
+    }, [toast]);
+
+    /* close the account menu on outside click / Escape */
+    useEffect(() => {
+
+        if (!menuOpen) {
+            return;
+        }
+
+        const handleClick = (e) => {
+            if (!e.target.closest("[data-user-menu]")) {
+                setMenuOpen(false);
+            }
+        };
+
+        const handleKey = (e) => {
+            if (e.key === "Escape") {
+                setMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClick);
+        document.addEventListener("keydown", handleKey);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+            document.removeEventListener("keydown", handleKey);
+        };
+
+    }, [menuOpen]);
 
     const handleRewardClick = (reward) => {
         setSelectedReward(reward);
@@ -281,6 +364,122 @@ function Dashboard() {
     const ultimateReward =
         streak.rewards?.find((reward) => reward.day === 7);
 
+    /* signed-in user info */
+
+    const storedUser = readStoredUser();
+    const tokenUser = readTokenUser();
+
+    const userEmail =
+        storedUser.email ||
+        streak.user?.email ||
+        streak.email ||
+        tokenUser.email ||
+        "";
+
+    const rawName =
+        storedUser.name ||
+        streak.user?.name ||
+        streak.name ||
+        streak.userName ||
+        tokenUser.name ||
+        tokenUser.username ||
+        "";
+
+    const userName =
+        rawName ||
+        (userEmail ? userEmail.split("@")[0] : "VELoop User");
+
+    const userInitial =
+        userName.trim().charAt(0).toUpperCase() || "U";
+
+    const streakCount = Number(streak.currentStreak) || 0;
+
+    const cycleCount = Math.min(
+        Number(streak.checkedIn ?? streakCount) || 0,
+        7
+    );
+
+    const renderUserMenu = () => (
+        <div className={styles.userMenu} data-user-menu>
+
+            <button
+                type="button"
+                className={styles.avatarButton}
+                onClick={() => setMenuOpen((open) => !open)}
+                aria-haspopup="menu"
+                aria-expanded={menuOpen}
+                aria-label="Account menu"
+            >
+                <span className={styles.avatar}>
+                    {userInitial}
+                </span>
+
+                <ChevronDown
+                    size={14}
+                    className={menuOpen ? styles.chevronOpen : ""}
+                />
+            </button>
+
+            {menuOpen && (
+                <div className={styles.menuPanel} role="menu">
+
+                    <span className={styles.menuLabel}>
+                        SIGNED IN AS
+                    </span>
+
+                    <strong className={styles.menuName}>
+                        {userName}
+                    </strong>
+
+                    {userEmail && (
+                        <span className={styles.menuEmail}>
+                            {userEmail}
+                        </span>
+                    )}
+
+                    <div className={styles.menuStats}>
+                        <div>
+                            <small>Streak</small>
+                            <strong>
+                                {streakCount} {streakCount === 1 ? "Day" : "Days"}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Cycle</small>
+                            <strong>{cycleCount}/7</strong>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        role="menuitem"
+                        className={styles.menuItem}
+                        onClick={() => {
+                            setMenuOpen(false);
+                            navigate("/wallet");
+                        }}
+                    >
+                        <WalletCards size={16} />
+                        View Wallet &amp; Ledger
+                    </button>
+
+                    <button
+                        type="button"
+                        role="menuitem"
+                        className={`${styles.menuItem} ${styles.menuDanger}`}
+                        onClick={handleLogout}
+                    >
+                        <LogOut size={16} />
+                        Log Out
+                    </button>
+
+                </div>
+            )}
+
+        </div>
+    );
+
     return (
 
         <div className={styles.page}>
@@ -296,10 +495,10 @@ function Dashboard() {
                     <button
                         type="button"
                         className={styles.backButton}
-                        onClick={() => navigate(-1)}
-                        aria-label="Go back"
+                        onClick={goToLogin}
+                        aria-label="Back to login"
                     >
-                        <ChevronLeft size={20} />
+                        <ArrowLeft size={19} />
                     </button>
 
                     <h1 className={styles.topTitle}>
@@ -317,14 +516,7 @@ function Dashboard() {
                         <span>{streak.vesBalance}</span>
                     </button>
 
-                    <button
-                        type="button"
-                        className={styles.logoutButton}
-                        onClick={handleLogout}
-                        aria-label="Logout"
-                    >
-                        <LogOut size={17} />
-                    </button>
+                    {renderUserMenu()}
 
                 </div>
 
@@ -335,12 +527,26 @@ function Dashboard() {
 
                 <header className={styles.pageHead}>
 
-                    <div className={styles.pageHeadText}>
-                        <h1>Daily Streak</h1>
-                        <p>
-                            Check in daily, maintain your streak, and
-                            unlock bigger rewards every day!
-                        </p>
+                    <div className={styles.pageHeadLeft}>
+
+                        <button
+                            type="button"
+                            className={`${styles.backButton} ${styles.pageBack}`}
+                            onClick={goToLogin}
+                            aria-label="Back to login"
+                            title="Back to login"
+                        >
+                            <ArrowLeft size={19} />
+                        </button>
+
+                        <div className={styles.pageHeadText}>
+                            <h1>Daily Streak</h1>
+                            <p>
+                                Check in daily, maintain your streak, and
+                                unlock bigger rewards every day!
+                            </p>
+                        </div>
+
                     </div>
 
                     <div className={styles.pageHeadActions}>
@@ -356,14 +562,7 @@ function Dashboard() {
                             <small>VES</small>
                         </button>
 
-                        <button
-                            type="button"
-                            className={styles.logoutButton}
-                            onClick={handleLogout}
-                            aria-label="Logout"
-                        >
-                            <LogOut size={17} />
-                        </button>
+                        {renderUserMenu()}
 
                         <div className={styles.streakTab}>
                             <img src={flameImg} alt="" />
@@ -562,19 +761,7 @@ function Dashboard() {
                     MESSAGES
                 ====================================== */}
 
-                {claimMessage && (
-
-                    <div className={styles.successMessage}>
-
-                        <Check size={17} />
-
-                        <span>
-                            {claimMessage}
-                        </span>
-
-                    </div>
-                )}
-
+                
                 {error && (
 
                     <div className={styles.warningMessage}>
@@ -778,6 +965,49 @@ function Dashboard() {
             {/* =====================================
                 REWARD MODAL
             ====================================== */}
+
+            {toast && (
+
+                <div
+                    className={styles.toastWrap}
+                    role="status"
+                    aria-live="polite"
+                >
+
+                    <div className={styles.toast} key={toast.id}>
+
+                        <div className={styles.confetti} aria-hidden="true">
+                            {Array.from({ length: 14 }).map((_, i) => (
+                                <span key={i} style={{ "--i": i }} />
+                            ))}
+                        </div>
+
+                        <div className={styles.toastIcon}>
+                            <Check size={22} strokeWidth={3} />
+                        </div>
+
+                        <div className={styles.toastText}>
+                            <strong>{toast.title}</strong>
+                            <span>{toast.message}</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            className={styles.toastClose}
+                            onClick={() => setToast(null)}
+                            aria-label="Dismiss"
+                        >
+                            <X size={15} />
+                        </button>
+
+                        <span className={styles.toastBar} />
+
+                    </div>
+
+                </div>
+
+            )}
+
 
             {selectedReward && (
 

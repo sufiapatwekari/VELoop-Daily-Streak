@@ -254,6 +254,13 @@ function Wallet() {
                     </button>
                 </header>
 
+                {error && (
+                    <div className={styles.refreshError} role="alert">
+                        <span>!</span>
+                        {error}
+                    </div>
+                )}
+
                 {/* Balance */}
                 <section className={styles.balanceGrid}>
                     <article className={styles.balanceCard}>

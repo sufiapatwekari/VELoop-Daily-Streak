@@ -752,3 +752,36 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* refresh: spinner + inline error (page stays visible) */
+
+.refreshError {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 28px 0;
+    padding: 11px 14px;
+    border: 1px solid rgba(255, 110, 110, 0.35);
+    border-radius: 12px;
+    background: rgba(255, 110, 110, 0.09);
+    color: #ffaaaa;
+    font-size: 12.5px;
+}
+
+.refreshError span {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 110, 110, 0.2);
+    font-weight: 800;
+}
+
+@media (max-width: 680px) {
+    .refreshError {
+        margin: 12px 14px 0;
+    }
+}

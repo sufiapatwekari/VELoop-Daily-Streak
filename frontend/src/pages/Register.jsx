@@ -59,6 +59,23 @@ function Register() {
                 }
             );
 
+            /* remember the name so it can be shown after login */
+            try {
+                const savedNames = JSON.parse(
+                    localStorage.getItem("veloopNames") || "{}"
+                );
+
+                savedNames[formData.email.trim().toLowerCase()] =
+                    formData.name.trim();
+
+                localStorage.setItem(
+                    "veloopNames",
+                    JSON.stringify(savedNames)
+                );
+            } catch (storageError) {
+                console.error(storageError);
+            }
+
             setSuccess("Account created successfully. Taking you to login...");
 
             setFormData({
